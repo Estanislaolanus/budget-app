@@ -1,0 +1,13 @@
+.list-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+.list-item-delete {
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+.list-item-delete > img{
+    width: 20px;
+}
