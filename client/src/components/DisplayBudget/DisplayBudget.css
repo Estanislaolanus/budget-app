@@ -24,6 +24,10 @@
     -4px -4px 6px -1px #7ed2ffb3;
     border-radius: 50%;
     background: #44a8f4;
+    background: conic-gradient(
+        #00FF00 0deg,
+        #a5ffa5 0deg
+    );
 }
 .inner {
     width: 120px;
@@ -41,11 +45,11 @@
     font-weight: 550;
     color: #ffffffe7;
 }
-circle {
+/* circle {
     fill: none;
     stroke: url(#GradientColor);
     stroke-width: 20px;
-    stroke-dasharray: 472; /* 472 complete circle */
+    stroke-dasharray: 472;
     stroke-dashoffset: 472;
     animation: progress-bar 1.5s linear forwards;
 }
@@ -53,7 +57,7 @@ svg {
     position: absolute;
     top: 0;
     left: 0;
-}
+} */
 
 .amounts-container {
     display: flex;
@@ -65,8 +69,9 @@ svg {
     color: #e8e8e8d4;
 }
 
-@keyframes progress-bar {
+/* @keyframes progress-bar {
     100% {
-        stroke-dashoffset: 175; /* Calculation 472 - 472 * .75 */
+        stroke-dashoffset: 472; 
     }
-}
+} */
+/* Calculation 472 - 472 * .75 */

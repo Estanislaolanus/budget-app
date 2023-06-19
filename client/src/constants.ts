@@ -9,21 +9,20 @@ interface Amount {
 interface BudgetFormProps {
     handleSetBudget: (newBudget: number) => void;
     handleSetExpense: (newExpense: number) => void;
-    handleSetBudgetArray: (newBudget: Amount) => void;
-    handleSetExpenseArray: (newExpense: Amount) => void;
+    handleSetAmountsArray: (newAmount: Amount) => void;
 }
 interface DisplayBudgetProps {
     budget: number;
     expense: number;
+    amountArray: Amount[];
 }
 interface DisplayListsProps {
-    budgetArray: Amount[];
-    expenseArray: Amount[];
-    deleteAmount: (id: string, type: string) => void;
+    amountArray: Amount[];
+    deleteAmount: (id: string, type: string, amount:number) => void;
 }
 interface ListItemProps {
     amount: Amount;
-    deleteAmount: (id: string, type: string) => void;
+    deleteAmount: (id: string, type: string, amount: number) => void;
 }
 
 

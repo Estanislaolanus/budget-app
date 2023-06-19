@@ -1,43 +1,48 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef, RefObject } from 'react';
 import { DisplayBudgetProps } from '../../constants';
 import "./DisplayBudget.css"
 
-export default function DisplayBudget({ budget, expense }: DisplayBudgetProps) {
+export default function DisplayBudget({ budget, expense, amountArray }: DisplayBudgetProps) {
   const [balance, setBalance] = useState<number>(0);
   const [counter, setCounter] = useState<number>(0);
-  useEffect(() => {
-    const calculatePercentage = 100 - ((expense / budget) * 100);
-    if(counter < calculatePercentage) {
-      setTimeout(() => setCounter(prevCounter => prevCounter += 1), 50);
-    }
-  }, [counter, expense, budget]);
-
+  const percentRef: RefObject<HTMLDivElement> = useRef(null);
   useEffect(() => {
     const calculateBalance = budget - expense;
     setBalance(calculateBalance);
-  }, [budget, expense]);
+
+    const calculatePercentage = Math.floor(100 - ((expense / budget) * 100)) || 0;
+    
+    const isAdding = counter < calculatePercentage ?  1 : counter > calculatePercentage ? -1 : 0;
+    if(calculatePercentage < 0) {
+      setCounter(() => 0);
+      return;
+    }
+    if(counter <= calculatePercentage || counter >= calculatePercentage)  {
+      setTimeout(() => {
+        setCounter(prev => prev + isAdding);
+        if(!percentRef.current) return;
+        percentRef.current.style.background = `conic-gradient(
+          #00FF00 ${counter * 3.6}deg,
+          #a5ffa5 ${counter * 3.6}deg
+          )`;
+      }, 10)
+
+    }
+  }, [counter, amountArray, expense, budget]);
   
   return (
     <div className='budget-display'>
       <div className='budget-progress-bar'>
-        <div className="outer">
+        <div ref={percentRef} className="outer">
           <div className="inner">
             <div className='percentage'>{counter}%</div>
           </div>
         </div>
-          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="160px" height="160px">
-            <defs>
-              <linearGradient id="GradientColor">
-                <stop offset="0%" stop-color="#e91e63" />
-                <stop offset="100%" stop-color="#673ab7" />
-              </linearGradient>
-            </defs>
-            <circle cx="80" cy="80" r="70" stroke-linecap="round" />
-          </svg>
+          
       </div>
       <div className="amounts-container">
-        <div>Initial budget: {budget}</div>
-        <div>Balance: {balance}</div>
+        <div>Initial budget: ${budget}</div>
+        <div>Balance: ${balance}</div>
       </div>
     </div>
   )

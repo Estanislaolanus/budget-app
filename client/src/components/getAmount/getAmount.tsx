@@ -1,8 +1,7 @@
-import React, { RefObject, useRef } from 'react'
-import "./getAmount.css";
+import { RefObject, useRef } from 'react'
+import "./GetAmount.css";
 import { BudgetFormProps } from '../../constants';
-import { randomUUID } from 'crypto';
-export default function BudgetForm({handleSetBudget, handleSetExpense, handleSetBudgetArray, handleSetExpenseArray}: BudgetFormProps) {
+export default function GetAmount({handleSetBudget, handleSetExpense, handleSetAmountsArray}: BudgetFormProps) {
   const amountRef: RefObject<HTMLInputElement> = useRef(null);
   const categoryRef: RefObject<HTMLInputElement> = useRef(null);
 
@@ -16,19 +15,17 @@ export default function BudgetForm({handleSetBudget, handleSetExpense, handleSet
     if(!amount || amount <= 0 || !category) return;
     const newAmount = {
       id: crypto.randomUUID(),
-      type: "",
+      type,
       amount,
       category,
       timestamp: Date.now()
     } 
+    handleSetAmountsArray(newAmount);
+    
     if(type === "budget") {
-      newAmount.type = "budget"
       handleSetBudget(amount);
-      handleSetBudgetArray(newAmount);
     } else {
-      newAmount.type = "expense"
       handleSetExpense(amount);
-      handleSetExpenseArray(newAmount);
     }
     amountInput.value = "";
     categoryInput.value = "";

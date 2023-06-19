@@ -7,11 +7,18 @@
     gap: 1.5rem;
 }
 .list {
-    background: #dbf7ff;
+    /* background: #dbf7ff; */
     border-radius: 1rem;
     padding: .5rem;
 }
+.list-body {
+    max-height: 400px;
+    overflow-y: scroll;
+}
 .lists-title {
     text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+    margin: 10px;
     color: #27254f;
 }
