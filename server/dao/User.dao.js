@@ -1,5 +1,5 @@
 import MongoDBContainer from '../database/MongoDB.database.js';
-import UserSchema from '../Models/User.model.js';
+import UserSchema from '../models/User.model.js';
 class User extends MongoDBContainer {
     constructor() {
         super('user', UserSchema);

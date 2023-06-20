@@ -1,6 +1,6 @@
 .register {
     width: 300px;
-    height: 400px;
+    min-height: 400px;
     background: #fff ;
     padding: 20px;
     box-shadow: 0 0 10px 5px #ccc;
@@ -30,7 +30,7 @@
     width: 80%;
 }
 .input-container > input {
-    width: 100%;
+    width: 93.5%;
     background: none;
     border-bottom: 1.8px solid #878787;
     border-radius: 0px;
@@ -40,6 +40,15 @@
     color: #44a8f4;
     font-weight: 700;
     font-size: 15px;
+}
+.input-password{
+    width: 100%;
+    background: none;
+    border-bottom: 1.8px solid #878787;
+    border-radius: 0px;
+    color: #727272;
+    display: flex;
+    justify-content: space-between;
 }
 .register-form>button {
     border: none;
@@ -60,4 +69,27 @@
 
 .register-form>button:hover {
     background: #037bd6;
+}
+.show-password {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #606060;
+}
+.ask-to-login{
+    text-align: center;
+    margin: 10px;
+    color: #606060;
+}
+.ask-to-login > button{
+    background: none;
+    border: none;
+    color: #046ec0;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 16px;
+    transition: color .3s
+}
+.ask-to-login > button:hover{
+    color: #014477;
 }

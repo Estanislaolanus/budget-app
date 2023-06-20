@@ -13,10 +13,14 @@ export default function DisplayBudget({ budget, expense, amountArray }: DisplayB
     const calculatePercentage = Math.floor(100 - ((expense / budget) * 100)) || 0;
     
     const isAdding = counter < calculatePercentage ?  1 : counter > calculatePercentage ? -1 : 0;
-    if(calculatePercentage < 0) {
-      setCounter(() => 0);
+    if(calculatePercentage <= 0 && counter === 0) {
+      if(!percentRef.current) return;
+        percentRef.current.style.background = `conic-gradient(
+          #00FF00 ${counter * 3.6}deg,
+          #a5ffa5 ${counter * 3.6}deg
+          )`;
       return;
-    }
+    };
     if(counter <= calculatePercentage || counter >= calculatePercentage)  {
       setTimeout(() => {
         setCounter(prev => prev + isAdding);
@@ -26,7 +30,6 @@ export default function DisplayBudget({ budget, expense, amountArray }: DisplayB
           #a5ffa5 ${counter * 3.6}deg
           )`;
       }, 10)
-
     }
   }, [counter, amountArray, expense, budget]);
   

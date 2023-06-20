@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
+import Config from '../config/config.js';
+const { URI } = new Config();
 
-const URI = process.env.URI;
+
 export default class MongoDB {
     constructor(collectionName, schema){
         this.collection = mongoose.model(collectionName, schema);
