@@ -50,6 +50,10 @@
     display: flex;
     justify-content: space-between;
 }
+.input-password > input{
+    width: 100%;
+    color: #727272;
+}
 .register-form>button {
     border: none;
     background: #44a8f4;
@@ -71,8 +75,7 @@
     background: #037bd6;
 }
 .show-password {
-    background: none;
-    border: none;
+    user-select: none;
     cursor: pointer;
     color: #606060;
 }

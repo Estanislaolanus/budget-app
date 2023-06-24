@@ -1,7 +1,10 @@
-import { FormEvent, useRef, useState, RefObject } from "react"
+import { FormEvent, useState } from "react"
 import { useNavigate } from "react-router-dom";
-import "./Register.css"
-export default function Register() {
+import Axios from '../../api/Axios';
+import "./Register.css";
+import useAuth from "../../hooks/useAuth";
+export default function Register({}) {
+    const authContext = useAuth()
     const [username, setUsername] = useState<string>();
     const [email, setEmail] = useState<string>();
     const [password, setPassword] = useState<string>();
@@ -9,7 +12,19 @@ export default function Register() {
     const [visiblePassword, setVisiblePassword] = useState<boolean>(false);
     const [visibleConfirmPassword, setVisibleConfirmPassword] = useState<boolean>(false);
     const navigate = useNavigate();
-    function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    Axios.defaults.withCredentials = true;
+    async function register() {
+        try {
+            const res = await Axios.post("/register", {username, email, password});
+            console.log(res.data);
+            if(!res.data) return;
+            authContext?.setAuth(res.data.success);
+            navigate("/");
+        } catch (err) {
+            console.error(err)
+        }
+    }
+    async function handleSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
         if (
             !username ||
@@ -21,12 +36,7 @@ export default function Register() {
         if (password !== confirmPassword) {
             return;
         }
-        const user = {
-            username,
-            email,
-            password
-        }
-        console.log(user)
+        await register()
         e.currentTarget.reset();
     }
     return (
@@ -48,15 +58,10 @@ export default function Register() {
                         onChange={(e) => setPassword(e.target.value)} 
                         type={visiblePassword ? "text" : "password"} 
                         id="password" />
-
-                        {visiblePassword ? 
-                        <button onClick={() => setVisiblePassword(visiblePassword ? false : true)} className="material-symbols-outlined show-password">
-                            visibility
-                        </button>
-                        :
-                        <button onClick={() => setVisiblePassword(visiblePassword ? false : true)} className="material-symbols-outlined show-password">
-                            visibility_off
-                        </button>}
+                        <span onClick={() => setVisiblePassword(visiblePassword ? false : true)} className="material-symbols-outlined show-password">
+                        {visiblePassword ? "visibility":"visibility_off"}
+                        </span>
+                        
                     </div>
                 </div>
                 <div className="input-container">
@@ -65,19 +70,11 @@ export default function Register() {
                         <input 
                         onChange={(e) => setConfirmPassword(e.target.value)} 
                         type={visibleConfirmPassword ? "text" : "password"} id="confirm-password" />
-
-                        {visibleConfirmPassword ? 
-                        <button 
+                        <span 
                         onClick={() => setVisibleConfirmPassword(visibleConfirmPassword ? false : true)} 
                         className="material-symbols-outlined show-password">
-                            visibility
-                        </button>
-                        :
-                        <button 
-                        onClick={() => setVisibleConfirmPassword(visibleConfirmPassword ? false : true)} 
-                        className="material-symbols-outlined show-password">
-                            visibility_off
-                        </button>}
+                        {visibleConfirmPassword ? "visibility" : "visibility_off"}
+                        </span>
                     </div>
                 </div>
                 <button type="submit">Create new account</button>
@@ -85,5 +82,6 @@ export default function Register() {
             </form>
             <div className="ask-to-login">Already have an account?<button onClick={() => navigate('/login')}>Login</button></div>
         </div>
+        // Those passwords didn’t match. Try again.
     )
 }

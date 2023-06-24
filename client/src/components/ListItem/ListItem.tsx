@@ -1,5 +1,5 @@
 
-import { ListItemProps } from '../../constants';
+import { ListItemProps } from '../../Types';
 import "./ListItem.css";
 export default function ListItem({amount, deleteAmount}:ListItemProps) {
     return (

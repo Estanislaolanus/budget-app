@@ -3,9 +3,9 @@ import passport from 'passport';
 import Config from '../config/config.js';
 const { CLIENT_URL } = new Config();
 
-const authRouter = Router();
+const router = Router();
 
-authRouter.get("/login/success", (req, res) => {
+router.get("/login/success", (req, res) => {
     if(req.user) {
         res.status(200).json({
             error: false,
@@ -29,8 +29,9 @@ authRouter.get("/login/success", (req, res) => {
     successRedirect: CLIENT_URL,
     failureRedirect: "/login/failed"
 }))
-.get("/google/", passport.authenticate("google",{scope:["profile", "email"]}))
+.get("/google", passport.authenticate("google",{scope:["profile", "email"]}))
 .get("/logout", (req, res) => {
     req.logOut();
     res.redirect(CLIENT_URL + "/login")
 })
+export default router;

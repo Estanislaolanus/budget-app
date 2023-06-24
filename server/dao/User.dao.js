@@ -1,6 +1,7 @@
-import MongoDBContainer from '../database/MongoDB.database.js';
+import MongoDB from '../database/MongoDB.database.js'
 import UserSchema from '../models/User.model.js';
-class User extends MongoDBContainer {
+
+export default class User extends MongoDB {
     constructor() {
         super('user', UserSchema);
     }
@@ -12,4 +13,3 @@ class User extends MongoDBContainer {
         }
     }
 }
-export default User;

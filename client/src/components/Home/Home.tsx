@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Amount } from '../../constants';
+import { Amount } from '../../Types';
 import DisplayBudget from '../DisplayBudget/DisplayBudget';
 import GetAmount from '../GetAmount/GetAmount';
 import DisplayLists from '../DisplayLists/DisplayLists';

@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef, RefObject } from 'react';
-import { DisplayBudgetProps } from '../../constants';
+import { DisplayBudgetProps } from '../../Types';
 import "./DisplayBudget.css"
 
 export default function DisplayBudget({ budget, expense, amountArray }: DisplayBudgetProps) {

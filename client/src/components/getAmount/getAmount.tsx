@@ -1,6 +1,6 @@
 import { RefObject, useRef } from 'react'
 import "./GetAmount.css";
-import { BudgetFormProps } from '../../constants';
+import { BudgetFormProps } from '../../Types';
 export default function GetAmount({handleSetBudget, handleSetExpense, handleSetAmountsArray}: BudgetFormProps) {
   const amountRef: RefObject<HTMLInputElement> = useRef(null);
   const categoryRef: RefObject<HTMLInputElement> = useRef(null);

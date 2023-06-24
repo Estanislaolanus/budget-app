@@ -1,5 +1,5 @@
 import "./DisplayLists.css";
-import { DisplayListsProps } from '../../constants';
+import { DisplayListsProps } from '../../Types';
 import ListItem from "../ListItem/ListItem";
 export default function DisplayLists({amountArray, deleteAmount}:DisplayListsProps) {
 
