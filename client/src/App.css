@@ -5,10 +5,7 @@
     align-items: center;
     justify-content: center;
 }
-/* .loader--hidden {
-    opacity: 0;
-    visibility: hidden;
-} */
+
 .loader{
     height: 75px;
     width: 75px;

@@ -16,9 +16,7 @@ router.post("/login", async (req, res) => {
         if(!isValid) return res.status(401).json({success: false, message: "Incorrect password"});
 
         const tokenData = {id: findUser._id, email, username: findUser.username};
-        req.session.user = tokenData;
         const accessToken = generateAccessToken(tokenData);
-        console.log("POST LOGIN", findUser, "SESSION", req.session.user)
         res.status(200).json({success: true, accessToken, message: "User logged in"});
     } catch (err) {
         console.error(err);
@@ -31,7 +29,6 @@ router.post("/login", async (req, res) => {
     if(!verifyToken) return res.status(200).json({
         loggedIn: false
     });
-    req.userId = verifyToken.id
     res.status(200).json({
         loggedIn: true,
         user: {

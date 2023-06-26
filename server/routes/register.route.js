@@ -3,6 +3,7 @@ import { hashPassword } from '../modules/bcrypt.js';
 import Amount from '../dao/Amount.dao.js';
 const amount = new Amount();
 import User from '../dao/User.dao.js';
+import { generateAccessToken } from "../modules/JWT.js";
 const user = new User();
 const router = Router();
 
@@ -24,9 +25,11 @@ router.post("/register", async (req, res) => {
             password: hashedPassword
         }
         const newUser = await user.save(userData);
-        await amount.save([])
-        req.session.user = {id: newUser._id, email, username};
-        res.status(200).json({success: true, message: 'User registered', username });        
+        const newAmount = await amount.save({amountArray: [], userId: newUser._id});
+        console.log(newAmount)
+        const tokenData = {id: newUser._id, email, username};
+        const accessToken = generateAccessToken(tokenData);
+        res.status(200).json({success: true, message: 'User registered', username, accessToken });        
     } catch (err) {
         console.error(err)
     }
