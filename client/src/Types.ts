@@ -11,8 +11,6 @@ interface User {
     email: string;
 }
 
-
-
 interface BudgetFormProps {
     handleSetBudget: (newBudget: number) => void;
     handleSetExpense: (newExpense: number) => void;
@@ -32,13 +30,18 @@ interface ListItemProps {
     deleteAmount: (id: string, type: string, amount: number) => void;
 }
 
-interface AuthProviderProps {
+interface ContextProviderProps {
     children: ReactNode;
 }
-interface UserContext {
+interface AuthContext {
     auth: Boolean;
     setAuth: Dispatch<SetStateAction<Boolean>>
 }
+interface UserContext {
+    user: User;
+    setUser: Dispatch<SetStateAction<User>>
+}
+
 
 
 export {
@@ -48,7 +51,7 @@ export {
     type DisplayBudgetProps, 
     type DisplayListsProps,
     type ListItemProps,
-    type AuthProviderProps,
+    type ContextProviderProps,
+    type AuthContext,
     type UserContext
-
 }

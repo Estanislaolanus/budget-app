@@ -96,3 +96,12 @@
 .ask-to-login > button:hover{
     color: #014477;
 }
+.error-message {
+    color: red;
+    font-size: 11px;
+    width: 70%;
+    align-items: start;
+}
+.invalid {
+    border-bottom: 1.8px solid red !important;
+}

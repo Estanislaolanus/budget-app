@@ -5,16 +5,15 @@ import Home from './components/Home/Home';
 import Register from "./components/Register/Register";
 import Login from "./components/Login/Login";
 import useAuth from './hooks/useAuth';
-import Axios from './api/Axios'
-
+import Axios from './api/Axios';
 import './App.css';
-import { User } from "./Types";
+import useUser from "./hooks/useUser";
 
 
 function App() {
-  const [user, setUser] = useState<User>({ username: "", email: "" });
   const [loading, setLoading] = useState<Boolean>(true);
   const authContext = useAuth();
+  const userContext = useUser()
 
   useEffect(() => {
     const isLoggedIn = async () => {
@@ -22,16 +21,24 @@ function App() {
         const accessToken = localStorage.getItem("accessToken");
         const res = await Axios.get("/login", {
           headers: {
+            "Content-Type": "application/json",
             "Authorization": `Bearer ${accessToken}`
           }
         });
-        console.log("Check login", res.data);
-        authContext?.setAuth(() => res.data.loggedIn);
+        const data = res.data;
+        authContext?.setAuth(() => data.loggedIn);
+
+        if(data.user) {
+          userContext?.setUser(() => {
+            return {username: data.user.username || "", email: data.user.email || ""};
+          });
+        }
         setLoading(false);
       } catch (err) {
         console.error(err)
         authContext?.setAuth(() => false);
         setLoading(false);
+        
       }
     }
     isLoggedIn();

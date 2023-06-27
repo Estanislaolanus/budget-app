@@ -2,11 +2,9 @@ import Config from '../config/config.js';
 const { SECRET_JWT_TOKEN } = new Config();
 import jwt from 'jsonwebtoken';
 
-
-
 const generateAccessToken  = ({id, email, username}) => {
     try {
-        return jwt.sign({id, email, username}, SECRET_JWT_TOKEN , {expiresIn: '60m'});
+        return jwt.sign({id, email, username}, SECRET_JWT_TOKEN , {expiresIn: '24h'});
     } catch (err) {
         console.error(err);
     }

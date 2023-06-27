@@ -17,7 +17,15 @@ router.post("/login", async (req, res) => {
 
         const tokenData = {id: findUser._id, email, username: findUser.username};
         const accessToken = generateAccessToken(tokenData);
-        res.status(200).json({success: true, accessToken, message: "User logged in"});
+        res.status(200).json({
+            success: true, 
+            message: "User logged in",
+            accessToken, 
+            user: {
+                username: findUser.username, 
+                email: email
+            }
+        });
     } catch (err) {
         console.error(err);
     }
@@ -38,7 +46,7 @@ router.post("/login", async (req, res) => {
     })
 })
 .get("/logout", (req, res) => {
-    
+    const {accessToken} = req.body;
 });
 
 export default router;

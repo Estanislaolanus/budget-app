@@ -1,9 +1,9 @@
 import { createContext, useState } from "react";
-import { AuthProviderProps, UserContext } from "../Types";
+import { ContextProviderProps, AuthContext as authContext} from "../Types";
 
-export const AuthContext = createContext<UserContext | undefined>(undefined);
+export const AuthContext = createContext<authContext | undefined>(undefined);
 
-export const AuthProvider = ({ children }: AuthProviderProps) => {
+export const AuthProvider = ({ children }: ContextProviderProps) => {
     const [auth, setAuth] = useState<Boolean>(false);
     return (
         <AuthContext.Provider value={{ auth, setAuth }}>

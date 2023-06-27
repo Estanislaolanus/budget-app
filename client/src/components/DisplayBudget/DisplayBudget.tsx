@@ -1,6 +1,8 @@
 import { useEffect, useState, useRef, RefObject } from 'react';
 import { DisplayBudgetProps } from '../../Types';
 import "./DisplayBudget.css"
+import useUser from '../../hooks/useUser';
+import UserDisplay from '../UserDisplay/UserDisplay';
 
 export default function DisplayBudget({ budget, expense, amountArray }: DisplayBudgetProps) {
   const [balance, setBalance] = useState<number>(0);
@@ -35,6 +37,7 @@ export default function DisplayBudget({ budget, expense, amountArray }: DisplayB
   
   return (
     <div className='budget-display'>
+      <UserDisplay></UserDisplay>
       <div className='budget-progress-bar'>
         <div ref={percentRef} className="outer">
           <div className="inner">

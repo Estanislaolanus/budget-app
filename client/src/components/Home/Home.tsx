@@ -1,30 +1,77 @@
 import { useEffect, useState } from 'react';
 import { Amount } from '../../Types';
+import Axios from "../../api/Axios";
 import DisplayBudget from '../DisplayBudget/DisplayBudget';
 import GetAmount from '../GetAmount/GetAmount';
 import DisplayLists from '../DisplayLists/DisplayLists';
 
-const getData = () => {
-    const getData = localStorage.getItem("amountArray");
-    return getData ? JSON.parse(getData) : [];
-}
-const getNum = (type: string) => {
-    const getData = localStorage.getItem("amountArray");
 
-    const data = getData ? JSON.parse(getData) : [];
-    const num = data.map((a: Amount) => a.type === type && a.amount).reduce(
-        (accumulator: number, currentValue: number) => accumulator + currentValue,
-        0
-    );
-    return num;
+const getSum = (type: string, data: Amount[]) => {
+    const nums = data
+    .flatMap((a: Amount) => a.type === type && a.amount)
+    .filter((a: number | Boolean) =>typeof a === "number");
+    let calculateSum = 0;
+    for (const num of nums) {
+        if(typeof num === "boolean") continue;
+        calculateSum += num
+    }
+    return calculateSum;
 }
 function Home() {
-    const [amountArray, setAmountArray] = useState<Amount[]>(getData);
-    const [budget, setBudget] = useState<number>(getNum("budget"));
-    const [expense, setExpense] = useState<number>(getNum("expense"));
+    const [amountArray, setAmountArray] = useState<Amount[]>([]);
+    const [budget, setBudget] = useState<number>(0);
+    const [expense, setExpense] = useState<number>(0);
+    const [loading, setLoading] = useState<Boolean>(true);
     useEffect(() => {
-        localStorage.setItem("amountArray", JSON.stringify(amountArray));
-    }, [amountArray])
+        const getAmount = async () => {
+            try {
+                const accessToken = localStorage.getItem("accessToken");
+                const amount = await Axios.get("/amount", {
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${accessToken}`
+                    }});
+                    const { amountArray } = amount.data;
+                    if (!amount.data || !amountArray) return setLoading(false);
+                    console.log(accessToken)
+                    setBudget(getSum("budget", amountArray));
+                    setExpense(getSum("expense", amountArray));
+                    setAmountArray(amountArray);
+                    setLoading(false);
+            } catch (err) {
+                
+            }
+        }
+        getAmount()
+    }, [])
+    async function postAmount(newAmount: Amount) {
+        try {
+            const accessToken = localStorage.getItem("accessToken");
+            await Axios.post("/amount", newAmount, {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${accessToken}`,
+                },
+                withCredentials: true
+            });
+        } catch (err) {
+            console.log(err);
+        }
+    }
+    async function deleteFromDB(id: string) {
+        try {
+            const accessToken = localStorage.getItem("accessToken");
+            await Axios.delete(`/amount/${id}`, {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${accessToken}`,
+                },
+                withCredentials: true
+            });
+        } catch (err) {
+            console.log(err);
+        }
+    }
     function handleSetBudget(newBudget: number) {
         setBudget(prev => prev + newBudget);
     }
@@ -33,6 +80,7 @@ function Home() {
     }
     function handleSetBudgetArray(newAmount: Amount) {
         setAmountArray(prev => [...prev, newAmount]);
+        postAmount(newAmount);
     }
     function deleteAmount(id: string, type: string, amount: number) {
         setAmountArray(prev => {
@@ -44,7 +92,9 @@ function Home() {
         } else {
             setExpense(prev => prev - amount);
         }
+        deleteFromDB(id);
     }
+    if(loading) return <div className='loader'></div>
     return (
         <>
             <DisplayBudget budget={budget} expense={expense} amountArray={amountArray} />

@@ -13,7 +13,7 @@ router.post("/", async (req, res) => {
         res.status(200).json({success: true, message: "Object added to the array"});
     } catch (err) {
         console.error(err);
-        res.status(500).json({error: err, message: "Database error: couldn't add the object"});
+        res.status(500).json({error: err, success: false, message: "Database error: couldn't add the object"});
     }
 })
 .get("/", async (req, res) => {
