@@ -1,9 +1,5 @@
 
 .budget-display {
-    width: 100%;
-    min-height: 45vh;
-    background-color: #2a98ed;
-    box-shadow: 3px 3px 10px 4px  #0002;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -18,8 +14,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 160px;
-    height: 160px;
+    width: 140px;
+    height: 140px;
     box-shadow: 4px 4px 6px -1px #0002,
     -4px -4px 6px -1px #7ed2ffb3;
     border-radius: 50%;
@@ -30,8 +26,8 @@
     );
 }
 .inner {
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -41,7 +37,7 @@
     background-color: #2a98ed;
 }
 .percentage {
-    font-size: 24px;
+    font-size: 22px;
     font-weight: 550;
     color: #ffffffe7;
 }
@@ -49,10 +45,24 @@
 .amounts-container {
     display: flex;
     justify-content: center;
-    gap: 1rem;
+    gap: 2rem;
+    margin-right: 20px;
 }
-.amounts-container > div{
-    font-weight: 400;   
+.amounts-container > div{   
     color: #e8e8e8d4;
+}
+.amount {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+} 
+.amount-title {
+    color: #e8e8e8d4;
+    font-size: 18px;
+}
+.amount-number {
+    font-weight: 600;
+    color: #e8e8e8;
 }
 

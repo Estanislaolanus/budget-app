@@ -3,8 +3,9 @@ interface Amount {
     id: string;
     amount: number;
     type: string;
+    description: string;
     category: string;
-    timestamp: number;
+    timestamp: string;
 }
 interface User {
     username: string;
@@ -16,7 +17,7 @@ interface BudgetFormProps {
     handleSetExpense: (newExpense: number) => void;
     handleSetAmountsArray: (newAmount: Amount) => void;
 }
-interface DisplayBudgetProps {
+interface SliderProps {
     budget: number;
     expense: number;
     amountArray: Amount[];
@@ -48,7 +49,7 @@ export {
     type Amount,
     type User,
     type BudgetFormProps,
-    type DisplayBudgetProps, 
+    type SliderProps, 
     type DisplayListsProps,
     type ListItemProps,
     type ContextProviderProps,

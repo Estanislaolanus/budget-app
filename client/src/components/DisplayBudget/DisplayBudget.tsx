@@ -1,10 +1,8 @@
 import { useEffect, useState, useRef, RefObject } from 'react';
-import { DisplayBudgetProps } from '../../Types';
-import "./DisplayBudget.css"
-import useUser from '../../hooks/useUser';
-import UserDisplay from '../UserDisplay/UserDisplay';
+import { SliderProps } from '../../Types';
+import "./DisplayBudget.css";
 
-export default function DisplayBudget({ budget, expense, amountArray }: DisplayBudgetProps) {
+export default function DisplayBudget({ budget, expense, amountArray }: SliderProps) {
   const [balance, setBalance] = useState<number>(0);
   const [counter, setCounter] = useState<number>(0);
   const percentRef: RefObject<HTMLDivElement> = useRef(null);
@@ -37,18 +35,22 @@ export default function DisplayBudget({ budget, expense, amountArray }: DisplayB
   
   return (
     <div className='budget-display'>
-      <UserDisplay></UserDisplay>
+      <div className="amounts-container">
+        <div className='amount'>
+          <div className="amount-title">Initial budget</div>
+          <div className="amount-number">${budget}</div>
+        </div>
+        <div className='amount'>
+          <div className="amount-title">Balance</div>
+          <div className="amount-number">${balance}</div>
+        </div>
+      </div>
       <div className='budget-progress-bar'>
         <div ref={percentRef} className="outer">
           <div className="inner">
             <div className='percentage'>{counter}%</div>
           </div>
         </div>
-          
-      </div>
-      <div className="amounts-container">
-        <div>Initial budget: ${budget}</div>
-        <div>Balance: ${balance}</div>
       </div>
     </div>
   )

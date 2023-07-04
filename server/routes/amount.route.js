@@ -4,11 +4,11 @@ const amountDB = new Amount()
 const router = Router();
 router.post("/", async (req, res) => {
     try {
-        const { amount, category, type, timestamp, id } = req.body;
+        const { amount, category, description, type, timestamp, id } = req.body;
         if(!amount, !category, !type, !timestamp, !id) return res.status(400).json({success: false, message: 'Some fields are missing'});
         const userId = req.user.id;
         const findAmount = await amountDB.getByUserId(userId);
-        const newAmount = [...findAmount.amountArray, {amount, category, type, timestamp, id}];
+        const newAmount = [...findAmount.amountArray, {amount, category, description, type, timestamp, id}];
         await amountDB.update(findAmount._id, {amountArray: newAmount});
         res.status(200).json({success: true, message: "Object added to the array"});
     } catch (err) {

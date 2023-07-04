@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Amount } from '../../Types';
 import Axios from "../../api/Axios";
-import DisplayBudget from '../DisplayBudget/DisplayBudget';
 import GetAmount from '../GetAmount/GetAmount';
 import DisplayLists from '../DisplayLists/DisplayLists';
+import Slider from '../Slider/Slider';
 
 
 const getSum = (type: string, data: Amount[]) => {
@@ -33,7 +33,6 @@ function Home() {
                     }});
                     const { amountArray } = amount.data;
                     if (!amount.data || !amountArray) return setLoading(false);
-                    console.log(accessToken)
                     setBudget(getSum("budget", amountArray));
                     setExpense(getSum("expense", amountArray));
                     setAmountArray(amountArray);
@@ -97,7 +96,8 @@ function Home() {
     if(loading) return <div className='loader'></div>
     return (
         <>
-            <DisplayBudget budget={budget} expense={expense} amountArray={amountArray} />
+
+            <Slider budget={budget} expense={expense} amountArray={amountArray} />
             <GetAmount
                 handleSetBudget={handleSetBudget}
                 handleSetExpense={handleSetExpense}

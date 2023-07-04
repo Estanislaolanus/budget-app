@@ -45,8 +45,6 @@ router.post("/login", async (req, res) => {
         }
     })
 })
-.get("/logout", (req, res) => {
-    const {accessToken} = req.body;
-});
+
 
 export default router;

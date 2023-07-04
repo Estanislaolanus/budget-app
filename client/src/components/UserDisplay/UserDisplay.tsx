@@ -20,9 +20,11 @@ export default function UserDisplay() {
             <div onClick={() => setDisplayUser(() => !displayUser)} className='user'>{userContext?.user.username[0]}</div>
             {displayUser &&
                 <div className='user-display'>
-                    <div>{userContext?.user.username}</div>
-                    <div>{userContext?.user.email}</div>
-                    <button onClick={() => onLogout()} className="logout"><img src="./assets/logout.png" alt="" />Log out</button>
+                    <div className='user-title'>Username</div>
+                    <div className='user-info'>{userContext?.user.username}</div>
+                    <div className='user-title'>Gmail</div>
+                    <div className='user-info'>{userContext?.user.email}</div>
+                    <button onClick={() => onLogout()} className="logout"><i className="fa-solid fa-right-from-bracket"></i>Log out</button>
                 </div>}
         </>
     )
