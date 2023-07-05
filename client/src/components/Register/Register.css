@@ -30,7 +30,9 @@
     width: 80%;
 }
 .input-container > input {
-    width: 93.5%;
+    border: none;
+    outline: none;
+    width:  99%;
     background: none;
     border-bottom: 1.8px solid #878787;
     border-radius: 0px;
@@ -51,6 +53,8 @@
     justify-content: space-between;
 }
 .input-password > input{
+    border: none;
+    outline: none;
     width: 100%;
     color: #727272;
 }

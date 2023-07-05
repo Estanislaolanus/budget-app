@@ -1,15 +1,18 @@
 .lists{
     width: 90%;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
     min-height: 38vh;
     margin-bottom: 20px;
     gap: 1.5rem;
+
 }
 .list {
     /* background: #dbf7ff; */
     border-radius: 1rem;
     padding: .5rem;
+    min-width: 300px;
 }
 .list-body {
     max-height: 400px;

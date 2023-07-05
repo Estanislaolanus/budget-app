@@ -8,9 +8,15 @@
 .get-amount-inputs {
     margin: 10px;
     display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
     gap: 25px;
 }
+.get-amount-inputs input {
+    min-width: 180px;
+}
 .get-amount-select{
+    min-width: 180px;
     display: flex;
     align-items: center;
     border-bottom: 1.8px solid #656565;

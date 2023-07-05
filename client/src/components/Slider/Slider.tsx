@@ -11,7 +11,7 @@ export default function Slider(props: SliderProps) {
         <PieChart {...props}/>
     ]
     function next () {
-        const isLastIndex = currIndex === slides.length - 1 ;
+        const isLastIndex = currIndex === slides.length - 1;
         const slide = isLastIndex ? 0 : currIndex + 1;
         setCurrIndex(slide);
     }
