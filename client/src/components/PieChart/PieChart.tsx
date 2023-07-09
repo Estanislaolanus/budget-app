@@ -1,5 +1,6 @@
 import { RefObject, useEffect, useRef } from 'react'
 import { SliderProps } from '../../Types'
+import getCategoryAndColor from '../../utils/getCategoryAndColor'
 import './PieChart.css'
 
 export default function PieChart({ expense, amountArray }: SliderProps) {
@@ -11,7 +12,7 @@ export default function PieChart({ expense, amountArray }: SliderProps) {
         for (let i = 0; i < amountArray.length; i++) {
             const a = amountArray[i];
             if (a.type === "expense") {
-                const color = getCategoryColor(a.category);
+                const color = getCategoryAndColor(a.category).color;
                 const category = a.category;
                 const section = {
                     id: a.id,
@@ -49,36 +50,12 @@ export default function PieChart({ expense, amountArray }: SliderProps) {
         pieChartRef.current.style.background = expensesChart.length === 1 ? expensesChart[0].color : background;
     }, [amountArray]);
 
-    function getCategoryColor(category: string) {
-        switch (category) {
-            case "housing":
-                return "#de2a6c";
-            case "transportation":
-                return "#fa6a02";
-            case "groceries":
-                return "#3fed1c";
-            case "personalCare":
-                return "#021ffa";
-            case "debtPayents":
-                return "#ad4b11";
-            case "taxes":
-                return "#fa0202";
-            case "entertainment":
-                return "#7211ad";
-            case "education":
-                return "#11ad62";
-            case "insurance ":
-                return "#5aad11";
-            default:
-                return "#8aad11";
-        }
-    }
     const array = amountArray.filter(a => a.type === "expense").map(a => {
         const category = a.category;
-        const color = getCategoryColor(category);
+        const color = getCategoryAndColor(category).color;
         return { category, color, amount: a.amount };
     }).sort((a, b) => a.category.localeCompare(b.category, 'en', { sensitivity: 'base' }));;
-    const sections: Array<{category:string, color:string, amount: number}> = [];
+    const sections: Array<{category:string, color:string, amount: number, percent: number}> = [];
     for(let i = 0; i < array.length; i++) {
         const category = array[i].category
         if(array[i - 1]) {
@@ -91,7 +68,8 @@ export default function PieChart({ expense, amountArray }: SliderProps) {
                 continue;
             };
         };
-        sections.push({category, amount: array[i].amount, color: array[i].color})
+        const percent = Math.floor((array[i].amount / expense) * 100);
+        sections.push({category, amount: array[i].amount, color: array[i].color, percent});
     }
     return (
         <>
@@ -105,11 +83,12 @@ export default function PieChart({ expense, amountArray }: SliderProps) {
 
                 <div className='category-list'>
                     {sections.map(a => {
-                        const category = a.category;
+                        const color = getCategoryAndColor(a.category).color;
+                        const category = getCategoryAndColor(a.category).category;
                         return (
-                            <div key={category} className='category-item'>
-                                <div className='category-color' style={{ background: getCategoryColor(category) }}></div>
-                                <div className='category-text'>{category}</div>
+                            <div key={color} className='category-item'>
+                                <div className='category-color' style={{ background: color }}></div>
+                                <div className='category-text'>{category}<span>({a.percent}%)</span></div>
                                 <div>${a.amount}</div>
                             </div>
                         )

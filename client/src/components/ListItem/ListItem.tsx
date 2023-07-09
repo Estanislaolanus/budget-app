@@ -1,5 +1,6 @@
 
 import { ListItemProps } from '../../Types';
+import getCategoryAndColor from '../../utils/getCategoryAndColor'
 import "./ListItem.css";
 export default function ListItem({amount, deleteAmount}:ListItemProps) {
     const amountColor = amount.type === "budget" ? "green" : "red";
@@ -7,7 +8,7 @@ export default function ListItem({amount, deleteAmount}:ListItemProps) {
         <div className='list-item'>
             <div className="bar"></div>
             <div className="list-item-info">
-                <div className='list-item-category'>{amount.category}</div>
+                <div className='list-item-category'>{getCategoryAndColor(amount.category).category}</div>
                 <div className='list-item-description'>{amount.description}</div>
             </div>
             <div className="list-item-payment">

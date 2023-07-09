@@ -19,8 +19,8 @@ export default function Register({}) {
     const [emailError, setEmailError] = useState<string>("");
     const [passwordError, setPasswordError] = useState<string>("");
     const [confirmPasswordError, setConfirmPasswordError] = useState<string>("");
+    const [userAlreadyExists, setUserAlreadyExists] = useState<string>("");
     const navigate = useNavigate();
-    Axios.defaults.withCredentials = true;
     async function register() {
         try {
             if(!usernameRef.current || !emailRef.current || !passwordRef.current) return;
@@ -29,16 +29,25 @@ export default function Register({}) {
                 email: emailRef.current.value, 
                 password: passwordRef.current.value
             };
-            const res = await Axios.post("/register", user);
-            if(!res.data) return;
+            const res = await Axios.post("/register", user, {
+                headers: { "Content-Type": "application/json" },
+                withCredentials: true
+            });
+            if(!res.data) return; 
             localStorage.setItem("accessToken", res.data.accessToken);
             authContext?.setAuth(res.data.success);
             userContext?.setUser(() => {
                 return { username: usernameRef.current?.value || "", email: emailRef.current?.value || "" };
             });
             navigate("/");
-        } catch (err) {
-            console.error(err)
+        } catch (err:any) {
+            if(!err && !err.response) return;
+            const status = parseInt(err.response.status);
+            if(status === 409) {
+                setUserAlreadyExists("This email is already taken");
+                return;
+            }
+            setUserAlreadyExists("Server error. Try again later.");
         }
     }
     async function handleSubmit(e: FormEvent<HTMLFormElement>) {
@@ -98,8 +107,8 @@ export default function Register({}) {
         }
     }
     return (
-        <div className="register">
-            <h1 className="register-title">Create Account</h1>
+        <div className="form">
+            <h1 className="form-title">Create Account</h1>
             <form onSubmit={handleSubmit} className="register-form" action="" >
                 <div className="input-container">
                     <label htmlFor="username">Username</label>
@@ -142,6 +151,7 @@ export default function Register({}) {
                 </div>
                 {confirmPasswordError && <div className="error-message">{confirmPasswordError}</div>}
                 <button type="submit">Create new account</button>
+                {userAlreadyExists && <div className="error-message">{userAlreadyExists}</div>}
 
             </form>
             <div className="ask-to-login">Already have an account?<button onClick={() => navigate('/login')}>Login</button></div>

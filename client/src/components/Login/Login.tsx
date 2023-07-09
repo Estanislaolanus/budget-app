@@ -71,8 +71,8 @@ export default function Login() {
         }
     }
     return (
-        <div className="register">
-            <h1 className="register-title">Welcome Back</h1>
+        <div className="form">
+            <h1 className="form-title">Welcome Back</h1>
             <form onSubmit={handleSubmit} className="register-form" action="">
                 <div className="input-container">
                     <label htmlFor="email">Email</label>

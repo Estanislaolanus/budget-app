@@ -14,8 +14,9 @@ router.post("/register", async (req, res) => {
             return res.status(401).json({success: false, message: 'Some fields are missing'})
         }
         const findUser = await user.getUserByEmail(email);
+        console.log(findUser)
         if (findUser) {
-            res.status(401).json({success: false, message: "User already exist"});
+            res.status(409).json({success: false, message: "User already exist"});
             return;
         } 
         const hashedPassword = await hashPassword(password, 10);
@@ -25,8 +26,7 @@ router.post("/register", async (req, res) => {
             password: hashedPassword
         }
         const newUser = await user.save(userData);
-        const newAmount = await amount.save({amountArray: [], userId: newUser._id});
-        console.log(newAmount)
+        await amount.save({amountArray: [], userId: newUser._id});
         const tokenData = {id: newUser._id, email, username};
         const accessToken = generateAccessToken(tokenData);
         res.status(200).json({success: true, message: 'User registered', username, accessToken });        

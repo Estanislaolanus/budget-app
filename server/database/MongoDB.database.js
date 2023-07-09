@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import Config from '../config/config.js';
-const { URI } = new Config();
+const { MONGO_ATLAS_URI } = new Config();
 
 
 export default class MongoDB {
@@ -10,7 +10,7 @@ export default class MongoDB {
     }
     async connect(){
         try {
-            mongoose.connect(URI, {
+            mongoose.connect(MONGO_ATLAS_URI, {
                 useNewUrlParser: true,
                 useUnifiedTopology: true,
                 serverSelectionTimeoutMS: 5000

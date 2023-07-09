@@ -42,6 +42,9 @@
     font-weight: 600;
     text-transform: capitalize;
 }
+.category-text > span{
+    font-size: 16px;;
+}
 .category-color{
     width: 15px;
     height: 15px;

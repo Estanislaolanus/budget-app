@@ -8,6 +8,9 @@ const router = Router();
 router.post("/login", async (req, res) => {
     try {
         const { email, password } = req.body;
+        if(!email || !password) {
+            return res.status(401).json({success: false, message: 'Some fields are missing'})
+        };
         const findUser = await user.getUserByEmail(email);
 
         if(!findUser) return res.status(401).json({success: false, message: "User does not exist"});

@@ -1,4 +1,4 @@
-.register {
+.form {
     width: 300px;
     min-height: 400px;
     background: #fff ;
@@ -11,7 +11,7 @@
 
 }
 
-.register-title {
+.form-title {
     margin: 0;
     text-align: center;
     font-weight: bold;
