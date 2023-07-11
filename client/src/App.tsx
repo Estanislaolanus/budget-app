@@ -42,7 +42,7 @@ function App() {
       }
     }
     isLoggedIn();
-  }, []);
+  });
 
 
   const routes: RouteObject[] = [

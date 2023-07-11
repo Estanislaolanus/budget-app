@@ -48,7 +48,7 @@ export default function PieChart({ expense, amountArray }: SliderProps) {
             ${sections.join(", ")}
         )`;
         pieChartRef.current.style.background = expensesChart.length === 1 ? expensesChart[0].color : background;
-    }, [amountArray]);
+    }, [amountArray, expense]);
 
     const array = amountArray.filter(a => a.type === "expense").map(a => {
         const category = a.category;

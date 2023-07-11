@@ -5,7 +5,7 @@ import "./Register.css";
 import useAuth from "../../hooks/useAuth";
 import useUser from "../../hooks/useUser";
 import validateForm from "../../validations/validateRegister";
-export default function Register({}) {
+export default function Register() {
     const authContext = useAuth();
     const userContext = useUser();
     const usernameRef: RefObject<HTMLInputElement> = useRef(null);
