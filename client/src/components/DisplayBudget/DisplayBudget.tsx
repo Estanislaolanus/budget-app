@@ -27,7 +27,7 @@ export default function DisplayBudget({ budget, expense, amountArray }: SliderPr
         if(!percentRef.current) return;
         percentRef.current.style.background = `conic-gradient(
           #00FF00 ${counter * 3.6}deg,
-          #a5ffa5 ${counter * 3.6}deg
+          #d9ffd9 ${counter * 3.6}deg
           )`;
       }, 10)
     }

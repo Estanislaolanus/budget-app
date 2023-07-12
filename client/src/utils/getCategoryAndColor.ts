@@ -7,7 +7,7 @@ export default function getCategoryAndColor(category: string) {
         case "groceries":
             return {color: "#3fed1c", category};
         case "personalCare":
-            return {color: "#021ffa", category: "personal care"};
+            return {color: "#0ee8e4", category: "personal care"};
         case "debtPayents":
             return {color: "#ad4b11", category: "debt payents"};
         case "taxes":
@@ -19,6 +19,6 @@ export default function getCategoryAndColor(category: string) {
         case "insurance ":
             return {color: "#5aad11", category};
         default:
-            return {color: "#8aad11", category};
+            return {color: "#d303fc", category};
     }
 }

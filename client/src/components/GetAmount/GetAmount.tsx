@@ -6,7 +6,6 @@ export default function GetAmount({ handleSetBudget, handleSetExpense, handleSet
   const descriptionRef: RefObject<HTMLInputElement> = useRef(null);
   const categoryRef: RefObject<HTMLSelectElement> = useRef(null);
 
-
   function addAmount(type: string) {
     const amountInput = amountRef.current;
     const categoryInput = categoryRef.current;
@@ -40,9 +39,9 @@ export default function GetAmount({ handleSetBudget, handleSetExpense, handleSet
   return (
     <>
       <div className='get-amount-container'>
-        <div className="get-amount-inputs">
-          <div className="get-amount-select">
-            <select ref={categoryRef} className='get-amount-categories'>
+        <div className="get-amount-fields">
+          <div className="dropdown-select">
+            <select ref={categoryRef} className='dropdown-options'>
               <option value="">Choose a category</option>
               <option value="income">Income</option>
               <option value="groceries">Groceries</option>
@@ -55,12 +54,12 @@ export default function GetAmount({ handleSetBudget, handleSetExpense, handleSet
               <option value="debtPayents">Debt Payents</option>
               <option value="other">Other</option>
             </select>
-            <div className="icon-container">
-              <i className='fa-solid fa-caret-down'></i>
+            <div className="caret-container">
+              <i className='fa-solid fa-caret-down'></i> 
             </div>
           </div>
-          <input ref={descriptionRef} type="text" placeholder='Enter description' />
-          <input ref={amountRef} type="number" placeholder='Enter amount' pattern="[0-9]*" />
+          <input className='input-field' ref={descriptionRef} type="text" placeholder='Enter description' />
+          <input className='input-field' ref={amountRef} type="number" placeholder='Enter amount' pattern="[0-9]*" />
         </div>
         <div className="get-amount-buttons">
           <button onClick={() => addAmount("budget")} className='add-amount budget'>Add Budget</button>

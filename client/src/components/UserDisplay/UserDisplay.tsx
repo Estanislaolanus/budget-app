@@ -32,7 +32,7 @@ export default function UserDisplay() {
         <div ref={menuRef} className='user-menu'>
             <div onClick={() => setDisplayUser(() => !displayUser)} className='user'>{userContext?.user.username[0]}</div>
             <div className={`user-display ${displayUser ? "active" : "inactive"}`}>
-                <div className='user-title'>Username</div>
+                <div className='user-title'><i className='fa-solid fa-user'></i></div>
                 <div className='user-info'>{userContext?.user.username}</div>
                 <div className='user-title'>Gmail</div>
                 <div className='user-info'>{userContext?.user.email}</div>

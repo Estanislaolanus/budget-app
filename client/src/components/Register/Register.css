@@ -1,14 +1,19 @@
+.form input{
+    border: none;
+    outline: none;
+    background: none;
+    border-radius: 0;
+}
 .form {
     width: 300px;
     min-height: 400px;
     background: #fff ;
-    padding: 20px;
+    padding: 30px 20px;
     box-shadow: 0 0 10px 5px #ccc;
     border-radius: 8px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-
 }
 
 .form-title {
@@ -30,12 +35,8 @@
     width: 80%;
 }
 .input-container > input {
-    border: none;
-    outline: none;
     width:  99%;
-    background: none;
     border-bottom: 1.8px solid #878787;
-    border-radius: 0px;
     color: #727272;
 }
 .input-container > label {
@@ -45,7 +46,6 @@
 }
 .input-password{
     width: 100%;
-    background: none;
     border-bottom: 1.8px solid #878787;
     border-radius: 0px;
     color: #727272;
@@ -53,8 +53,6 @@
     justify-content: space-between;
 }
 .input-password > input{
-    border: none;
-    outline: none;
     width: 100%;
     color: #727272;
 }
