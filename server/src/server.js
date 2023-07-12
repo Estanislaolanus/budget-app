@@ -14,7 +14,7 @@ const app = express();
 app.use(express.json());
 app.use(cors({
     origin: CLIENT_URL,
-    methods: "GET, POST, DELETE",
+    methods: "GET, POST, PUT, DELETE",
     credentials: true
 }))
 

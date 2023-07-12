@@ -1,12 +1,11 @@
 .pie-chart-header {
-    margin-top: 15px;
     width: 100%;
     text-align: center;
-    color: #ffffffe7;
+    color: #fff;
 }
 .pie-chart-title {
     font-size: 18px;
-    color: #ffffffe7;
+    color: #fff;
     font-weight: 600;
 }
 
@@ -14,7 +13,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 10px 0 20px 0;
     gap: 20px;
     color: #ffffffe7;
 }
