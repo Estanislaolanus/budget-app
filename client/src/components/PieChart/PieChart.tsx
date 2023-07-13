@@ -54,7 +54,7 @@ export default function PieChart({ expense, amountArray }: SliderProps) {
         const category = a.category;
         const color = getCategoryAndColor(category).color;
         return { category, color, amount: a.amount };
-    }).sort((a, b) => a.category.localeCompare(b.category, 'en', { sensitivity: 'base' }));;
+    }).sort((a, b) => b.amount - a.amount);;
     const sections: Array<{category:string, color:string, amount: number, percent: number}> = [];
     for(let i = 0; i < array.length; i++) {
         const category = array[i].category

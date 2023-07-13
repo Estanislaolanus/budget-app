@@ -47,8 +47,8 @@
 }
 .input-field {
     background: none;
-    min-width: 180px;
     border-radius: none;
+    width: 180px;
     border: none;
     border-bottom: 1.8px solid #656565;
     padding: 7px;
@@ -57,8 +57,6 @@
 .get-amount-categories option {
     margin: 20px 0;
 }
-
-
 .get-amount-buttons {
     margin: 10px;
     display: flex;
@@ -69,26 +67,24 @@
     background: none;
     border: none;
     font-size: 18px;
-    display: block;
     cursor: pointer;
-    transition: all .3;
     padding: 8px 10px;
     border-radius: 15px;
+    width: 130px;
+    transition: all .2s;
 }
 .budget {
     color: #2a98ed;
     border: 1.8px solid #2a98ed;
-    transition: all .2s;
-}
-.budget:hover {
-    background:#2a98ed;
-    color: #fff;
 }
 
 .expense {
     color: #333065;
     border: 1.8px solid #333065;
-    transition: all .2s;
+}
+.budget:hover {
+    background:#2a98ed;
+    color: #fff;
 }
 .expense:hover {
     background:#27254f;

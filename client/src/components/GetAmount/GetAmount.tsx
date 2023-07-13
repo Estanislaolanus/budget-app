@@ -22,7 +22,7 @@ export default function GetAmount({ handleSetBudget, handleSetExpense, handleSet
       amount,
       description,
       category,
-      timestamp: `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`
+      timestamp: `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
     }
     handleSetAmountsArray(newAmount);
 

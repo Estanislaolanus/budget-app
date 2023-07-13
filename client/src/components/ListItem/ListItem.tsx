@@ -7,6 +7,7 @@ export default function ListItem({amount, deleteAmount}:ListItemProps) {
     return (
         <div className='list-item'>
             <div className="bar"></div>
+            <i className="fa-regular fa-pen-to-square"></i>
             <div className="list-item-info">
                 <div className='list-item-category'>{getCategoryAndColor(amount.category).category}</div>
                 <div className='list-item-description'>{amount.description}</div>

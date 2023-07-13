@@ -3,7 +3,7 @@ export default function getCategoryAndColor(category: string) {
         case "housing":
             return {color: "#de2a6c", category};
         case "transportation":
-            return {color: "#fa6a02", category};
+            return {color: "#ff8b52", category};
         case "groceries":
             return {color: "#3fed1c", category};
         case "personalCare":

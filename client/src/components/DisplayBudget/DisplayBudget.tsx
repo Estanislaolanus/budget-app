@@ -42,7 +42,7 @@ export default function DisplayBudget({ budget, expense, amountArray }: SliderPr
         </div>
         <div className='amount'>
           <div className="amount-title">Balance</div>
-          <div className="amount-number">${balance}</div>
+          <div className="amount-number" style={{color: "#00FF00"}}>${balance}</div>
         </div>
       </div>
       <div className='budget-progress-bar'>

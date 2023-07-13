@@ -85,10 +85,13 @@
     font-size: 14px;
 }
 
+.logout  {
+    color: #272727;
+    font-size: 16px;
+
+}
 .logout i {
     transform: rotate(180deg);
-}
-.logout button, i {
-    font-size: 20px;
+    font-size: 18px;
     color: #272727;
 }
