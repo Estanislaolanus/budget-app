@@ -37,11 +37,11 @@ export default function DisplayBudget({ budget, expense, amountArray }: SliderPr
     <div className='budget-display'>
       <div className="amounts-container">
         <div className='amount'>
-          <div className="amount-title">Initial budget</div>
+          <div className="amount-title">Initial</div>
           <div className="amount-number">${budget}</div>
         </div>
         <div className='amount'>
-          <div className="amount-title">Balance</div>
+          <div className="amount-title" style={{color: "#00FF00"}}>Balance</div>
           <div className="amount-number" style={{color: "#00FF00"}}>${balance}</div>
         </div>
       </div>

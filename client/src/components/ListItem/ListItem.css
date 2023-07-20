@@ -1,14 +1,14 @@
 .list-item {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    display: flex;
     padding: 10px 20px;
     margin: 5px;
     border-radius: 6px;
     background-color: #ffffff;
     position: relative;
     overflow: hidden;
-    min-width: 250px;
-    max-width: 400px;
+    width: 400px;
+    z-index: 0;
+    gap: 20px;
 }
 .bar{
     height: 80%;
@@ -21,48 +21,140 @@
     transform: translateY(-50%);
 }
 .list-item-info {
-    grid-column: 1 / 4;
+    width: 33%;
     height: 100%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;    
+    gap: 5px;
 }
 .list-item-category {
     text-transform: capitalize;
     font-weight: 540;
     font-size: 1.1rem;
 }
-.list-item-description {
+
+.list-item-description, .list-item-date  {
     color: #a8a8a8;
 }
-.list-item-payment {
-    grid-column: 5 / 6;
+.list-item-data {
+    width: 33%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-end;
+    align-items: flex-start;
+    gap: 5px;
 }
-.list-item-date {
-    color: #a8a8a8;
+.list-item-amount{
+    display: flex;
+    align-items: center;
 }
-.list-item-delete {
+.list-btns {
+    width: 33%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.list-btns button{
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    width: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.list-btns img{
+    width: 28px;
+}
+
+.list-item-edit  img {
+    width: 22px;
+}
+.list-item-edit  i {
+    font-size: 18px;
+    color: #242424;
+}
+
+/* ------------- EDIT ------------- */
+
+.dropdown-item{
+    position: relative;
+    z-index: 1;
+}
+.dropdown-item > select{
+    color: #363636;
+    appearance: none;
+    background: none;
+    border: none;
+    outline: none;
+    padding-right: 20px;
+    cursor: pointer;
+}
+.dropdown-item .caret-item{
     position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: -1;
+}
+.dropdown-item .caret-item i { 
+    color: #404040;
+    padding: 5px;
+}
+.list-item-input {
+    background: none;
+    outline: none;
+    border: none;
+    width: 100%;
+    font-size: 16px;
+    background: #90b2f52f;
+    border-radius: 4px;
+}
+.list-item-textarea {
+    background: none;
+    outline: none;
+    border: none;
+    font-size: 16px;
+    background: #90b2f52f;
+    border-radius: 4px;
+    resize: none;
+    max-height: 100px;
+    height: 22px;
+    padding: 0 5px;
+    width: 100%;
+}
+.list-item-edit {
     border: none;
     background: none;
     cursor: pointer;
-}
-.list-item-delete > i{
-    font-size: 18px;
-    transition: all .2s ease-in;
-    color: #242424;
-}
-.list-item-delete > i:hover{
-    font-size: 20px;
-}
+    display: flex;
+    align-items: center;
+} 
 
-
-
+@media  (max-width: 767px) {
+    .list-item {
+        width: 300px;
+        gap: 20px;
+    }
+    .list-item-info {
+        width: 40%;
+    }
+    .list-item-data {
+        width: 40%;
+    }
+    .list-btns {
+        width: 20%;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+    }
+}

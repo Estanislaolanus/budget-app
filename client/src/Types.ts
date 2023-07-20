@@ -25,10 +25,12 @@ interface SliderProps {
 interface DisplayListsProps {
     amountArray: Amount[];
     deleteAmount: (id: string, type: string, amount:number) => void;
+    setAmountArray: Dispatch<SetStateAction<Amount[]>>;
 }
 interface ListItemProps {
     amount: Amount;
     deleteAmount: (id: string, type: string, amount: number) => void;
+    updateAmountArray: (id: string, object: Amount | Object) => void;
 }
 
 interface ContextProviderProps {

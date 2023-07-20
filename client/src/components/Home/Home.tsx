@@ -41,7 +41,7 @@ function Home() {
                 
             }
         }
-        getAmount()
+        getAmount();
     }, [])
     async function postAmount(newAmount: Amount) {
         try {
@@ -106,6 +106,7 @@ function Home() {
             <DisplayLists
                 amountArray={amountArray}
                 deleteAmount={deleteAmount}
+                setAmountArray={setAmountArray}
             />
         </>
     );
