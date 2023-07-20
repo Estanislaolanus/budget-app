@@ -58,8 +58,14 @@ export default function GetAmount({ handleSetBudget, handleSetExpense, handleSet
               <i className='fa-solid fa-caret-down'></i> 
             </div>
           </div>
-          <input className='input-field' ref={descriptionRef} type="text" placeholder='Enter description' />
-          <input className='input-field' ref={amountRef} type="number" placeholder='Enter amount' pattern="[0-9]*" />
+          <div className='input-field'>
+            <input ref={descriptionRef} type="text" placeholder='Enter description' />
+          </div>
+          <div className='input-field'>
+            <input ref={amountRef} type="number" placeholder='Enter amount' pattern="[0-9]*" />
+          </div>
+          
+          
         </div>
         <div className="get-amount-buttons">
           <button onClick={() => addAmount("budget")} className='add-amount budget'>Add Budget</button>

@@ -46,11 +46,13 @@
     padding: 5px;
 }
 .input-field {
+    border-bottom: 1.8px solid #656565;
+}
+.input-field input {
     background: none;
-    border-radius: none;
+    border-radius: 0;
     width: 180px;
     border: none;
-    border-bottom: 1.8px solid #656565;
     padding: 7px;
     outline: none;
 }
