@@ -5,8 +5,9 @@ import "./ListItem.css";
 export default function ListItem({ amount, deleteAmount, updateAmountArray }: ListItemProps) {
     const [edit, setEdit] = useState<Boolean>(false);
     const [editCategory, setEditCategory] = useState<String>(amount.category);
-    const [editAmount, setEditAmount] = useState<Number>(amount.amount);
+    const [editAmount, setEditAmount] = useState<number>(amount.amount);
     const [editDescription, setEditDescription] = useState<String>(amount.description);
+    const background = amount.type === "budget" ? "#374785" : "#f76c6c"
     const amountColor = amount.type === "budget" ? "green" : "red";
     const itemRef: RefObject<HTMLDivElement> = useRef(null);
     const textareaRef:RefObject<HTMLTextAreaElement> = useRef(null);
@@ -16,12 +17,7 @@ export default function ListItem({ amount, deleteAmount, updateAmountArray }: Li
         textarea.style.height = "auto";
         const height = textarea.scrollHeight;
         textarea.style.height = `${height}px`;
-        // const handler = () => {
-        // }
-        // document.addEventListener("keyup", handler);
-        // return () => {
-        //     document.removeEventListener("keyup", handler);
-        // }
+        
     });
     function handleAmountChange(e: ChangeEvent<HTMLInputElement>) {
         const value = parseInt(e.target.value)
@@ -42,16 +38,20 @@ export default function ListItem({ amount, deleteAmount, updateAmountArray }: Li
         if (editAmount !== amount.amount && editAmount) object = { ...object, amount: editAmount };
         if (editDescription !== amount.description && editDescription !== "") object = { ...object, description: editDescription };
         if(editCategory !== amount.category) object = {...object, category:editCategory};
-        console.log(object)
         if (Object.keys(object).length === 0) return setEdit(() => !edit);
-        updateAmountArray(amount.id, object);
+        if(editAmount !== amount.amount && editAmount){
+            const money = editAmount - amount.amount;
+            updateAmountArray(amount.id, object, money, amount.type)
+        } else {
+            updateAmountArray(amount.id, object);
+        }
         setEdit(() => !edit);
     }
 
 
     return (
         <div className='list-item'>
-            <div className="bar"></div>
+            <div style={{background: background}} className="bar"></div>
             <div ref={itemRef} className="list-item-info">
                 <div className='list-item-category'>
                     

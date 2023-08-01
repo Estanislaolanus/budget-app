@@ -24,13 +24,15 @@ export default function GetAmount({ handleSetBudget, handleSetExpense, handleSet
       category,
       timestamp: `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
     }
-    handleSetAmountsArray(newAmount);
-
+    
     if (type === "budget") {
+      if(category !== "income") return;
       handleSetBudget(amount);
     } else {
+      if(category === "income") return;
       handleSetExpense(amount);
     }
+    handleSetAmountsArray(newAmount);
     amountInput.value = "";
     categoryInput.value = "";
     descriptionSelect.value = "";
@@ -59,10 +61,10 @@ export default function GetAmount({ handleSetBudget, handleSetExpense, handleSet
             </div>
           </div>
           <div className='input-field'>
-            <input ref={descriptionRef} type="text" placeholder='Enter description' />
+            <input ref={amountRef} type="number" placeholder='Enter amount' pattern="[0-9]*" />
           </div>
           <div className='input-field'>
-            <input ref={amountRef} type="number" placeholder='Enter amount' pattern="[0-9]*" />
+            <input ref={descriptionRef} type="text" placeholder='Enter description' />
           </div>
           
           

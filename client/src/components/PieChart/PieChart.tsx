@@ -54,7 +54,7 @@ export default function PieChart({ expense, amountArray }: SliderProps) {
         const category = a.category;
         const color = getCategoryAndColor(category).color;
         return { category, color, amount: a.amount };
-    }).sort((a, b) => b.amount - a.amount);;
+    }).sort((a, b) => b.amount - a.amount);
     const sections: Array<{category:string, color:string, amount: number, percent: number}> = [];
     for(let i = 0; i < array.length; i++) {
         const category = array[i].category
@@ -79,7 +79,10 @@ export default function PieChart({ expense, amountArray }: SliderProps) {
             </div>
             <div className='pie-chart-container'>
 
-                <div ref={pieChartRef} className="pie-chart"></div>
+                <div ref={pieChartRef} className="pie-chart">
+                    <div className="inner-circle"></div>
+                    <div className="inner-circle-grey"></div>
+                </div>
 
                 <div className='category-list'>
                     {sections.map(a => {
@@ -87,9 +90,10 @@ export default function PieChart({ expense, amountArray }: SliderProps) {
                         const category = getCategoryAndColor(a.category).category;
                         return (
                             <div key={color} className='category-item'>
-                                <div className='category-color' style={{ background: color }}></div>
-                                <div className='category-text'>{category}<span>({a.percent}%)</span></div>
-                                <div>${a.amount}</div>
+                                <div className='category-text'> 
+                                <span className='category-color' style={{ background: color }}></span>
+                                    {category}</div>
+                                <div className='category-amount'>${a.amount} <div>{a.percent}%</div></div>
                             </div>
                         )
                     })}

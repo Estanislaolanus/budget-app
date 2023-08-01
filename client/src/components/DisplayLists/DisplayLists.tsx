@@ -2,8 +2,8 @@ import "./DisplayLists.css";
 import { Amount, DisplayListsProps } from '../../Types';
 import ListItem from "../ListItem/ListItem";
 import Axios from "../../api/Axios";
-export default function DisplayLists({ amountArray, deleteAmount, setAmountArray }: DisplayListsProps) {
-    async function updateAmountArray(id: string, object: Amount | Object) {
+export default function DisplayLists({ amountArray, deleteAmount, setAmountArray, setBudget, setExpense }: DisplayListsProps) {
+    async function updateAmountArray(id: string, object: Amount | Object, money?:number, type?: string) {
         const idx = amountArray.findIndex(a => a.id === id);
         if (idx === -1) return;
         let amount = {...amountArray[idx]};
@@ -16,6 +16,18 @@ export default function DisplayLists({ amountArray, deleteAmount, setAmountArray
             prev.splice(idx, 1, amount);
             return prev;
         });
+        if(type === "budget") {
+            
+            if(typeof money === "number") setBudget(prev => {
+                const newAmount = prev + money
+                return newAmount;
+            });
+        } else {
+            if(typeof money === "number") setExpense(prev => {
+                const newAmount = prev + money
+                return newAmount;
+            });
+        }
         try {
             const accessToken = localStorage.getItem("accessToken");
             await Axios.put(`/amount/${id}` , object, {
@@ -28,7 +40,6 @@ export default function DisplayLists({ amountArray, deleteAmount, setAmountArray
         } catch (err) {
             console.log(err);
         }
-        
 
     }
     return (

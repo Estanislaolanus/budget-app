@@ -26,11 +26,13 @@ interface DisplayListsProps {
     amountArray: Amount[];
     deleteAmount: (id: string, type: string, amount:number) => void;
     setAmountArray: Dispatch<SetStateAction<Amount[]>>;
+    setBudget: Dispatch<SetStateAction<number>>;
+    setExpense: Dispatch<SetStateAction<number>>;
 }
 interface ListItemProps {
     amount: Amount;
     deleteAmount: (id: string, type: string, amount: number) => void;
-    updateAmountArray: (id: string, object: Amount | Object) => void;
+    updateAmountArray: (id: string, object: Amount | Object, money?: number, type?: string) => void;
 }
 
 interface ContextProviderProps {

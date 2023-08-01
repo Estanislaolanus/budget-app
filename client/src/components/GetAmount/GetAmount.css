@@ -76,20 +76,20 @@
     transition: all .2s;
 }
 .budget {
-    color: #2a98ed;
-    border: 1.8px solid #2a98ed;
+    color: #374785;
+    border: 1.8px solid #374785;
 }
 
 .expense {
-    color: #333065;
-    border: 1.8px solid #333065;
+    color: #f76c6c;
+    border: 1.8px solid #f76c6c;
 }
 .budget:hover {
-    background:#2a98ed;
+    background:#374785;
     color: #fff;
 }
 .expense:hover {
-    background:#27254f;
+    background:#f76c6c;
     color: #fff;
 }
 

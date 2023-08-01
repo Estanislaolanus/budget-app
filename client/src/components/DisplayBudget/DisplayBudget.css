@@ -26,18 +26,27 @@
     );
 }
 .inner {
-    width: 100px;
-    height: 100px;
+    width: 60px;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
     box-shadow: inset 4px 4px 6px -1px #0004,
     inset -4px -4px 6px -1px #101cbfb3;
     border-radius: 50%;
+    z-index: 1;
     background-color: #120a6c;
 }
+.inner-grey {
+    background: #00000055;
+    width: 85px;
+    height: 85px;
+    border-radius: 50%;
+    position: absolute;
+}
 .percentage {
-    font-size: 22px;
+    font-size: 18px;
+    z-index: 1;
     font-weight: 550;
     color: #fff;
 }

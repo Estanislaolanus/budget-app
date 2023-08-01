@@ -107,6 +107,8 @@ function Home() {
                 amountArray={amountArray}
                 deleteAmount={deleteAmount}
                 setAmountArray={setAmountArray}
+                setBudget={setBudget}
+                setExpense={setExpense}
             />
         </>
     );
