@@ -36,7 +36,7 @@ export default function DisplayBudget({ budget, expense, amountArray }: SliderPr
           )`;
       }, 10)
     }
-  }, [counter, amountArray, expense, budget]);
+  }, [counter, amountArray, expense, budget, color]);
   
   return (
     <div className='budget-display'>
