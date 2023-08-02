@@ -4,7 +4,7 @@ import Axios from "../../api/Axios";
 import GetAmount from '../GetAmount/GetAmount';
 import DisplayLists from '../DisplayLists/DisplayLists';
 import Slider from '../Slider/Slider';
-import useMonth from '../../hooks/useMonth';
+import useDate from '../../hooks/useDate';
 
 
 const getSum = (type: string, data: Amount[]) => {
@@ -24,12 +24,9 @@ function Home() {
     const [budget, setBudget] = useState<number>(0);
     const [expense, setExpense] = useState<number>(0);
     const [loading, setLoading] = useState<Boolean>(true);
-    const month = useMonth()?.month;
+    const date = useDate()?.date;
     function filterByMonth(amountArray: Amount[]) {
-        const format = new Intl.DateTimeFormat("en-us", {
-            month: "numeric"
-        });
-        const newAmountArray = amountArray.filter(a => parseInt(format.format(new Date(a.timestamp))) === month);
+        const newAmountArray = amountArray.filter(a => new Date(a.timestamp).getMonth() === date?.getMonth() && new Date(a.timestamp).getFullYear() === date?.getFullYear());
         return newAmountArray;
     }
     useEffect(() => {
@@ -60,7 +57,7 @@ function Home() {
         setBudget(getSum("budget", filteredAmountArray));
         setExpense(getSum("expense", filteredAmountArray));
         setAmountArray(filteredAmountArray);
-    }, [useMonth()?.month])
+    }, [useDate()?.date])
     async function postAmount(newAmount: Amount) {
         try {
             const accessToken = localStorage.getItem("accessToken");

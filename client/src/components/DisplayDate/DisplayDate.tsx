@@ -1,31 +1,41 @@
 import './DisplayDate.css';
 import {useEffect, useState} from 'react'
-import useMonth from '../../hooks/useMonth'
+import useDate from '../../hooks/useDate'
 
 export default function DisplayDate() {
-    const date = new Date();
-    const format = new Intl.DateTimeFormat("en-us", {
+    const date = useDate()?.date;
+    const setDate = useDate()?.setDate;
+    const formatMonthName = new Intl.DateTimeFormat("en-us", {
         month: "long"
     });
-    const [monthName, setMonthName] = useState<String>(format.format(date));
-    const month = useMonth()?.month;
-    const setMonth = useMonth()?.setMonth;
+    const [monthName, setMonthName] = useState<String>(formatMonthName.format(date));
     useEffect(() => {
-        if(!month) return
-        const newMonth = new Date(2000, month - 1, 1);
-        setMonthName(format.format(newMonth))
-    }, [useMonth()?.month]);
+        if(!date) return;
+        const year = new Date().getFullYear();
+        const currentYear = date.getFullYear();
+        const isCurrentYear = year === currentYear;
+        const month = date.getMonth();
+        const newDate = new Date(currentYear, month, 1);
+        const getStringDate = isCurrentYear ? formatMonthName.format(newDate) : `${formatMonthName.format(newDate)} ${currentYear}` ;
+        setMonthName(getStringDate);
+    }, [useDate()?.date]);
     function next () {
-        if(!month || !setMonth) return;
+        if(!date || !setDate) return;
+        const month = date.getMonth();
         const isLastMonth = month === 12;
         const newMonth = isLastMonth ? 1 : month + 1;
-        setMonth(newMonth);
+        const year = isLastMonth ? date.getFullYear() + 1 : date.getFullYear();
+        const newDate = new Date(year, newMonth, 1);
+        setDate(newDate);
     }
     function prev () {
-        if(!month || !setMonth) return;
+        if(!date || !setDate) return;
+        const month = date.getMonth();
         const isFirstMonth = month === 1;
         const newMonth = isFirstMonth ? 12 : month - 1;
-        setMonth(newMonth);
+        const year = isFirstMonth ? date.getFullYear() - 1 : date.getFullYear();
+        const newDate = new Date(year, newMonth, 1);
+        setDate(newDate);
     }
     return (
         <div className="date-container">

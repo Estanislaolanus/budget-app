@@ -46,9 +46,9 @@ interface UserContext {
     user: User;
     setUser: Dispatch<SetStateAction<User>>
 }
-interface MonthContext {
-    month: number;
-    setMonth: Dispatch<SetStateAction<number>>
+interface DateContext {
+    date: Date;
+    setDate: Dispatch<SetStateAction<Date>>
 }
 
 
@@ -63,5 +63,5 @@ export {
     type ContextProviderProps,
     type AuthContext,
     type UserContext,
-    type MonthContext
+    type DateContext
 }
