@@ -18,17 +18,18 @@ const getSum = (type: string, data: Amount[]) => {
     }
     return calculateSum;
 }
-
+const filterByMonth = (amountArray: Amount[], date: Date | undefined) => {
+    const newAmountArray = amountArray.filter(a => new Date(a.timestamp).getMonth() === date?.getMonth() && new Date(a.timestamp).getFullYear() === date?.getFullYear());
+    return newAmountArray;
+}
 function Home() {
+    const [data, setData] = useState<Amount[]>([]);
     const [amountArray, setAmountArray] = useState<Amount[]>([]);
     const [budget, setBudget] = useState<number>(0);
     const [expense, setExpense] = useState<number>(0);
     const [loading, setLoading] = useState<Boolean>(true);
     const date = useDate()?.date;
-    function filterByMonth(amountArray: Amount[]) {
-        const newAmountArray = amountArray.filter(a => new Date(a.timestamp).getMonth() === date?.getMonth() && new Date(a.timestamp).getFullYear() === date?.getFullYear());
-        return newAmountArray;
-    }
+    
     useEffect(() => {
         const getAmount = async () => {
             try {
@@ -41,23 +42,24 @@ function Home() {
                 });
                 const { amountArray } = amount.data;
                 if (!amount.data || !amountArray) return setLoading(false);
-                const filteredAmountArray = filterByMonth(amountArray);
+                const filteredAmountArray = filterByMonth(amountArray, date);
+                setData(amountArray);
                 setBudget(getSum("budget", filteredAmountArray));
                 setExpense(getSum("expense", filteredAmountArray));
                 setAmountArray(filteredAmountArray);
                 setLoading(false);
             } catch (err) {
-
+                console.log(err);
             }
         }
         getAmount();
-    });
+    }, [date]);
     useEffect(() => {
-        const filteredAmountArray = filterByMonth(amountArray);
+        const filteredAmountArray = filterByMonth(data, date);
         setBudget(getSum("budget", filteredAmountArray));
         setExpense(getSum("expense", filteredAmountArray));
         setAmountArray(filteredAmountArray);
-    }, [useDate()?.date])
+    }, [date, data]);
     async function postAmount(newAmount: Amount) {
         try {
             const accessToken = localStorage.getItem("accessToken");

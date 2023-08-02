@@ -5,12 +5,13 @@ import useDate from '../../hooks/useDate'
 export default function DisplayDate() {
     const date = useDate()?.date;
     const setDate = useDate()?.setDate;
-    const formatMonthName = new Intl.DateTimeFormat("en-us", {
-        month: "long"
-    });
-    const [monthName, setMonthName] = useState<String>(formatMonthName.format(date));
+    
+    const [monthName, setMonthName] = useState<String>("");
     useEffect(() => {
         if(!date) return;
+        const formatMonthName = new Intl.DateTimeFormat("en-us", {
+            month: "long"
+        });
         const year = new Date().getFullYear();
         const currentYear = date.getFullYear();
         const isCurrentYear = year === currentYear;
@@ -18,7 +19,7 @@ export default function DisplayDate() {
         const newDate = new Date(currentYear, month, 1);
         const getStringDate = isCurrentYear ? formatMonthName.format(newDate) : `${formatMonthName.format(newDate)} ${currentYear}` ;
         setMonthName(getStringDate);
-    }, [useDate()?.date]);
+    }, [date]);
     function next () {
         if(!date || !setDate) return;
         const month = date.getMonth();
