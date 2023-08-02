@@ -1,4 +1,4 @@
-import { RefObject, useRef } from 'react'
+import { RefObject, useRef } from 'react';
 import "./GetAmount.css";
 import { BudgetFormProps } from '../../Types';
 export default function GetAmount({ handleSetBudget, handleSetExpense, handleSetAmountsArray }: BudgetFormProps) {
@@ -22,7 +22,7 @@ export default function GetAmount({ handleSetBudget, handleSetExpense, handleSet
       amount,
       description,
       category,
-      timestamp: `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
+      timestamp: date
     }
     
     if (type === "budget") {

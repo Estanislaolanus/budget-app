@@ -8,6 +8,9 @@
     font-size: 20px;
     font-weight: 600;
 }
+.pie-chart-expense {
+    color: #ee4e4e;
+}
 
 .pie-chart-container{
     display: flex;
