@@ -13,7 +13,8 @@ import useUser from "./hooks/useUser";
 function App() {
   const [loading, setLoading] = useState<Boolean>(true);
   const authContext = useAuth();
-  const userContext = useUser()
+  const userContext = useUser();
+
 
   useEffect(() => {
     const isLoggedIn = async () => {

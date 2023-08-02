@@ -5,7 +5,7 @@ interface Amount {
     type: string;
     description: string;
     category: string;
-    timestamp: string;
+    timestamp: Date;
 }
 interface User {
     username: string;
@@ -46,6 +46,10 @@ interface UserContext {
     user: User;
     setUser: Dispatch<SetStateAction<User>>
 }
+interface DateContext {
+    date: Date;
+    setDate: Dispatch<SetStateAction<Date>>
+}
 
 
 
@@ -58,5 +62,6 @@ export {
     type ListItemProps,
     type ContextProviderProps,
     type AuthContext,
-    type UserContext
+    type UserContext,
+    type DateContext
 }

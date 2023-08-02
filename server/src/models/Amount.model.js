@@ -7,7 +7,7 @@ const AmountSchema = new mongoose.Schema({
             category: {type: String, required: true}, 
             description: {type: String, required: true}, 
             type: {type: String, required: true},
-            timestamp: {type: String, required: true}, 
+            timestamp: {type: Date, default: Date.now, required: true}, 
             id: {type: String, required: true}
         }
     ],

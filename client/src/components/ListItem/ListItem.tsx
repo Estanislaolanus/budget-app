@@ -11,13 +11,22 @@ export default function ListItem({ amount, deleteAmount, updateAmountArray }: Li
     const amountColor = amount.type === "budget" ? "green" : "red";
     const itemRef: RefObject<HTMLDivElement> = useRef(null);
     const textareaRef:RefObject<HTMLTextAreaElement> = useRef(null);
+    const format = new Intl.DateTimeFormat("en-us", {
+        dateStyle: "short"
+    });
+    // useEffect(() => {
+    //     const f = new Intl.DateTimeFormat("en-us", {
+    //         dateStyle: "full",
+    //         timeStyle: "full"
+    //     });
+    //     console.log(f.format(new Date(amount.timestamp)))
+    // })
     useEffect(() => {
         const textarea = textareaRef.current;
         if(!textarea) return;
         textarea.style.height = "auto";
         const height = textarea.scrollHeight;
         textarea.style.height = `${height}px`;
-        
     });
     function handleAmountChange(e: ChangeEvent<HTMLInputElement>) {
         const value = parseInt(e.target.value)
@@ -47,8 +56,7 @@ export default function ListItem({ amount, deleteAmount, updateAmountArray }: Li
         }
         setEdit(() => !edit);
     }
-
-
+    
     return (
         <div className='list-item'>
             <div style={{background: background}} className="bar"></div>
@@ -96,7 +104,8 @@ export default function ListItem({ amount, deleteAmount, updateAmountArray }: Li
                         :
                         <div onClick={() => setEdit(() => !edit)}>{amount.amount}</div>}
                 </div>
-                <div className="list-item-date">{amount.timestamp}</div>
+                <div className="list-item-date">{format.format(new Date(amount.timestamp))}</div>
+                
             </div>
 
             <div className="list-btns">
