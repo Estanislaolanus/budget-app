@@ -88,7 +88,7 @@
 .logout  {
     color: #272727;
     font-size: 16px;
-
+    width: 100%;
 }
 .logout i {
     transform: rotate(180deg);

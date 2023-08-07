@@ -1,4 +1,4 @@
-import { FormEvent, RefObject, ChangeEvent, useRef, useState } from "react"
+import { FormEvent, RefObject, ChangeEvent, useRef, useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom";
 import Axios from '../../api/Axios';
 import "./Register.css";
@@ -21,6 +21,10 @@ export default function Register() {
     const [confirmPasswordError, setConfirmPasswordError] = useState<string>("");
     const [userAlreadyExists, setUserAlreadyExists] = useState<string>("");
     const navigate = useNavigate();
+    useEffect(() => {
+        if(authContext && !authContext.auth) return;
+        navigate("/");
+    }, [authContext, navigate]);
     async function register() {
         try {
             if(!usernameRef.current || !emailRef.current || !passwordRef.current) return;
@@ -150,7 +154,7 @@ export default function Register() {
                     </div>
                 </div>
                 {confirmPasswordError && <div className="error-message">{confirmPasswordError}</div>}
-                <button type="submit">Create new account</button>
+                <button className="submit" type="submit">Create new account</button>
                 {userAlreadyExists && <div className="error-message">{userAlreadyExists}</div>}
 
             </form>

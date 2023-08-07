@@ -55,10 +55,8 @@ function App() {
           index: true,
           element: <Home />,
           path: "/",
-
-        }
+        },
       ],
-
     },
     { path: "/register", element: <Register /> },
     { path: "/login", element: <Login /> }

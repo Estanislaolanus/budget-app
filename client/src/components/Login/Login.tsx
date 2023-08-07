@@ -1,4 +1,4 @@
-import { FormEvent, RefObject, ChangeEvent, useState, useRef } from 'react'
+import { FormEvent, RefObject, ChangeEvent, useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import Axios from "../../api/Axios";
 import useAuth from '../../hooks/useAuth';
@@ -14,9 +14,15 @@ export default function Login() {
     const [emailError, setEmailError] = useState<string>();
     const [passwordError, setPasswordError] = useState<string>();
     const [visiblePassword, setVisiblePassword] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(false);
 
+    useEffect(() => {
+        if(authContext && !authContext.auth) return;
+        navigate("/");
+    }, [authContext, navigate]);
     async function login() {
         try {
+            setLoading(true)
             if (!emailRef.current || !passwordRef.current) return;
             const res = await Axios.post("/login", { email:emailRef.current.value, password: passwordRef.current.value }, {
                 headers: { "Content-Type": "application/json" },
@@ -33,6 +39,7 @@ export default function Login() {
             navigate("/");
         } catch (err) {
             setPasswordError("Email or password incorrect");
+            setLoading(false);
         }
     }
 
@@ -93,7 +100,7 @@ export default function Login() {
                     </div>
                 </div>
                 {passwordError && <div className="error-message">{passwordError}</div>}
-                <button type="submit">Log in</button>
+                {loading ? <div className='submit' ><div className='submit-loader'></div></div> : <button className='submit' type="submit">Log in</button>}
             </form>
             <div className="ask-to-login">Don't have an account?<button onClick={() => navigate('/register')}>Sign Up</button></div>
         </div>
