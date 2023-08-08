@@ -16,8 +16,8 @@ export default function getCategoryAndColor(category: string) {
             return {color: "#7211ad", category};
         case "education":
             return {color: "#11ad62", category};
-        case "insurance ":
-            return {color: "#5aad11", category};
+        case "insurance":
+            return {color: "#fff", category};
         default:
             return {color: "#d303fc", category};
     }
