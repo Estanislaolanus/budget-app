@@ -1,0 +1,66 @@
+.dropdown {
+    width: 200px;
+    position: relative;
+}
+.select {
+    padding: 7px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1.8px solid #656565;
+    cursor: pointer;
+    transition: background .3s ease-in-out;
+}
+.select span {
+    font-size: 14px;
+    color: #656565;
+}
+.caret i {   
+    color: #656565;
+    transition: .5s ease;
+}
+.caret-rotate i {
+    transform: rotate(180deg);
+}
+.menu {
+    list-style: none;
+    padding: .2rem .5rem;
+    box-shadow: 0 .5rem 1rem #0000001a;
+    border-radius: .5rem;
+    position: absolute;
+    width: 100%;
+    opacity: 0;
+    display: none;
+    transition: .2s;
+    z-index: 1;
+    background: #F9EBFF;
+    height: 250px;
+    overflow-y: scroll;
+}
+.menu li {
+    padding: .7rem .5rem;
+    margin: .3rem 0;
+    border-radius: .5rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all .3s ease;
+}
+.menu li:hover {
+    background: #dddbc5;
+}
+.menu li .list-title {
+    color: #5a5d67;
+}
+
+.menu li img {
+    width: 2rem;
+}
+.active {
+    background: #23242a;
+}
+.menu-open {
+    display: block;
+    opacity: 1;
+}

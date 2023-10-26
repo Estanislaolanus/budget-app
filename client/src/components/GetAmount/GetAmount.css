@@ -13,38 +13,6 @@
     gap: 25px;
 }
 
-.dropdown-select{
-    position: relative;
-    min-width: 180px;
-    display: flex;
-    align-items: center;
-    border-bottom: 1.8px solid #656565;
-}
-.dropdown-options {
-    width: 100%;
-    color: #313131;
-    appearance: none;
-    background: none;
-    border: none;
-    outline: none;
-    padding: 7px 30px 7px 6px;
-    font-size: 14px;
-}
-
-.caret-container{
-    position:absolute;
-    z-index: -1;
-    right: 0;
-    height: 100%;
-    width: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-} 
-.caret-container i { 
-    color: #404040;
-    padding: 5px;
-}
 .input-field {
     border-bottom: 1.8px solid #656565;
 }
@@ -56,9 +24,7 @@
     padding: 7px;
     outline: none;
 }
-.get-amount-categories option {
-    margin: 20px 0;
-}
+
 .get-amount-buttons {
     margin: 10px;
     display: flex;

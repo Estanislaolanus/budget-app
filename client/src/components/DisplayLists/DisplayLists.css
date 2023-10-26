@@ -11,11 +11,7 @@
 .list {
     border-radius: 1rem;
     padding: .5rem;
-    min-width: 300px;
-}
-.list-body {
-    max-height: 400px;
-    overflow-y: auto;
+    min-width: 350px;
 }
 .lists-title {
     text-align: center;

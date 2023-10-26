@@ -1,6 +1,6 @@
 import { RefObject, useEffect, useRef } from 'react'
 import { SliderProps } from '../../Types'
-import getCategoryAndColor from '../../utils/getCategoryAndColor'
+import getCategoryAndColor from '../../utils/getCategoryInfo'
 import './PieChart.css'
 
 export default function PieChart({ expense, amountArray }: SliderProps) {

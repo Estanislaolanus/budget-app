@@ -1,6 +1,6 @@
 import { ChangeEvent, useEffect, useState, useRef, RefObject } from 'react'
 import { ListItemProps } from '../../Types';
-import getCategoryAndColor from '../../utils/getCategoryAndColor'
+import getCategoryAndColor from '../../utils/getCategoryInfo'
 import "./ListItem.css";
 export default function ListItem({ amount, deleteAmount, updateAmountArray }: ListItemProps) {
     const [edit, setEdit] = useState<Boolean>(false);
@@ -14,20 +14,13 @@ export default function ListItem({ amount, deleteAmount, updateAmountArray }: Li
     const format = new Intl.DateTimeFormat("en-us", {
         dateStyle: "short"
     });
-    // useEffect(() => {
-    //     const f = new Intl.DateTimeFormat("en-us", {
-    //         dateStyle: "full",
-    //         timeStyle: "full"
-    //     });
-    //     console.log(f.format(new Date(amount.timestamp)))
-    // })
     useEffect(() => {
         const textarea = textareaRef.current;
         if(!textarea) return;
         textarea.style.height = "auto";
         const height = textarea.scrollHeight;
         textarea.style.height = `${height}px`;
-    });
+    }, []);
     function handleAmountChange(e: ChangeEvent<HTMLInputElement>) {
         const value = parseInt(e.target.value)
         if (typeof value !== "number") return;

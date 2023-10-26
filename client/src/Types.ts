@@ -29,6 +29,11 @@ interface DisplayListsProps {
     setBudget: Dispatch<SetStateAction<number>>;
     setExpense: Dispatch<SetStateAction<number>>;
 }
+interface DisplayListSectionProps {
+    amountArray: Amount[];
+    deleteAmount: (id: string, type: string, amount: number) => void;
+    updateAmountArray: (id: string, object: Amount | Object, money?: number, type?: string) => void;
+}
 interface ListItemProps {
     amount: Amount;
     deleteAmount: (id: string, type: string, amount: number) => void;
@@ -38,6 +43,12 @@ interface ListItemProps {
 interface ContextProviderProps {
     children: ReactNode;
 }
+
+interface DropdownProps {
+    setCategory: Dispatch<SetStateAction<string>>;
+    category: string;
+}
+
 interface AuthContext {
     auth: Boolean;
     setAuth: Dispatch<SetStateAction<Boolean>>
@@ -59,8 +70,10 @@ export {
     type BudgetFormProps,
     type SliderProps, 
     type DisplayListsProps,
+    type DisplayListSectionProps,
     type ListItemProps,
     type ContextProviderProps,
+    type DropdownProps,
     type AuthContext,
     type UserContext,
     type DateContext

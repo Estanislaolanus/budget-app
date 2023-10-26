@@ -1,12 +1,13 @@
 .list-item {
+    width: 100%;
+    min-height: 5.1rem;
     display: flex;
     padding: 10px 20px;
-    margin: 5px;
+    margin: 5px 0;
     border-radius: 6px;
     background-color: #ffffff;
     position: relative;
     overflow: hidden;
-    width: 400px;
     z-index: 0;
     gap: 20px;
 }
@@ -139,10 +140,6 @@
 } 
 
 @media  (max-width: 767px) {
-    .list-item {
-        width: 300px;
-        gap: 20px;
-    }
     .list-item-info {
         width: 40%;
     }

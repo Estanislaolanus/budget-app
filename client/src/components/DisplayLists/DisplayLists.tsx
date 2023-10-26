@@ -1,8 +1,10 @@
 import "./DisplayLists.css";
 import { Amount, DisplayListsProps } from '../../Types';
-import ListItem from "../ListItem/ListItem";
 import Axios from "../../api/Axios";
+import DisplayListSection from "../DisplayListSection/DisplayListSection";
 export default function DisplayLists({ amountArray, deleteAmount, setAmountArray, setBudget, setExpense }: DisplayListsProps) {
+    const budgetArray:Amount[] = amountArray.filter(a => a.type === 'budget');
+    const expenseArray:Amount[] = amountArray.filter(a => a.type === 'expense');
     async function updateAmountArray(id: string, object: Amount | Object, money?:number, type?: string) {
         const idx = amountArray.findIndex(a => a.id === id);
         if (idx === -1) return;
@@ -30,7 +32,7 @@ export default function DisplayLists({ amountArray, deleteAmount, setAmountArray
         }
         try {
             const accessToken = localStorage.getItem("accessToken");
-            await Axios.put(`/amount/${id}` , object, {
+            await Axios.put(`/amount/${id}`, object, {
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": `Bearer ${accessToken}`,
@@ -48,7 +50,7 @@ export default function DisplayLists({ amountArray, deleteAmount, setAmountArray
                 <div className="lists-title">Budget List</div>
                 <div className="list-body">
                     {
-                        amountArray.filter(a => a.type === 'budget').map(amount => <ListItem key={amount.id} amount={amount} deleteAmount={deleteAmount} updateAmountArray={updateAmountArray} />)
+                        <DisplayListSection key="budget" amountArray={budgetArray} updateAmountArray={updateAmountArray} deleteAmount={deleteAmount}/>
                     }
                 </div>
             </div>
@@ -56,7 +58,7 @@ export default function DisplayLists({ amountArray, deleteAmount, setAmountArray
                 <div className="lists-title">Expense List</div>
                 <div className="list-body">
                     {
-                        amountArray.filter(a => a.type === 'expense').map(amount => <ListItem key={amount.id} amount={amount} deleteAmount={deleteAmount} updateAmountArray={updateAmountArray} />)
+                        <DisplayListSection key="expense" amountArray={expenseArray} updateAmountArray={updateAmountArray} deleteAmount={deleteAmount}/>
                     }
                 </div>
             </div>
