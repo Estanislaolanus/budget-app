@@ -15,7 +15,7 @@ export default function CategoryDropDown({amountArray, ...rest}:DisplayListSecti
             let height = 0;
             const children = Array.from(ul.children);
             for(const child of children) {
-                height += child.clientHeight + 10;
+                height += child.clientHeight;
             }
             ul.style.height = height + "px";
         }
@@ -27,9 +27,8 @@ export default function CategoryDropDown({amountArray, ...rest}:DisplayListSecti
             let height = 0;
             const children = Array.from(ul.children);
             for(const child of children) {
-                height += child.clientHeight + 10;
+                height += child.clientHeight;
             }
-            ul.style.margin = "10px 0";
             ul.style.height = height + "px";
         } else {
             ul.style.margin = "0";

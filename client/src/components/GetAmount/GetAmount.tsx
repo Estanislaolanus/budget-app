@@ -6,7 +6,6 @@ export default function GetAmount({ handleSetBudget, handleSetExpense, handleSet
   const amountRef: RefObject<HTMLInputElement> = useRef(null);
   const descriptionRef: RefObject<HTMLInputElement> = useRef(null);
   const [category, setCategory] = useState("");
-  // const categoryRef: RefObject<HTMLSelectElement> = useRef(null);
 
   function addAmount(type: string) {
     const amountInput = amountRef.current;

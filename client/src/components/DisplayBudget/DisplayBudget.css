@@ -14,21 +14,22 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 140px;
-    height: 140px;
+    width: 180px;
+    height: 180px;
     box-shadow: 4px 4px 6px -1px #0002,
     -4px -4px 6px -1px #101cbfb3;
     border-radius: 50%;
     background: #44a8f4;
     background: conic-gradient(
-        #00FF00 0deg,
-        #d9ffd9 0deg
+        #50f93a 0deg,
+        #fff 0deg
     );
 }
 .inner {
-    width: 60px;
-    height: 60px;
+    width: 165px;
+    height: 165px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     box-shadow: inset 4px 4px 6px -1px #0004,
@@ -37,27 +38,23 @@
     z-index: 1;
     background-color: #120a6c;
 }
-.inner-grey {
-    background: #00000055;
-    width: 85px;
-    height: 85px;
-    border-radius: 50%;
-    position: absolute;
-}
+
 .percentage {
-    font-size: 18px;
+    font-size: 2rem;
     z-index: 1;
     font-weight: 550;
-    color: #fff;
+    color: #50f93a;
 }
-
-.amounts-container {
+.inner-text {
+    color: #c8cce3;
+}
+/* .amounts-container {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 2rem;
-}
-
+} */
+/* 
 .amount {
     display: flex;
     flex-direction: column;
@@ -73,4 +70,4 @@
 .amount-number {
     color: #fff;
 }
-
+ */

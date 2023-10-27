@@ -5,13 +5,13 @@ import "./DisplayBudget.css";
 export default function DisplayBudget({ budget, expense, amountArray }: SliderProps) {
   const [balance, setBalance] = useState<number>(0);
   const [counter, setCounter] = useState<number>(0);
-  const [color, setColor] = useState<string>(counter >= 5 ? "red" : "#00FF00");
+  const [color, setColor] = useState<string>(counter >= 5 ? "red" : "#50f93a");
   const percentRef: RefObject<HTMLDivElement> = useRef(null);
   useEffect(() => {
     const calculatePercentage = Math.floor(100 - ((expense / budget) * 100)) || 0;
     const calculateBalance = budget - expense;
     setColor(() => {
-      const newColor = calculatePercentage <= 5 ? "red" : "#00FF00";
+      const newColor = calculatePercentage <= 5 ? "red" : "#50f93a";
       return newColor
     });
     setBalance(calculateBalance);
@@ -32,7 +32,7 @@ export default function DisplayBudget({ budget, expense, amountArray }: SliderPr
         if(!percentRef.current) return;
         percentRef.current.style.background = `conic-gradient(
           ${color} ${counter * 3.6}deg,
-          #d9ffd9 ${counter * 3.6}deg
+          #fff ${counter * 3.6}deg
           )`;
       }, 10)
     }
@@ -41,20 +41,20 @@ export default function DisplayBudget({ budget, expense, amountArray }: SliderPr
   return (
     <div className='budget-display'>
       <div className="amounts-container">
-        <div className='amount'>
+        {/* <div className='amount'>
           <div className="amount-title">Initial</div>
           <div className="amount-number">${budget}</div>
         </div>
         <div className='amount'>
           <div className="amount-title" style={{color: color}}>Balance</div>
           <div className="amount-number" style={{color: color}}>${balance}</div>
-        </div>
+        </div> */}
       </div>
       <div className='budget-progress-bar'>
         <div ref={percentRef} className="outer">
           <div className="inner">
-            <div className="inner-grey"></div>
-            <div className='percentage'>{counter}%</div>
+            <div className='percentage'>${balance}</div>
+            <div className='inner-text'>Safe-to-Spend</div>
           </div>
         </div>
       </div>
