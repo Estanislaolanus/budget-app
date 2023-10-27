@@ -16,6 +16,8 @@ interface BudgetFormProps {
     handleSetBudget: (newBudget: number) => void;
     handleSetExpense: (newExpense: number) => void;
     handleSetAmountsArray: (newAmount: Amount) => void;
+    setAddTransaction: Dispatch<SetStateAction<boolean>>;
+    type: string;
 }
 interface SliderProps {
     budget: number;
@@ -28,6 +30,9 @@ interface DisplayListsProps {
     setAmountArray: Dispatch<SetStateAction<Amount[]>>;
     setBudget: Dispatch<SetStateAction<number>>;
     setExpense: Dispatch<SetStateAction<number>>;
+    handleSetBudget: (newBudget: number) => void;
+    handleSetExpense: (newExpense: number) => void;
+    handleSetAmountsArray: (newAmount: Amount) => void;
 }
 interface DisplayListSectionProps {
     amountArray: Amount[];

@@ -1,16 +1,17 @@
-import { RefObject, useRef, useState } from 'react';
 import "./GetAmount.css";
+import { RefObject, useRef, useState } from 'react';
 import { BudgetFormProps } from '../../Types';
 import Dropdown from '../Dropdown/Dropdown';
-export default function GetAmount({ handleSetBudget, handleSetExpense, handleSetAmountsArray }: BudgetFormProps) {
+export default function GetAmount({ type, setAddTransaction, handleSetBudget, handleSetExpense, handleSetAmountsArray }: BudgetFormProps) {
   const amountRef: RefObject<HTMLInputElement> = useRef(null);
   const descriptionRef: RefObject<HTMLInputElement> = useRef(null);
   const [category, setCategory] = useState("");
-
+  const alertRef: RefObject<HTMLDivElement> = useRef(null);
   function addAmount(type: string) {
     const amountInput = amountRef.current;
-    const descriptionSelect = descriptionRef.current
-    if (!amountInput || !category || !descriptionSelect) return;
+    const descriptionSelect = descriptionRef.current;
+    if (type === "expense" && !category) return;
+    if (!amountInput || !descriptionSelect) return;
     const amount: number = parseInt(amountInput.value);
     const description: string = descriptionSelect.value;
     const date = new Date();
@@ -20,18 +21,17 @@ export default function GetAmount({ handleSetBudget, handleSetExpense, handleSet
       type,
       amount,
       description,
-      category,
+      category: category || "income",
       timestamp: date
     }
-    
+
     if (type === "budget") {
-      if(category !== "income") return;
       handleSetBudget(amount);
     } else {
-      if(category === "income") return;
       handleSetExpense(amount);
     }
     handleSetAmountsArray(newAmount);
+    setAddTransaction(false);
     setCategory("");
     amountInput.value = "";
     descriptionSelect.value = "";
@@ -39,9 +39,15 @@ export default function GetAmount({ handleSetBudget, handleSetExpense, handleSet
   }
   return (
     <>
-      <div className='get-amount-container'>
+      <div className="background-screen"></div>
+      <div ref={alertRef} className='get-amount-container'>
+        <button onClick={() => setAddTransaction(false)} className='close-btn'>
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 20L4 4.00003M20 4L4.00002 20" stroke="#000000" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </button>
         <div className="get-amount-fields">
-          <Dropdown setCategory={setCategory} category={category}/>
+          {type === "budget" ? <></> : <Dropdown setCategory={setCategory} category={category} />}
           <div className='input-field'>
             <input ref={amountRef} type="number" placeholder='Enter amount' pattern="[0-9]*" />
           </div>
@@ -50,8 +56,7 @@ export default function GetAmount({ handleSetBudget, handleSetExpense, handleSet
           </div>
         </div>
         <div className="get-amount-buttons">
-          <button onClick={() => addAmount("budget")} className='add-amount budget'>Add Budget</button>
-          <button onClick={() => addAmount("expense")} className='add-amount expense'>Add Expense</button>
+          <button onClick={() => addAmount(type)} className='add-amount'>Add Transacion</button>
         </div>
       </div>
     </>

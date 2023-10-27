@@ -33,7 +33,7 @@
     display: none;
     transition: .2s;
     z-index: 1;
-    background: #F9EBFF;
+    background: #fff;
     height: 250px;
     overflow-y: scroll;
 }
@@ -45,13 +45,14 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transition: all .3s ease;
 }
 .menu li:hover {
     background: #dddbc5;
 }
 .menu li .list-title {
-    color: #5a5d67;
+    color: #4d505a;
+    font-weight: normal;
+    font-size: .9rem;
 }
 
 .menu li img {

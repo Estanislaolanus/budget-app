@@ -1,4 +1,33 @@
+.background-screen {
+    width: 100vw;
+    height: 100vmax;
+    background: #00000071;
+    position: absolute;
+    z-index: 98;
+}
+.close-btn {
+    height: 1.8rem;
+    width: 1.8rem;
+    cursor: pointer;
+    position: absolute;
+    right: .5rem;
+    top: .5rem;
+    background: none;
+    outline: none;
+    border: none;
+}
+.close-btn svg {
+    width: 100%;
+    height: 100%;
+}
 .get-amount-container {
+    padding: 1rem 2rem;
+    position: absolute;
+    background: #fff;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    z-index: 99;
+    border-radius: 4px;
+    width: 500px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -9,7 +38,8 @@
     margin: 10px;
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
+    align-items: center;
+    flex-direction: column;
     gap: 25px;
 }
 
@@ -19,7 +49,7 @@
 .input-field input {
     background: none;
     border-radius: 0;
-    width: 180px;
+    width: 200px;
     border: none;
     padding: 7px;
     outline: none;
@@ -33,31 +63,22 @@
 .add-amount {
     padding: 4px 0;
     background: none;
-    border: none;
     font-size: 18px;
     cursor: pointer;
     padding: 8px 10px;
-    border-radius: 15px;
-    width: 130px;
+    width: 180px;
     transition: all .2s;
+    color: #27254f;
+    border: 1.8px solid #27254f;
+    border-radius: 1rem;
+    transition: background color .3s;
 }
-.budget {
-    color: #374785;
-    border: 1.8px solid #374785;
+.add-amount:hover {
+    background: #27254f;
+    color: #fff;
 }
 
-.expense {
-    color: #f76c6c;
-    border: 1.8px solid #f76c6c;
-}
-.budget:hover {
-    background:#374785;
-    color: #fff;
-}
-.expense:hover {
-    background:#f76c6c;
-    color: #fff;
-}
+
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -66,4 +87,10 @@ input::-webkit-inner-spin-button {
 }
 input[type=number] {
     -moz-appearance: textfield;
+}
+
+@media (width < 500px) {
+    .get-amount-container {
+        width: 300px;
+    }
 }

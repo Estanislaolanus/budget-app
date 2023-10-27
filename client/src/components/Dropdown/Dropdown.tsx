@@ -11,12 +11,12 @@ export default function Dropdown({category: cat, setCategory}: DropdownProps) {
         if(!cat) setTextField("Choose a category");
     }, [cat]);
     useEffect(() => {
-        const handleClick = (e: MouseEvent) => {
-            if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-                setSelect(false)
-            }
+    const handleClick = (e: MouseEvent) => {
+        if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+            setSelect(false)
         }
-        document.addEventListener("click", handleClick);
+    }
+    document.addEventListener("click", handleClick);
     return () => {
         document.removeEventListener("click", handleClick);
     };
@@ -34,10 +34,6 @@ export default function Dropdown({category: cat, setCategory}: DropdownProps) {
                 <div className={`caret ${select ? "caret-rotate" : ""}`}><i className='fa-solid fa-caret-down'></i></div>
             </div>
             <ul className={`menu ${select ? "menu-open" : ""}`}>
-                <li onClick={() => onSelect("income")}>
-                    <img src="./assets/categories/income.png" alt="" />
-                    <div className="list-title">Income</div>
-                </li>
                 <li onClick={() => onSelect("groceries")}>
                     <img src="./assets/categories/grocery.png" alt="" />
                     <div className="list-title">Groceries</div>
@@ -57,6 +53,10 @@ export default function Dropdown({category: cat, setCategory}: DropdownProps) {
                 <li onClick={() => onSelect("education")}>
                     <img src="./assets/categories/education.png" alt="" />
                     <div className="list-title">Education</div>
+                </li>
+                <li onClick={() => onSelect("housing")}>
+                    <img src="./assets/categories/housing.png" alt="" />
+                    <div className="list-title">Housing</div>
                 </li>
                 <li onClick={() => onSelect("personalCare")}>
                     <img src="./assets/categories/personal-care.png" alt="" />

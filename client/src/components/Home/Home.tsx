@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Amount } from '../../Types';
 import Axios from "../../api/Axios";
-import GetAmount from '../GetAmount/GetAmount';
 import DisplayLists from '../DisplayLists/DisplayLists';
 import Slider from '../Slider/Slider';
 import useDate from '../../hooks/useDate';
@@ -115,17 +114,15 @@ function Home() {
         <>
 
             <Slider budget={budget} expense={expense} amountArray={amountArray} />
-            <GetAmount
-                handleSetBudget={handleSetBudget}
-                handleSetExpense={handleSetExpense}
-                handleSetAmountsArray={handleSetBudgetArray}
-            />
             <DisplayLists
                 amountArray={amountArray}
                 deleteAmount={deleteAmount}
                 setAmountArray={setAmountArray}
                 setBudget={setBudget}
                 setExpense={setExpense}
+                handleSetBudget={handleSetBudget}
+                handleSetExpense={handleSetExpense}
+                handleSetAmountsArray={handleSetBudgetArray}
             />
         </>
     );

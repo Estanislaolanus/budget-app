@@ -40,16 +40,6 @@ export default function DisplayBudget({ budget, expense, amountArray }: SliderPr
   
   return (
     <div className='budget-display'>
-      <div className="amounts-container">
-        {/* <div className='amount'>
-          <div className="amount-title">Initial</div>
-          <div className="amount-number">${budget}</div>
-        </div>
-        <div className='amount'>
-          <div className="amount-title" style={{color: color}}>Balance</div>
-          <div className="amount-number" style={{color: color}}>${balance}</div>
-        </div> */}
-      </div>
       <div className='budget-progress-bar'>
         <div ref={percentRef} className="outer">
           <div className="inner">

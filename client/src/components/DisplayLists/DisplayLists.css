@@ -16,10 +16,45 @@
 .list-body {
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
-.lists-title {
-    text-align: center;
+
+.list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .5rem 1rem;
+}
+.list-title {
+    /* text-align: center; */
     font-weight: bold;
     font-size: 18px;
     margin: 10px;
     color: #27254f;
+}
+.add {
+    height: 2rem;
+    width: 2rem;
+    border-radius: 50%;
+    border: none;
+    background: none;
+    outline: none;
+    cursor: pointer;
+    display: grid;
+    place-content: center;
+}
+.add svg {
+    height: .8rem;
+    width: .8rem;
+}
+
+.add-1 {
+    border: 1.5px solid #374785;
+}
+.add-1 svg {
+    fill: #374785;
+}
+.add-2 {
+    border: 1.5px solid #f76c6c;
+}
+.add-2 svg {
+    fill: #f76c6c;
 }
