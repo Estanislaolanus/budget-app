@@ -8,9 +8,9 @@ export default function DisplayListSection({amountArray, ...rest}: DisplayListSe
                 amountArray.length && amountArray[0].type === "budget" ? <CategoryDropdown amountArray={amountArray} {...rest}/> :
                 categories.map((category, i) => {
                     const categoryArray = amountArray.filter(a => a.category === category);
-                    if(categoryArray.length !== 0) {
-                        return <CategoryDropdown key={`${i}-${category}`} amountArray={categoryArray} {...rest}/>;
-                    }
+                    if(categoryArray.length === 0) return null;
+                    return <CategoryDropdown key={`${i}-${category}`} amountArray={categoryArray} {...rest}/>;
+
                 })
             }
         </>
