@@ -59,7 +59,6 @@ export default function Login() {
             }
             return;
         }
-        
         await login();
     }
     function onType (e: ChangeEvent<HTMLInputElement>, type: string) {

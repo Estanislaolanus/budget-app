@@ -1,8 +1,8 @@
 .header {
     padding-top: 20px;
     background-color: #120a6c;
-    box-shadow: 0 0 10px 4px  #212121;
-    min-height: 50vh;
+    box-shadow: 0 0 10px #2121219c;
+    min-height: 63vh;
     width: 100%;
 }
 .slider-container{
@@ -50,4 +50,30 @@
 }
 .slider-button > svg:hover{
     fill: #ffffffe6;
+}
+.dots {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+.dot {
+    cursor: pointer;
+    background-color: #ffffff66;
+    border-radius: 50%;
+    height: .5rem;
+    width: .5rem;
+    transition: background .3s ease;
+}
+.dot:hover {
+    background-color: #fff;
+}
+.slide-selected {
+    background-color: #fff;
+}
+
+@media (width < 500px) {
+    .slider {
+        width: 100%;
+    }
 }

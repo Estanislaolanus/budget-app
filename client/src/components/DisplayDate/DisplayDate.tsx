@@ -9,15 +9,18 @@ export default function DisplayDate() {
     const [monthName, setMonthName] = useState<String>("");
     useEffect(() => {
         if(!date) return;
-        const formatMonthName = new Intl.DateTimeFormat("en-us", {
+        const formatMonthLong = new Intl.DateTimeFormat("en-us", {
             month: "long"
+        });
+        const formatMonthShort = new Intl.DateTimeFormat("en-us", {
+            month: "short"
         });
         const year = new Date().getFullYear();
         const currentYear = date.getFullYear();
         const isCurrentYear = year === currentYear;
         const month = date.getMonth();
         const newDate = new Date(currentYear, month, 1);
-        const getStringDate = isCurrentYear ? formatMonthName.format(newDate) : `${formatMonthName.format(newDate)} ${currentYear}` ;
+        const getStringDate = isCurrentYear ? formatMonthLong.format(newDate) : `${formatMonthShort.format(newDate)} ${currentYear}` ;
         setMonthName(getStringDate);
     }, [date]);
     function next () {

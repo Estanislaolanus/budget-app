@@ -15,10 +15,10 @@ export default function getCategoryInfo(category: string) {
         case "education":
             return { color: "#11ad62", category, name: "Education", img: "./assets/categories/education.png" };
         case "insurance":
-            return { color: "#fff", category, name: "Insurance", img: "./assets/categories/insurance.png" };
+            return { color: "pink", category, name: "Insurance", img: "./assets/categories/insurance.png" };
         case "housing":
-            return { color: "#ccc", category, name: "Housing", img: "./assets/categories/housing.png" };
+            return { color: "#f6ff00", category, name: "Housing", img: "./assets/categories/housing.png" };
         default:
-            return { color: "#d303fc", category, name: "Other" };
+            return { color: "#688b07", category, name: "Other" };
     }
 }

@@ -6,8 +6,8 @@
     z-index: 98;
 }
 .close-btn {
-    height: 1.8rem;
-    width: 1.8rem;
+    height: 2rem;
+    width: 2rem;
     cursor: pointer;
     position: absolute;
     right: .5rem;
@@ -17,18 +17,19 @@
     border: none;
 }
 .close-btn svg {
-    width: 100%;
-    height: 100%;
+    width: 2rem;
+    height: 2rem;
 }
 .get-amount-container {
     padding: 1rem 2rem;
-    position: absolute;
+    position: fixed;
     background: #fff;
     box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
     z-index: 99;
     border-radius: 4px;
     width: 500px;
     display: flex;
+    transform: translateY(-50%);
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -69,7 +70,7 @@
     width: 180px;
     transition: all .2s;
     color: #27254f;
-    border: 1.8px solid #27254f;
+    border: 2px solid #27254f;
     border-radius: 1rem;
     transition: background color .3s;
 }

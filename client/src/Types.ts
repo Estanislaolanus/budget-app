@@ -66,7 +66,13 @@ interface DateContext {
     date: Date;
     setDate: Dispatch<SetStateAction<Date>>
 }
-
+interface ExpensesChart {
+    id: string;
+    amount: number;
+    percent: number;
+    category: string;
+    color: string;
+}
 
 
 export {
@@ -81,5 +87,6 @@ export {
     type DropdownProps,
     type AuthContext,
     type UserContext,
-    type DateContext
+    type DateContext,
+    type ExpensesChart
 }
