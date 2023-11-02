@@ -18,8 +18,11 @@
     height: 40px;
     display: block;
     border-top: 1px solid #5554605d;
+    position: relative;
 }
 .y-axis li span {
+    position: absolute;
+    left: 0;
     font-family: sans-serif;
     display: block;
     font-size: .8rem;
@@ -29,6 +32,7 @@
     color: #fff;
     text-align: right;
     user-select: none;
+    z-index: 2;
 }
 .x-axis {
     position: absolute;
@@ -73,6 +77,7 @@
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 }
 .bar-info {
+    
     position: absolute;
     top: 50%;
     left: 50%;
@@ -82,7 +87,7 @@
     width: 150px;
     background: #efefe8;
     box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
-    z-index: 2;
+    z-index: 3;
     border-radius: 4px;
     padding: .5rem; 
     transition: all .3s;

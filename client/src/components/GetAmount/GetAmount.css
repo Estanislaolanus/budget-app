@@ -1,9 +1,30 @@
 .background-screen {
-    width: 100vw;
-    height: 100vmax;
+    width: 100%;
+    height: 100vh;
     background: #00000071;
-    position: absolute;
+    position: fixed;
     z-index: 98;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.get-amount-container {
+    padding: 1rem 2rem;
+    position: fixed;
+    background: #fff;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    z-index: 99;
+    border-radius: 4px;
+    width: 500px;
+    display: flex;
+    top: 50%;
+    transform: translateY(-50%);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
 }
 .close-btn {
     height: 2rem;
@@ -19,21 +40,6 @@
 .close-btn svg {
     width: 2rem;
     height: 2rem;
-}
-.get-amount-container {
-    padding: 1rem 2rem;
-    position: fixed;
-    background: #fff;
-    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
-    z-index: 99;
-    border-radius: 4px;
-    width: 500px;
-    display: flex;
-    transform: translateY(-50%);
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
 }
 .get-amount-fields {
     margin: 10px;

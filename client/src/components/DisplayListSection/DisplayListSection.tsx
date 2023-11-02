@@ -10,7 +10,6 @@ export default function DisplayListSection({amountArray, ...rest}: DisplayListSe
                     const categoryArray = amountArray.filter(a => a.category === category);
                     if(categoryArray.length === 0) return null;
                     return <CategoryDropdown key={`${i}-${category}`} amountArray={categoryArray} {...rest}/>;
-
                 })
             }
         </>

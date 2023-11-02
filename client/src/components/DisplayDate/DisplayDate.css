@@ -1,9 +1,10 @@
 .date-container {
     width: 100%;
+    position: absolute;
+    top: 1.35rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    
 }
 .date {
     position: relative;

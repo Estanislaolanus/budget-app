@@ -52,7 +52,7 @@
 }
 @media (width < 500px) {
     .money-data-container {
-        width: 300px;
+        width: 270px;
     }
     .money-ex-bu {
         display: flex;
