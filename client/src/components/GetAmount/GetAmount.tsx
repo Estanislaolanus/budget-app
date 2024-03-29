@@ -2,11 +2,13 @@ import "./GetAmount.css";
 import { RefObject, useRef, useState } from 'react';
 import { BudgetFormProps } from '../../Types';
 import Dropdown from '../Dropdown/Dropdown';
-export default function GetAmount({ type, setAddTransaction, handleSetBudget, handleSetExpense, handleSetAmountsArray }: BudgetFormProps) {
+export default function GetAmount({ type, setAddTransaction, handleSetBudget, handleSetExpense, handleSetAmountsArray }: Readonly<BudgetFormProps>) {
   const amountRef: RefObject<HTMLInputElement> = useRef(null);
   const descriptionRef: RefObject<HTMLInputElement> = useRef(null);
-  const [category, setCategory] = useState("");
   const alertRef: RefObject<HTMLDivElement> = useRef(null);
+  const dateRef: RefObject<HTMLInputElement> = useRef(null);
+  const [category, setCategory] = useState("");
+
   function addAmount(type: string) {
     const amountInput = amountRef.current;
     const descriptionSelect = descriptionRef.current;
@@ -14,7 +16,8 @@ export default function GetAmount({ type, setAddTransaction, handleSetBudget, ha
     if (!amountInput || !descriptionSelect) return;
     const amount: number = parseInt(amountInput.value);
     const description: string = descriptionSelect.value;
-    const date = new Date();
+
+    const date = dateRef.current?.valueAsDate ?? new Date();
     if (!amount || amount <= 0) return;
     const newAmount = {
       id: crypto.randomUUID(),
@@ -26,12 +29,13 @@ export default function GetAmount({ type, setAddTransaction, handleSetBudget, ha
     }
 
     if (type === "budget") {
-      handleSetBudget(amount);
+      handleSetBudget(amount, date);
     } else {
-      handleSetExpense(amount);
+      handleSetExpense(amount, date);
     }
     handleSetAmountsArray(newAmount);
     setAddTransaction(false);
+
     setCategory("");
     amountInput.value = "";
     descriptionSelect.value = "";
@@ -42,7 +46,7 @@ export default function GetAmount({ type, setAddTransaction, handleSetBudget, ha
       <div className="background-screen"></div>
       <div ref={alertRef} className='get-amount-container'>
         <button onClick={() => setAddTransaction(false)} className='close-btn'>
-          <svg  fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M20 20L4 4.00003M20 4L4.00002 20" stroke="#000000" stroke-width="2" stroke-linecap="round" />
           </svg>
         </button>
@@ -53,6 +57,9 @@ export default function GetAmount({ type, setAddTransaction, handleSetBudget, ha
           </div>
           <div className='input-field'>
             <input ref={descriptionRef} type="text" placeholder='Enter description' />
+          </div>
+          <div className='input-field input-date'>
+            <input type="date" ref={dateRef} placeholder='Enter date' />
           </div>
         </div>
         <div className="get-amount-buttons">

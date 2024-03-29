@@ -1,4 +1,4 @@
-import {ReactNode, Dispatch, SetStateAction} from 'react'
+import { ReactNode, Dispatch, SetStateAction } from 'react'
 interface Amount {
     id: string;
     amount: number;
@@ -13,8 +13,8 @@ interface User {
 }
 
 interface BudgetFormProps {
-    handleSetBudget: (newBudget: number) => void;
-    handleSetExpense: (newExpense: number) => void;
+    handleSetBudget: (newBudget: number, date: Date) => void;
+    handleSetExpense: (newExpense: number, date: Date) => void;
     handleSetAmountsArray: (newAmount: Amount) => void;
     setAddTransaction: Dispatch<SetStateAction<boolean>>;
     type: string;
@@ -26,12 +26,12 @@ interface SliderProps {
 }
 interface DisplayListsProps {
     amountArray: Amount[];
-    deleteAmount: (id: string, type: string, amount:number) => void;
+    deleteAmount: (id: string, type: string, amount: number) => void;
     setAmountArray: Dispatch<SetStateAction<Amount[]>>;
     setBudget: Dispatch<SetStateAction<number>>;
     setExpense: Dispatch<SetStateAction<number>>;
-    handleSetBudget: (newBudget: number) => void;
-    handleSetExpense: (newExpense: number) => void;
+    handleSetBudget: (newBudget: number, date: Date) => void;
+    handleSetExpense: (newExpense: number, date: Date) => void;
     handleSetAmountsArray: (newAmount: Amount) => void;
 }
 interface DisplayListSectionProps {
@@ -79,7 +79,7 @@ export {
     type Amount,
     type User,
     type BudgetFormProps,
-    type SliderProps, 
+    type SliderProps,
     type DisplayListsProps,
     type DisplayListSectionProps,
     type ListItemProps,

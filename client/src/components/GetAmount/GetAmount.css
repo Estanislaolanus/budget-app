@@ -26,6 +26,7 @@
     align-items: center;
     margin-top: 20px;
 }
+
 .close-btn {
     height: 2rem;
     width: 2rem;
@@ -37,10 +38,12 @@
     outline: none;
     border: none;
 }
+
 .close-btn svg {
     width: 2rem;
     height: 2rem;
 }
+
 .get-amount-fields {
     margin: 10px;
     display: flex;
@@ -53,6 +56,14 @@
 .input-field {
     border-bottom: 1.8px solid #656565;
 }
+
+.input-field input[type="date"] {
+    cursor: pointer;
+    user-select: none;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
 .input-field input {
     background: none;
     border-radius: 0;
@@ -60,13 +71,16 @@
     border: none;
     padding: 7px;
     outline: none;
+    color: #656565;
 }
+
 
 .get-amount-buttons {
     margin: 10px;
     display: flex;
     gap: 25px;
 }
+
 .add-amount {
     padding: 4px 0;
     background: none;
@@ -80,11 +94,12 @@
     border-radius: 1rem;
     transition: background color .3s;
 }
+
+
 .add-amount:hover {
     background: #27254f;
     color: #fff;
 }
-
 
 
 input::-webkit-outer-spin-button,
@@ -92,6 +107,7 @@ input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
+
 input[type=number] {
     -moz-appearance: textfield;
 }

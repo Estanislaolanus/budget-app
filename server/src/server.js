@@ -8,6 +8,7 @@ import loginRoute from './routes/login.router.js';
 import amountRoute from './routes/amount.route.js';
 import isAuth from './middlewares/isAuth.js'
 import Config from './config/config.js';
+import Amount from './dao/Amount.dao.js';
 const { PORT, CLIENT_URL } = new Config();
 const app = express();
 
@@ -16,7 +17,7 @@ app.use(cors({
     origin: CLIENT_URL,
     methods: "GET, POST, PUT, DELETE",
     credentials: true
-}))
+}));
 
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));

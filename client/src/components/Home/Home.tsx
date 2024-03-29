@@ -17,35 +17,35 @@ const getSum = (type: string, data: Amount[]) => {
     }
     return calculateSum;
 }
-const filterByMonth = (amountArray: Amount[], date: Date | undefined) => {
-    const newAmountArray = amountArray.filter(a => new Date(a.timestamp).getMonth() === date?.getMonth() && new Date(a.timestamp).getFullYear() === date?.getFullYear());
-    return newAmountArray;
-}
 function Home() {
-    const [data, setData] = useState<Amount[]>([]);
     const [amountArray, setAmountArray] = useState<Amount[]>([]);
     const [budget, setBudget] = useState<number>(0);
     const [expense, setExpense] = useState<number>(0);
     const [loading, setLoading] = useState<Boolean>(true);
     const date = useDate()?.date;
-    
+
     useEffect(() => {
         const getAmount = async () => {
             try {
                 const accessToken = localStorage.getItem("accessToken");
-                const amount = await Axios.get("/amount", {
+                const month = date?.getMonth() ?? 0;
+                const year = date?.getFullYear();
+                if (!month && !year) return;
+                const res = await Axios.get(`/amount/${month + 1}/ ${year}`, {
                     headers: {
                         "Content-Type": "application/json",
                         "Authorization": `Bearer ${accessToken}`
                     }
                 });
-                const { amountArray } = amount.data;
-                if (!amount.data || !amountArray) return setLoading(false);
-                const filteredAmountArray = filterByMonth(amountArray, date);
-                setData(amountArray);
-                setBudget(getSum("budget", filteredAmountArray));
-                setExpense(getSum("expense", filteredAmountArray));
-                setAmountArray(filteredAmountArray);
+
+                if (!res) return setLoading(false);
+                const data = res.data;
+                if (!data) return setLoading(false);
+                const getAmountArray = data.amountArray;
+                if (!data.amountArray) return setLoading(false);
+                setBudget(getSum("budget", getAmountArray));
+                setExpense(getSum("expense", getAmountArray));
+                setAmountArray(getAmountArray);
                 setLoading(false);
             } catch (err) {
                 console.log(err);
@@ -53,12 +53,6 @@ function Home() {
         }
         getAmount();
     }, [date]);
-    useEffect(() => {
-        const filteredAmountArray = filterByMonth(data, date);
-        setBudget(getSum("budget", filteredAmountArray));
-        setExpense(getSum("expense", filteredAmountArray));
-        setAmountArray(filteredAmountArray);
-    }, [date, data]);
     async function postAmount(newAmount: Amount) {
         try {
             const accessToken = localStorage.getItem("accessToken");
@@ -87,14 +81,20 @@ function Home() {
             console.log(err);
         }
     }
-    function handleSetBudget(newBudget: number) {
+    function compareDate(date: Date): boolean {
+        const comparisonDate: Date = new Date();
+        return date.getMonth() === comparisonDate.getMonth() && date.getFullYear() === comparisonDate.getFullYear();
+    }
+    function handleSetBudget(newBudget: number, date: Date) {
+        if (date) return compareDate(date);
         setBudget(prev => prev + newBudget);
     }
-    function handleSetExpense(newExpense: number) {
+    function handleSetExpense(newExpense: number, date: Date) {
+        if (date) return compareDate(date);
         setExpense(prev => prev + newExpense);
     }
     function handleSetBudgetArray(newAmount: Amount) {
-        setAmountArray(prev => [...prev, newAmount]);
+        if (compareDate(newAmount.timestamp)) setAmountArray(prev => [...prev, newAmount]);
         postAmount(newAmount);
     }
     function deleteAmount(id: string, type: string, amount: number) {
@@ -112,7 +112,6 @@ function Home() {
     if (loading) return <div className='loader'></div>
     return (
         <>
-
             <Slider budget={budget} expense={expense} amountArray={amountArray} />
             <DisplayLists
                 amountArray={amountArray}
@@ -130,3 +129,4 @@ function Home() {
 
 export default Home;
 
+// db.amounts.find({ userId: "65f8747a6d5d40e4bb22dac5", amountArray: { $elemMatch: { timestamp: { $gte: new Date("2024-03-1T00:00:00.000Z"), $lt: new Date("2024-04-1T00:00:00.000Z") } } } })

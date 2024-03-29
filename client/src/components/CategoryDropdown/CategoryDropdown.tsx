@@ -3,7 +3,7 @@ import { useState, useRef, RefObject, useEffect } from 'react';
 import { Amount, DisplayListSectionProps } from '../../Types';
 import ListItem from '../ListItem/ListItem';
 import getCategoryInfo from '../../utils/getCategoryInfo';
-export default function CategoryDropDown({ amountArray, ...rest }: DisplayListSectionProps) {
+export default function CategoryDropDown({ amountArray, ...rest }: Readonly<DisplayListSectionProps>) {
     const ulRef: RefObject<HTMLUListElement> = useRef(null);
     const [select, setSelect] = useState<boolean>(false);
     const amount: Amount = amountArray[0];
