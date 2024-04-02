@@ -1,13 +1,14 @@
-.form input{
+.form input {
     border: none;
     outline: none;
     background: none;
     border-radius: 0;
 }
+
 .form {
     width: 300px;
     min-height: 400px;
-    background: #fff ;
+    background: #fff;
     padding: 30px 20px;
     box-shadow: 0 0 10px 5px #ccc;
     border-radius: 8px;
@@ -31,20 +32,24 @@
     justify-content: center;
     gap: 20px;
 }
+
 .input-container {
     width: 80%;
 }
-.input-container > input {
-    width:  99%;
+
+.input-container>input {
+    width: 99%;
     border-bottom: 1.8px solid #878787;
     color: #727272;
 }
-.input-container > label {
+
+.input-container>label {
     color: #44a8f4;
     font-weight: 700;
     font-size: 15px;
 }
-.input-password{
+
+.input-password {
     width: 100%;
     border-bottom: 1.8px solid #878787;
     border-radius: 0px;
@@ -52,10 +57,12 @@
     display: flex;
     justify-content: space-between;
 }
-.input-password > input{
+
+.input-password>input {
     width: 100%;
     color: #727272;
 }
+
 .submit {
     border: none;
     background: #44a8f4;
@@ -79,6 +86,7 @@
 .register-form>button:hover {
     background: #037bd6;
 }
+
 .submit-loader {
     height: 30px;
     width: 30px;
@@ -87,34 +95,54 @@
     border-radius: 50%;
     animation: loader 1s ease infinite;
 }
+
 .show-password {
     user-select: none;
     cursor: pointer;
     color: #606060;
 }
-.ask-to-login{
+
+.show-password svg {
+    height: 30px;
+    width: 30px;
+    fill: none;
+    display: flex;
+    align-items: center;
+    margin-right: .5rem;
+}
+
+.show-password svg path {
+    stroke: #606060;
+}
+
+.ask-to-login {
     text-align: center;
     margin: 10px;
     color: #606060;
 }
-.ask-to-login > button{
+
+.ask-to-login>button {
     background: none;
     border: none;
+    width: fit-content;
     color: #046ec0;
     cursor: pointer;
     font-weight: 500;
     font-size: 16px;
-    transition: color .3s
+    transition: color .3s;
 }
-.ask-to-login > button:hover{
+
+.ask-to-login>button:hover {
     color: #014477;
 }
+
 .error-message {
     color: red;
     font-size: 11px;
     width: 70%;
     align-items: start;
 }
+
 .invalid {
     border-bottom: 1.8px solid red !important;
 }
