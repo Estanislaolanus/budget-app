@@ -7,16 +7,17 @@ export default function ListItem({ amount, deleteAmount, updateAmountArray }: Li
     const [editCategory, setEditCategory] = useState<String>(amount.category);
     const [editAmount, setEditAmount] = useState<number>(amount.amount);
     const [editDescription, setEditDescription] = useState<String>(amount.description);
+    const [showFullDescription, setShowFullDescription] = useState<Boolean>(false);
     const background = amount.type === "budget" ? "#374785" : "#f76c6c"
     const amountColor = amount.type === "budget" ? "green" : "red";
     const itemRef: RefObject<HTMLDivElement> = useRef(null);
-    const textareaRef:RefObject<HTMLTextAreaElement> = useRef(null);
+    const textareaRef: RefObject<HTMLTextAreaElement> = useRef(null);
     const format = new Intl.DateTimeFormat("en-us", {
         dateStyle: "short"
     });
     useEffect(() => {
         const textarea = textareaRef.current;
-        if(!textarea) return;
+        if (!textarea) return;
         textarea.style.height = "auto";
         const height = textarea.scrollHeight;
         textarea.style.height = `${height}px`;
@@ -31,7 +32,7 @@ export default function ListItem({ amount, deleteAmount, updateAmountArray }: Li
         if (typeof value !== "string") return;
         setEditDescription(() => value);
     }
-    function handleCategory (e: ChangeEvent<HTMLSelectElement>) {
+    function handleCategory(e: ChangeEvent<HTMLSelectElement>) {
         const value = e.target.value;
         setEditCategory(() => value);
     }
@@ -39,9 +40,9 @@ export default function ListItem({ amount, deleteAmount, updateAmountArray }: Li
         let object: Object = {};
         if (editAmount !== amount.amount && editAmount) object = { ...object, amount: editAmount };
         if (editDescription !== amount.description && editDescription !== "") object = { ...object, description: editDescription };
-        if(editCategory !== amount.category) object = {...object, category:editCategory};
+        if (editCategory !== amount.category) object = { ...object, category: editCategory };
         if (Object.keys(object).length === 0) return setEdit(() => !edit);
-        if(editAmount !== amount.amount && editAmount){
+        if (editAmount !== amount.amount && editAmount) {
             const money = editAmount - amount.amount;
             updateAmountArray(amount.id, object, money, amount.type)
         } else {
@@ -49,13 +50,13 @@ export default function ListItem({ amount, deleteAmount, updateAmountArray }: Li
         }
         setEdit(() => !edit);
     }
-    
+
     return (
         <div className='list-item'>
-            <div style={{background: background}} className="bar"></div>
+            <div style={{ background: background }} className="bar"></div>
             <div ref={itemRef} className="list-item-info">
                 <div className='list-item-category'>
-                    
+
                     {edit && amount.type === "expense" ?
                         <div className="dropdown-item">
                             <select onChange={e => handleCategory(e)} value={editCategory.toString()}>
@@ -75,14 +76,27 @@ export default function ListItem({ amount, deleteAmount, updateAmountArray }: Li
                             </div>
                         </div>
                         :
-                        <div onClick={() => setEdit(() => !edit)}>{getCategoryAndColor(amount.category).category}</div>
+                        <div>{getCategoryAndColor(amount.category).category}</div>
                     }
                 </div>
                 <div className='list-item-description'>
                     {edit ?
-                        <textarea ref={textareaRef} className=' list-item-textarea' onChange={e => handleDescriptionChange(e)}></textarea>                        
+                        <textarea ref={textareaRef} className=' list-item-textarea' onChange={e => handleDescriptionChange(e)}></textarea>
                         :
-                        <div onClick={() => setEdit(p => !p)}>{amount.description}</div>
+                        <div onClick={() => setShowFullDescription(!showFullDescription)}>{
+                            amount.description.length > 32 ?
+                                amount.description.slice(0, 32) + "..." :
+                                amount.description
+                        }</div>
+                    }
+                    {
+                        showFullDescription ?
+                            <div onClick={() => setShowFullDescription(!showFullDescription)} className='list-item-full-description'>
+                                <div className='fullist-item-full-description-title'>Description</div>
+                                <div className='fullist-item-full-description-text'>{amount.description}</div>
+                            </div>
+                            :
+                            <></>
                     }
                 </div>
             </div>
@@ -93,12 +107,12 @@ export default function ListItem({ amount, deleteAmount, updateAmountArray }: Li
                             onChange={e => handleAmountChange(e)}
                             className='list-item-input'
                             type="number"
-                            />
+                        />
                         :
-                        <div onClick={() => setEdit(() => !edit)}>{amount.amount}</div>}
+                        <div>{amount.amount}</div>}
                 </div>
                 <div className="list-item-date">{format.format(new Date(amount.timestamp))}</div>
-                
+
             </div>
 
             <div className="list-btns">
@@ -109,12 +123,12 @@ export default function ListItem({ amount, deleteAmount, updateAmountArray }: Li
                                 <button onClick={() => confirmEdition()}><i className="fa-solid fa-check"></i></button>
                                 <button onClick={() => setEdit(() => !edit)}><i className='fa-solid fa-x'></i></button>
                             </> :
-                            <button onClick={() => setEdit(() => !edit)}><img src="./assets/icons/edit.png" alt=""/></button>
+                            <button onClick={() => setEdit(() => !edit)}><img src="./assets/icons/edit.png" alt="" /></button>
                     }
 
                 </div>
-                <button onClick={() => deleteAmount(amount.id, amount.type, amount.amount)}><img src="./assets/icons/trash.png" alt=""/></button>
-                
+                <button onClick={() => deleteAmount(amount.id, amount.type, amount.amount)}><img src="./assets/icons/trash.png" alt="" /></button>
+
             </div>
         </div>
     )

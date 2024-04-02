@@ -41,8 +41,7 @@ function Home() {
                 if (!res) return setLoading(false);
                 const data = res.data;
                 if (!data) return setLoading(false);
-                const getAmountArray = data.amountArray;
-                if (!data.amountArray) return setLoading(false);
+                const getAmountArray = data.amountArray ?? [];
                 setBudget(getSum("budget", getAmountArray));
                 setExpense(getSum("expense", getAmountArray));
                 setAmountArray(getAmountArray);
@@ -128,5 +127,3 @@ function Home() {
 }
 
 export default Home;
-
-// db.amounts.find({ userId: "65f8747a6d5d40e4bb22dac5", amountArray: { $elemMatch: { timestamp: { $gte: new Date("2024-03-1T00:00:00.000Z"), $lt: new Date("2024-04-1T00:00:00.000Z") } } } })

@@ -64,6 +64,7 @@
 }
 
 .input-field input[type="date"] {
+    height: 29px;
     cursor: pointer;
     user-select: none;
     text-transform: uppercase;

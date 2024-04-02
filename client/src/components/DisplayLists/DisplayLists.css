@@ -1,4 +1,4 @@
-.lists{
+.lists {
     width: 90%;
     display: flex;
     justify-content: center;
@@ -8,6 +8,7 @@
     gap: 1.5rem;
 
 }
+
 .list {
     margin-top: 3.5rem;
     border-radius: 1rem;
@@ -24,12 +25,14 @@
     align-items: center;
     padding: .5rem 1rem;
 }
+
 .list-title {
     font-weight: bold;
     font-size: 18px;
     margin: 10px;
     color: #27254f;
 }
+
 .add {
     height: 2rem;
     width: 2rem;
@@ -41,6 +44,7 @@
     display: grid;
     place-content: center;
 }
+
 .add svg {
     height: .8rem;
     width: .8rem;
@@ -49,12 +53,15 @@
 .add-1 {
     border: 2px solid #374785;
 }
+
 .add-1 svg {
     fill: #374785;
 }
+
 .add-2 {
     border: 2px solid #f76c6c;
 }
+
 .add-2 svg {
     fill: #f76c6c;
 }

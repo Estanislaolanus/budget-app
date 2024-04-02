@@ -16,7 +16,6 @@ router.get("/", async (req, res) => {
         try {
             const { month, year } = req.params;
             const findAmount = await amountDB.getAmountByMonthAndYear(req.user.id, month, year);
-            console.log(month, year, findAmount)
             if (!findAmount) return res.json({ message: "Amount array not found" });
             res.status(200).json(findAmount);
         } catch (err) {

@@ -1,6 +1,6 @@
 .list-item {
     width: 100%;
-    min-height: 5.1rem;
+    height: 5.1rem;
     display: flex;
     padding: 10px 20px;
     background-color: #ffffff;
@@ -9,7 +9,8 @@
     z-index: 0;
     gap: 20px;
 }
-.bar{
+
+.bar {
     height: 80%;
     width: 5px;
     border-radius: 10px;
@@ -18,24 +19,56 @@
     top: 50%;
     transform: translateY(-50%);
 }
+
 .list-item-info {
     width: 33%;
     height: 100%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: center;    
+    justify-content: center;
     gap: 5px;
 }
+
 .list-item-category {
     text-transform: capitalize;
-    font-weight: 540;
     font-size: 1.1rem;
 }
 
-.list-item-description, .list-item-date  {
-    color: #a8a8a8;
+.list-item-description {
+    user-select: none;
+    color: #6c6c6c;
+    cursor: pointer;
 }
+
+.list-item-full-description {
+    position: absolute;
+    transition: all .3s;
+    height: 100%;
+    width: 210px;
+    background: #fff;
+    top: 50%;
+    left: .8rem;
+    transform: translateY(-50%);
+    padding: 0.3rem 0.8rem;
+}
+
+.fullist-item-full-description-title {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #242424;
+}
+
+.fullist-item-full-description-text {
+    height: 100%;
+    overflow: scroll;
+    scroll-behavior: smooth;
+}
+
+.list-item-date {
+    color: #7c7c7c;
+}
+
 .list-item-data {
     width: 33%;
     display: flex;
@@ -44,10 +77,12 @@
     align-items: flex-start;
     gap: 5px;
 }
-.list-item-amount{
+
+.list-item-amount {
     display: flex;
     align-items: center;
 }
+
 .list-btns {
     width: 33%;
     display: flex;
@@ -55,7 +90,7 @@
     justify-content: flex-end;
 }
 
-.list-btns button{
+.list-btns button {
     background: none;
     border: none;
     outline: none;
@@ -65,26 +100,29 @@
     align-items: center;
     justify-content: center;
 }
-.list-btns img{
+
+.list-btns img {
     width: 28px;
 }
 
-.list-item-edit  img {
+.list-item-edit img {
     width: 22px;
 }
-.list-item-edit  i {
+
+.list-item-edit i {
     font-size: 18px;
     color: #242424;
 }
 
 /* ------------- EDIT ------------- */
 
-.dropdown-item{
+.dropdown-item {
     position: relative;
     z-index: 1;
 }
-.dropdown-item > select{
-    color: #363636;
+
+.dropdown-item>select {
+    color: #767676;
     appearance: none;
     background: none;
     border: none;
@@ -92,7 +130,8 @@
     padding-right: 20px;
     cursor: pointer;
 }
-.dropdown-item .caret-item{
+
+.dropdown-item .caret-item {
     position: absolute;
     right: 0;
     top: 0;
@@ -103,25 +142,28 @@
     justify-content: center;
     z-index: -1;
 }
-.dropdown-item .caret-item i { 
+
+.dropdown-item .caret-item i {
     color: #404040;
     padding: 5px;
 }
+
 .list-item-input {
     background: none;
     outline: none;
     border: none;
     width: 100%;
     font-size: 16px;
-    background: #90b2f52f;
+    background: #82a0e13c;
     border-radius: 4px;
 }
+
 .list-item-textarea {
     background: none;
     outline: none;
     border: none;
     font-size: 16px;
-    background: #90b2f52f;
+    background: #dfeaff52;
     border-radius: 4px;
     resize: none;
     max-height: 100px;
@@ -129,21 +171,24 @@
     padding: 0 5px;
     width: 100%;
 }
+
 .list-item-edit {
     border: none;
     background: none;
     cursor: pointer;
     display: flex;
     align-items: center;
-} 
+}
 
-@media  (max-width: 767px) {
+@media (max-width: 767px) {
     .list-item-info {
         width: 40%;
     }
+
     .list-item-data {
         width: 40%;
     }
+
     .list-btns {
         width: 20%;
         flex-direction: column;

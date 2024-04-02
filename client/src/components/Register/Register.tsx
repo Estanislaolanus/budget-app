@@ -41,7 +41,10 @@ export default function Register() {
             localStorage.setItem("accessToken", res.data.accessToken);
             authContext?.setAuth(res.data.success);
             userContext?.setUser(() => {
-                return { username: usernameRef.current?.value || "", email: emailRef.current?.value || "" };
+                return {
+                    username: usernameRef.current?.value ?? "",
+                    email: emailRef.current?.value ?? ""
+                };
             });
             navigate("/");
         } catch (err: any) {
