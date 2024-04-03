@@ -81,7 +81,7 @@ export default function ListItem({ amount, deleteAmount, updateAmountArray }: Li
                 </div>
                 <div className='list-item-description'>
                     {edit ?
-                        <textarea ref={textareaRef} className=' list-item-textarea' onChange={e => handleDescriptionChange(e)}></textarea>
+                        <textarea ref={textareaRef} className=' list-item-textarea' onChange={e => handleDescriptionChange(e)}>{amount.description}</textarea>
                         :
                         <div onClick={() => setShowFullDescription(!showFullDescription)}>{
                             amount.description.length > 32 ?
@@ -107,6 +107,7 @@ export default function ListItem({ amount, deleteAmount, updateAmountArray }: Li
                             onChange={e => handleAmountChange(e)}
                             className='list-item-input'
                             type="number"
+                            value={amount.amount}
                         />
                         :
                         <div>{amount.amount}</div>}
