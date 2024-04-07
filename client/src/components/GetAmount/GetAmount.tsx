@@ -16,8 +16,11 @@ export default function GetAmount({ type, setAddTransaction, handleSetBudget, ha
     if (!amountInput || !descriptionSelect) return;
     const amount: number = parseInt(amountInput.value);
     const description: string = descriptionSelect.value;
-
-    const date = dateRef.current?.valueAsDate ?? new Date();
+    const currentDate = new Date();
+    const date = dateRef.current?.valueAsDate ?? currentDate;
+    if (date.getFullYear() > currentDate.getFullYear() ||
+      (date.getFullYear() === currentDate.getFullYear() && date.getMonth() > currentDate.getMonth()) ||
+      (date.getFullYear() === currentDate.getFullYear() && date.getMonth() === currentDate.getMonth() && date.getDay() > currentDate.getDay())) return;
     if (!amount || amount <= 0) return;
     const newAmount = {
       id: crypto.randomUUID(),

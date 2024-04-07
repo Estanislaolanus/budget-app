@@ -30,7 +30,7 @@
     font-weight: bold;
     font-size: 18px;
     margin: 10px;
-    color: #27254f;
+    color: #27254fff;
 }
 
 .add {
@@ -65,3 +65,8 @@
 .add-2 svg {
     fill: #f76c6c;
 }
+
+/* --space-cadet: #27254fff;
+--deep-sky-blue: #5cc8ffff;
+--ivory: #f5f9e9ff;
+--bright-pink-crayola: #ff5964ff; */

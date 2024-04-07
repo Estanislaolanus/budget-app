@@ -35,9 +35,9 @@ export default function PieChart({ expense, amountArray }: SliderProps) {
             }
         }
         if (expenses.size === 0) return;
-        const expensesChart:ExpensesChart[] = Array.from(expenses.values()).sort((a, b) => b.amount - a.amount);
+        const expensesChart: ExpensesChart[] = Array.from(expenses.values()).sort((a, b) => b.amount - a.amount);
         setPieChart(expensesChart);
-        
+
         const sections = [];
         let acc = Math.floor((expensesChart[0].percent || 0) * 3.6);
         let prevAcc = 0;
@@ -70,7 +70,6 @@ export default function PieChart({ expense, amountArray }: SliderProps) {
 
                 <div ref={pieChartRef} className="pie-chart">
                     <div className="inner-circle"></div>
-                    <div className="inner-circle-grey"></div>
                 </div>
 
                 <div className='category-list'>
@@ -79,8 +78,8 @@ export default function PieChart({ expense, amountArray }: SliderProps) {
                         const category = getCategoryAndColor(a.category).category;
                         return (
                             <div key={color} className='category-item'>
-                                <div className='category-text'> 
-                                <span className='category-color' style={{ background: color }}></span>
+                                <div className='category-text'>
+                                    <span className='category-color' style={{ background: color }}></span>
                                     {category}</div>
                                 <div className='category-amount'>${a.amount} <div>{a.percent}%</div></div>
                             </div>

@@ -12,7 +12,7 @@ export default function ListItem({ amount, deleteAmount, updateAmountArray }: Li
     const amountColor = amount.type === "budget" ? "green" : "red";
     const itemRef: RefObject<HTMLDivElement> = useRef(null);
     const textareaRef: RefObject<HTMLTextAreaElement> = useRef(null);
-    const format = new Intl.DateTimeFormat("en-us", {
+    const format = new Intl.DateTimeFormat("en-GB", {
         dateStyle: "short"
     });
     useEffect(() => {
@@ -83,11 +83,13 @@ export default function ListItem({ amount, deleteAmount, updateAmountArray }: Li
                     {edit ?
                         <textarea ref={textareaRef} className=' list-item-textarea' onChange={e => handleDescriptionChange(e)}>{amount.description}</textarea>
                         :
-                        <div onClick={() => setShowFullDescription(!showFullDescription)}>{
-                            amount.description.length > 32 ?
-                                amount.description.slice(0, 32) + "..." :
-                                amount.description
-                        }</div>
+                        <div onClick={() => {
+                            if (amount.description.length > 32) setShowFullDescription(!showFullDescription);
+                        }}>{
+                                amount.description.length > 32 ?
+                                    amount.description.slice(0, 32) + "..." :
+                                    amount.description
+                            }</div>
                     }
                     {
                         showFullDescription ?

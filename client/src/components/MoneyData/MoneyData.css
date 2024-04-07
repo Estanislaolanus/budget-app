@@ -1,4 +1,5 @@
 .money-data-container {
+    position: relative;
     background: #efefe8;
     width: 350px;
     padding: 1rem;
@@ -8,16 +9,28 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
     box-shadow: rgba(0, 0, 0) 0px 0px 7px;
+    padding-bottom: 3rem;
+
+    overflow: hidden;
 }
+
+.money-data-container svg {
+    position: absolute;
+    z-index: 1;
+    bottom: 0;
+    fill: #5cc8ffff;
+}
+
 .money-ex-bu {
+    z-index: 2;
     display: flex;
     justify-content: space-between;
     width: 300px;
 }
 
 .amount-display {
+    z-index: 2;
     height: 100px;
     display: flex;
     flex-direction: column;
@@ -25,35 +38,42 @@
     align-items: center;
     justify-content: center;
 }
+
 .amount-display .amount-display-title {
     font-size: 1rem;
     font-weight: bold;
-    color: #353e46;
     text-align: center;
 }
+
 .amount-display-amount {
     font-size: 1.3rem;
     color: #2bb310;
     font-size: center;
     text-align: center;
 }
-.alt-red{
+
+.alt-red {
     color: #ee4e4e;
 }
+
 .alt-grey {
     color: #190547;
 }
+
 .safe-to-spend {
     font-size: 2rem;
 }
+
 .reverse {
     flex-direction: column-reverse;
     gap: 0;
 }
+
 @media (width < 500px) {
     .money-data-container {
         width: 270px;
     }
+
     .money-ex-bu {
         display: flex;
         justify-content: space-around;
