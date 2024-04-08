@@ -35,7 +35,7 @@ export default function DisplayBudget({ budget, expense, amountArray }: Readonly
       <div className='budget-progress-bar'>
         <div ref={percentRef} className="outer">
           <div className="inner">
-            <div className='percentage' style={{ color }}>{balance < 0 ? "-" : ""}${Math.abs(balance)}</div>
+            <div className='percentage'>{balance < 0 ? "-" : ""}${Math.abs(balance)}</div>
             <div className='inner-text'>Safe-to-Spend</div>
           </div>
         </div>

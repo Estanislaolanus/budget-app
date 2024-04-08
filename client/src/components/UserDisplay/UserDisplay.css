@@ -8,7 +8,7 @@
     padding: 5px;
     width: 48px;
     height: 48px;
-    background-color: #b5cdfc;
+    background-color: #ebf8ff;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -19,7 +19,7 @@
     font-weight: bold;
     font-size: 24px;
     user-select: none;
-    box-shadow: 0 0 5px 0px #272727;
+    box-shadow: 0 0 5px 0px #5c5c5c;
     z-index: 1;
 }
 
@@ -27,7 +27,7 @@
     position: absolute;
     top: 55px;
     right: 0;
-    background-color: #b5cdfc;
+    background-color: #ebf8ff;
     border-radius: 5px;
     margin: 1.3rem 1rem;
     padding: 1rem 1rem .5rem 1rem;
@@ -47,7 +47,7 @@
     right: 13px;
     height: 20px;
     width: 20px;
-    background: #b5cdfc;
+    background: #ebf8ff;
     transform: rotate(45deg);
 }
 

@@ -1,4 +1,3 @@
-
 .budget-display {
     display: flex;
     flex-direction: column;
@@ -7,9 +6,11 @@
     gap: 20px;
     margin-bottom: 20px;
 }
+
 .budget-progress-bar {
     position: relative;
 }
+
 .outer {
     display: flex;
     align-items: center;
@@ -17,14 +18,13 @@
     width: 180px;
     height: 180px;
     box-shadow: 4px 4px 6px -1px #0002,
-    -4px -4px 6px -1px #101cbfb3;
+        -4px -4px 6px -1px #63B1FF;
     border-radius: 50%;
-    background: #44a8f4;
-    background: conic-gradient(
-        #50f93a 0deg,
-        #fff 0deg
-    );
+    background: #44a8f461;
+    background: conic-gradient(#50f93a 0deg,
+            #fff 0deg);
 }
+
 .inner {
     width: 165px;
     height: 165px;
@@ -33,19 +33,20 @@
     align-items: center;
     justify-content: center;
     box-shadow: inset 4px 4px 6px -1px #0004,
-    inset -4px -4px 6px -1px #101cbfb3;
+        inset -4px -4px 6px -1px #63b1ff3f;
     border-radius: 50%;
     z-index: 1;
-    background-color: #120a6c;
+    background-color: #63B1FF;
 }
 
 .percentage {
     font-size: 2rem;
     z-index: 1;
     font-weight: 550;
-    color: #50f93a;
-}
-.inner-text {
-    color: #c8cce3;
+    color: #ffffff;
 }
 
+.inner-text {
+    color: #ffffff;
+    font-weight: 600;
+}

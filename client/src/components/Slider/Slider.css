@@ -1,26 +1,29 @@
 .header {
     padding-top: 4rem;
-    background-color: #120a6c;
-    box-shadow: 0 0 10px #2121219c;
+    background-color: #63B1FF;
+    box-shadow: 0 0 10px #63b1ff31;
     min-height: 63vh;
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
-.slider-container{
-    padding: 20px 20px 30px 20px ;
+
+.slider-container {
+    padding: 20px 20px 30px 20px;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 20px;
 }
-.slider{
+
+.slider {
     width: 700px;
     height: 90%;
     position: relative;
     padding: 0 30px;
 }
+
 .slider-button {
     background: none;
     border: none;
@@ -34,7 +37,8 @@
     width: 50px;
     height: 50px;
 }
-.slider-button > svg {
+
+.slider-button>svg {
     width: 30px;
     height: 30px;
 }
@@ -48,18 +52,22 @@
     left: .2rem;
     fill: #ffffff66;
 }
-.prev-slide > svg {
+
+.prev-slide>svg {
     transform: rotate(180deg);
 }
-.slider-button > svg:hover{
+
+.slider-button>svg:hover {
     fill: #ffffffe6;
 }
+
 .dots {
     margin-top: 2rem;
     display: flex;
     justify-content: center;
     gap: 2rem;
 }
+
 .dot {
     cursor: pointer;
     background-color: #ffffff66;
@@ -68,9 +76,11 @@
     width: .5rem;
     transition: background .3s ease;
 }
+
 .dot:hover {
     background-color: #fff;
 }
+
 .slide-selected {
     background-color: #fff;
 }
@@ -79,9 +89,11 @@
     .slider-container {
         padding: 20px 0 30px 0;
     }
+
     .next-slide {
         right: 0;
     }
+
     .prev-slide {
         left: 0;
     }

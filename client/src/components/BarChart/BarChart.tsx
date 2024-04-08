@@ -35,10 +35,10 @@ export default function BarChart({ expense, amountArray }: SliderProps) {
         }
         setExpensesChart(Array.from(expenses.values()).sort((a, b) => b.amount - a.amount));
     }, [amountArray, expense]);
-    const displayChartData = (expense:ExpensesChart, touch = false) => {
+    const displayChartData = (expense: ExpensesChart, touch = false) => {
         setShow(true);
         setBarData(expense);
-        if(touch) {
+        if (touch) {
             setTimeout(() => {
                 setShow(false);
             }, 3000);
@@ -48,7 +48,7 @@ export default function BarChart({ expense, amountArray }: SliderProps) {
         <div className='bar-chart'>
             <div className={`bar-info ${show ? "bar-info-show" : ""}`}>
                 <div className='bar-section bar-category'>
-                    {barData?.category !== "other" && <img src={getCategoryInfo(barData?.category || "").img || ""} alt=""/>}
+                    {barData?.category !== "other" && <img src={getCategoryInfo(barData?.category || "").img || ""} alt="" />}
                     <p>{getCategoryInfo(barData?.category || "").name || ""}</p>
                 </div>
                 <div className='bar-section'>
@@ -57,7 +57,7 @@ export default function BarChart({ expense, amountArray }: SliderProps) {
                 <div className='bar-section'>
                     <h4>Percent:</h4><p>{barData?.percent}%</p>
                 </div>
-                
+
             </div>
             <ul className='y-axis'>
                 <li><span>100%</span></li>
@@ -70,12 +70,12 @@ export default function BarChart({ expense, amountArray }: SliderProps) {
                 {
                     expensesChart?.map(expense => {
                         return (
-                            <li 
-                            onMouseOver={() => displayChartData(expense)} 
-                            onMouseOut={() => setShow(false)}
-                            onTouchStart={() => displayChartData(expense, true)}
-                            key={`x-axis-${expense.category}`}>
-                                <span>{expense.category.slice(0, 3)}</span> 
+                            <li
+                                onMouseOver={() => displayChartData(expense)}
+                                onMouseOut={() => setShow(false)}
+                                onTouchStart={() => displayChartData(expense, true)}
+                                key={`x-axis-${expense.category}`}>
+                                <span>{expense.category.slice(0, 3)}</span>
                             </li>
                         )
                     })
@@ -86,10 +86,10 @@ export default function BarChart({ expense, amountArray }: SliderProps) {
                     expensesChart?.map(expense => {
                         return (
                             <li
-                            onMouseOver={() => displayChartData(expense)} 
-                            onMouseOut={() => setShow(false)}
-                            onTouchStart={() => displayChartData(expense, true)}
-                            key={`bar-${expense.category}`} className='bar-item' style={{ height: `${expense.percent * 2}px`, background: expense.color }}>
+                                onMouseOver={() => displayChartData(expense)}
+                                onMouseOut={() => setShow(false)}
+                                onTouchStart={() => displayChartData(expense, true)}
+                                key={`bar-${expense.category}`} className='bar-item' style={{ height: `${expense.percent * 2}px`, background: expense.color }}>
                             </li>
                         )
                     })
