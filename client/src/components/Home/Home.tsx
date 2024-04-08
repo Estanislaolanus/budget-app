@@ -9,7 +9,7 @@ import useDate from '../../hooks/useDate';
 const getSum = (type: string, data: Amount[]) => {
     const nums = data
         .flatMap((a: Amount) => a.type === type && a.amount)
-        .filter((a: number | Boolean) => typeof a === "number");
+        .filter((a: number | boolean) => typeof a === "number");
     let calculateSum = 0;
     for (const num of nums) {
         if (typeof num === "boolean") continue;
@@ -21,7 +21,7 @@ function Home() {
     const [amountArray, setAmountArray] = useState<Amount[]>([]);
     const [budget, setBudget] = useState<number>(0);
     const [expense, setExpense] = useState<number>(0);
-    const [loading, setLoading] = useState<Boolean>(true);
+    const [loading, setLoading] = useState<boolean>(true);
     const date = useDate()?.date;
 
     useEffect(() => {

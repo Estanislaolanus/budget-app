@@ -55,8 +55,8 @@ interface DropdownProps {
 }
 
 interface AuthContext {
-    auth: Boolean;
-    setAuth: Dispatch<SetStateAction<Boolean>>
+    auth: boolean;
+    setAuth: Dispatch<SetStateAction<boolean>>
 }
 interface UserContext {
     user: User;
