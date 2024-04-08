@@ -33,7 +33,7 @@
     cursor: pointer;
     position: absolute;
     right: .5rem;
-    top: .5rem;
+    top: 1rem;
     background: none;
     outline: none;
     border: none;
@@ -111,6 +111,7 @@
     color: #27254f;
     border: 2px solid #27254f;
     border-radius: 1rem;
+    text-align: center;
 }
 
 
