@@ -10,7 +10,7 @@
     min-height: 400px;
     background: #fff;
     padding: 30px 20px;
-    box-shadow: 0 0 10px 5px #ccc;
+    box-shadow: 0 0 4px 1px #a8a8a8;
     border-radius: 8px;
     display: flex;
     flex-direction: column;

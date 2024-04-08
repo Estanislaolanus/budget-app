@@ -35,13 +35,7 @@
     position: relative;
 }
 
-/* .inner-circle-grey {
-    background: #00000056;
-    width: 105px;
-    height: 105px;
-    border-radius: 50%;
-    position: absolute;
-} */
+
 
 .inner-circle {
     z-index: 1;

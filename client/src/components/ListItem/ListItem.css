@@ -30,15 +30,15 @@
     gap: 5px;
 }
 
-.list-item-category {
-    text-transform: capitalize;
-    font-size: 1.1rem;
-}
 
 .list-item-description {
     user-select: none;
-    color: #6c6c6c;
     cursor: pointer;
+}
+
+.list-item-description>button {
+    color: #6c6c6c;
+    font-size: 16px;
 }
 
 .list-item-full-description {
@@ -51,6 +51,7 @@
     left: .8rem;
     transform: translateY(-50%);
     padding: 0.3rem 0.8rem;
+
 }
 
 .fullist-item-full-description-title {
@@ -63,6 +64,7 @@
     height: 100%;
     overflow: scroll;
     scroll-behavior: smooth;
+    font-size: 1rem;
 }
 
 .list-item-date {
@@ -110,10 +112,7 @@
     width: 22px;
 }
 
-.list-item-edit i {
-    font-size: 18px;
-    color: #242424;
-}
+
 
 /* ------------- EDIT ------------- */
 
@@ -144,14 +143,15 @@
     z-index: -1;
 }
 
-.dropdown-item .caret-item i {
-    color: #404040;
-    padding: 5px;
+.dropdown-item .caret-item svg {
+    fill: #404040;
+    transform: rotate(90deg);
+    width: 1rem;
+    height: 1rem;
 }
 
+
 .list-item-input {
-    background: none;
-    outline: none;
     border: none;
     width: 100%;
     font-size: 16px;
@@ -160,8 +160,6 @@
 }
 
 .list-item-textarea {
-    background: none;
-    outline: none;
     border: none;
     font-size: 16px;
     background: #dfeaff52;
@@ -179,6 +177,15 @@
     cursor: pointer;
     display: flex;
     align-items: center;
+}
+
+.list-item-edit>button>svg {
+    width: 1.3rem;
+    height: 1.3rem;
+}
+
+.list-item-edit>button>svg>path {
+    fill: #231f20;
 }
 
 @media (max-width: 767px) {

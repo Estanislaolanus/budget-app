@@ -2,7 +2,9 @@
     width: 200px;
     position: relative;
 }
+
 .select {
+    width: 100%;
     padding: 7px;
     display: flex;
     justify-content: space-between;
@@ -11,17 +13,25 @@
     cursor: pointer;
     transition: background .3s ease-in-out;
 }
+
 .select span {
     font-size: 14px;
     color: #656565;
 }
-.caret i {   
-    color: #656565;
-    transition: .5s ease;
+
+.caret svg {
+    fill: #000;
+    height: .8rem;
+    width: .8rem;
+    rotate: -90deg;
+    transform: matrix(1, 0, 0, 1, 0, 0);
+    transition: rotate .3s ease-in-out;
 }
-.caret-rotate i {
-    transform: rotate(180deg);
+
+.caret-rotate svg {
+    rotate: 90deg;
 }
+
 .menu {
     list-style: none;
     padding: .2rem .5rem;
@@ -30,25 +40,30 @@
     position: absolute;
     width: 100%;
     opacity: 0;
-    display: none;
-    transition: .2s;
     z-index: 1;
     background: #fff;
-    height: 250px;
+    height: 0;
     overflow-y: scroll;
+    transition: all .5s;
 }
+
 .menu li {
     padding: .7rem .5rem;
     margin: .3rem 0;
     border-radius: .5rem;
+}
+
+.menu li button {
     cursor: pointer;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
+
 .menu li:hover {
     background: #dddbc5;
 }
+
 .menu li .list-title {
     color: #4d505a;
     font-weight: normal;
@@ -58,10 +73,13 @@
 .menu li img {
     width: 2rem;
 }
+
 .active {
     background: #23242a;
 }
+
 .menu-open {
-    display: block;
+    transition: all .5s;
+    height: 250px;
     opacity: 1;
 }

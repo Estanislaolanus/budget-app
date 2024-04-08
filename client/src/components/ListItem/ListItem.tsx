@@ -1,15 +1,16 @@
 import { ChangeEvent, useEffect, useState, useRef, RefObject } from 'react'
 import { ListItemProps } from '../../Types';
-import getCategoryAndColor from '../../utils/getCategoryInfo'
 import "./ListItem.css";
-export default function ListItem({ amount, deleteAmount, updateAmountArray }: ListItemProps) {
-    const [edit, setEdit] = useState<Boolean>(false);
-    const [editCategory, setEditCategory] = useState<String>(amount.category);
+export default function ListItem({ amount, deleteAmount, updateAmountArray }: Readonly<ListItemProps>) {
+    const [edit, setEdit] = useState<boolean>(false);
+    const [editCategory, setEditCategory] = useState<string>(amount.category);
     const [editAmount, setEditAmount] = useState<number>(amount.amount);
-    const [editDescription, setEditDescription] = useState<String>(amount.description);
-    const [showFullDescription, setShowFullDescription] = useState<Boolean>(false);
+    const [editDescription, setEditDescription] = useState<string>(amount.description);
+    const [showFullDescription, setShowFullDescription] = useState<boolean>(false);
+    const [numberValue, setNumberValue] = useState<number>(amount.amount);
     const background = amount.type === "budget" ? "#374785" : "#f76c6c"
     const amountColor = amount.type === "budget" ? "green" : "red";
+    const listRef: RefObject<HTMLDivElement> = useRef(null);
     const itemRef: RefObject<HTMLDivElement> = useRef(null);
     const textareaRef: RefObject<HTMLTextAreaElement> = useRef(null);
     const format = new Intl.DateTimeFormat("en-GB", {
@@ -22,10 +23,22 @@ export default function ListItem({ amount, deleteAmount, updateAmountArray }: Li
         const height = textarea.scrollHeight;
         textarea.style.height = `${height}px`;
     }, []);
+    useEffect(() => {
+        if (!edit) return;
+        const handler = (e: MouseEvent) => {
+            if (!listRef.current || !e.target) return;
+            if (!listRef.current.contains(e.target as Node)) setEdit(false);
+        }
+        document.addEventListener("mousedown", handler);
+        return () => {
+            document.removeEventListener("mousedown", handler)
+        }
+    });
     function handleAmountChange(e: ChangeEvent<HTMLInputElement>) {
         const value = parseInt(e.target.value)
         if (typeof value !== "number") return;
-        setEditAmount(() => value)
+        setNumberValue(() => value);
+        setEditAmount(() => value);
     }
     function handleDescriptionChange(e: ChangeEvent<HTMLTextAreaElement>) {
         const value = e.target.value
@@ -35,6 +48,11 @@ export default function ListItem({ amount, deleteAmount, updateAmountArray }: Li
     function handleCategory(e: ChangeEvent<HTMLSelectElement>) {
         const value = e.target.value;
         setEditCategory(() => value);
+    }
+    function editList() {
+        setShowFullDescription(false);
+        setNumberValue(amount.amount)
+        setEdit(() => !edit);
     }
     function confirmEdition() {
         let object: Object = {};
@@ -52,7 +70,7 @@ export default function ListItem({ amount, deleteAmount, updateAmountArray }: Li
     }
 
     return (
-        <div className='list-item'>
+        <div ref={listRef} className='list-item'>
             <div style={{ background: background }} className="bar"></div>
             <div ref={itemRef} className="list-item-info">
                 <div className='list-item-category'>
@@ -72,34 +90,38 @@ export default function ListItem({ amount, deleteAmount, updateAmountArray }: Li
                                 <option value="other">Other</option>
                             </select>
                             <div className="caret-item">
-                                <i className='fa-solid fa-caret-down'></i>
+                                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 330 330">
+                                    <g id="SVGRepo_iconCarrier"> <path id="XMLID_222_" d="M250.606,154.389l-150-149.996c-5.857-5.858-15.355-5.858-21.213,0.001 c-5.857,5.858-5.857,15.355,0.001,21.213l139.393,139.39L79.393,304.394c-5.857,5.858-5.857,15.355,0.001,21.213 C82.322,328.536,86.161,330,90,330s7.678-1.464,10.607-4.394l149.999-150.004c2.814-2.813,4.394-6.628,4.394-10.606 C255,161.018,253.42,157.202,250.606,154.389z" /> </g>
+
+                                </svg>
                             </div>
                         </div>
                         :
-                        <div>{getCategoryAndColor(amount.category).category}</div>
+                        <></>
                     }
                 </div>
                 <div className='list-item-description'>
+                    {
+                        showFullDescription ?
+                            <button onClick={() => setShowFullDescription(!showFullDescription)} className='list-item-full-description'>
+                                <div className='fullist-item-full-description-title'>Description</div>
+                                <div className='fullist-item-full-description-text'>{amount.description}</div>
+                            </button>
+                            :
+                            <></>
+                    }
                     {edit ?
                         <textarea ref={textareaRef} className=' list-item-textarea' onChange={e => handleDescriptionChange(e)}>{amount.description}</textarea>
                         :
-                        <div onClick={() => {
+                        <button onClick={() => {
                             if (amount.description.length > 32) setShowFullDescription(!showFullDescription);
                         }}>{
                                 amount.description.length > 32 ?
                                     amount.description.slice(0, 32) + "..." :
                                     amount.description
-                            }</div>
+                            }</button>
                     }
-                    {
-                        showFullDescription ?
-                            <div onClick={() => setShowFullDescription(!showFullDescription)} className='list-item-full-description'>
-                                <div className='fullist-item-full-description-title'>Description</div>
-                                <div className='fullist-item-full-description-text'>{amount.description}</div>
-                            </div>
-                            :
-                            <></>
-                    }
+
                 </div>
             </div>
             <div className="list-item-data">
@@ -109,7 +131,7 @@ export default function ListItem({ amount, deleteAmount, updateAmountArray }: Li
                             onChange={e => handleAmountChange(e)}
                             className='list-item-input'
                             type="number"
-                            value={amount.amount}
+                            value={numberValue}
                         />
                         :
                         <div>{amount.amount}</div>}
@@ -123,10 +145,12 @@ export default function ListItem({ amount, deleteAmount, updateAmountArray }: Li
                     {
                         edit ?
                             <>
-                                <button onClick={() => confirmEdition()}><i className="fa-solid fa-check"></i></button>
-                                <button onClick={() => setEdit(() => !edit)}><i className='fa-solid fa-x'></i></button>
+                                <button onClick={() => confirmEdition()}><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M4 12.6111L8.92308 17.5L20 6.5" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg></button>
+                                <button onClick={() => setEdit(() => !edit)}>
+                                    <svg width="64px" height="64px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" fill="#000000" stroke="#000000" stroke-width="0.8640000000000001"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><g id="cancel"> <path d="M28,29a1,1,0,0,1-.71-.29l-24-24A1,1,0,0,1,4.71,3.29l24,24a1,1,0,0,1,0,1.42A1,1,0,0,1,28,29Z"></path> <path d="M4,29a1,1,0,0,1-.71-.29,1,1,0,0,1,0-1.42l24-24a1,1,0,1,1,1.42,1.42l-24,24A1,1,0,0,1,4,29Z"></path> </g> </g></svg>
+                                </button>
                             </> :
-                            <button onClick={() => setEdit(() => !edit)}><img src="./assets/icons/edit.png" alt="" /></button>
+                            <button onClick={() => editList()}><img src="./assets/icons/edit.png" alt="" /></button>
                     }
 
                 </div>

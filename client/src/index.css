@@ -1,20 +1,35 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-*, *::after, *::before{
+
+*,
+*::after,
+*::before {
   box-sizing: border-box;
-}
-body {
-  margin: 0;
   padding: 0;
-  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  font-family: "Work Sans", sans-serif;
+  font-optical-sizing: auto;
+}
+
+body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #FDF6FF;
+  background-color: #FEE9E1;
 }
+
+button {
+  background: none;
+  outline: none;
+  border: none;
+  text-align: left;
+}
+
 
 ::-webkit-scrollbar {
   width: 5px;
 }
-::-webkit-scrollbar:hover, :focus {
+
+::-webkit-scrollbar:hover,
+:focus {
   width: 8px;
 }
 
@@ -33,3 +48,10 @@ body {
   background: #555;
 }
 
+/* --space-cadet: #27254f;
+--deep-sky-blue: #5cc8ff;
+--ivory: #f5f9e9;
+--bright-pink-crayola: #ff5964;
+--beige: #ebebd3
+--misty-rose: #FEE9E1
+*/
