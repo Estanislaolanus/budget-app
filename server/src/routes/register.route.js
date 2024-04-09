@@ -1,9 +1,11 @@
 import { Router } from "express";
 import { hashPassword } from '../modules/bcrypt.js';
-import Amount from '../dao/Amount.dao.js';
-const amount = new Amount();
-import User from '../dao/User.dao.js';
 import { generateAccessToken } from "../modules/JWT.js";
+import { v4 } from "uuid";
+import sendEmail from "../config/sendEmail.js";
+import Amount from '../dao/Amount.dao.js';
+import User from '../dao/User.dao.js';
+const amount = new Amount();
 const user = new User();
 const router = Router();
 
@@ -19,18 +21,23 @@ router.post("/register", async (req, res) => {
             return;
         }
         const hashedPassword = await hashPassword(password, 10);
+        const userToken = v4();
         const userData = {
             username,
             email,
-            password: hashedPassword
+            password: hashedPassword,
+            verified: false,
+            token: userToken
         }
         const newUser = await user.save(userData);
         await amount.save({ amountArray: [], userId: newUser._id });
+        sendEmail(email, userToken);
         const tokenData = { id: newUser._id, email, username };
         const accessToken = generateAccessToken(tokenData);
-        res.status(200).json({ success: true, message: 'User registered', username, accessToken });
+        res.status(200).json({ success: true, message: 'User registered. Please verify your Email', username, accessToken });
     } catch (err) {
         console.error(err)
+        res.status(500).json({ success: false, message: "Server error" })
     }
-});
+})
 export default router;

@@ -6,9 +6,9 @@ import bodyParser from 'body-parser';
 import registerRoute from './routes/register.route.js';
 import loginRoute from './routes/login.router.js';
 import amountRoute from './routes/amount.route.js';
+import verifyEmailRoute from './routes/verifyEmail.route.js';
 import isAuth from './middlewares/isAuth.js'
 import Config from './config/config.js';
-import Amount from './dao/Amount.dao.js';
 const { PORT, CLIENT_URL } = new Config();
 const app = express();
 
@@ -25,4 +25,5 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/api", registerRoute);
 app.use("/api", loginRoute);
 app.use("/api/amount", isAuth, amountRoute)
+app.use("/api/verify", verifyEmailRoute);
 app.listen(PORT, () => console.log(`Running on http://localhost:${PORT}`));

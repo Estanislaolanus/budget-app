@@ -7,7 +7,14 @@ export default class User extends MongoDB {
     }
     async getUserByEmail(email) {
         try {
-            return await this.collection.findOne({email: email});
+            return await this.collection.findOne({ email: email });
+        } catch (err) {
+            console.error(`Dao error: ${err}`);
+        }
+    }
+    async getUserByToken(token) {
+        try {
+            return await this.collection.findOne({ token: token });
         } catch (err) {
             console.error(`Dao error: ${err}`);
         }
