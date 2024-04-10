@@ -17,16 +17,17 @@ router.post("/login", async (req, res) => {
         const isValid = await isValidPassword(password, findUser.password);
 
         if (!isValid) return res.status(401).json({ success: false, message: "Incorrect password" });
-
-        const tokenData = { id: findUser._id, email, username: findUser.username };
+        const tokenData = { id: findUser._id, email, username: findUser.username, isEmailVerified: findUser.verified };
         const accessToken = generateAccessToken(tokenData);
+
         res.status(200).json({
             success: true,
             message: "User logged in",
             accessToken,
             user: {
                 username: findUser.username,
-                email: email
+                email: email,
+                isEmailVerified: findUser.verified
             }
         });
     } catch (err) {
@@ -44,7 +45,8 @@ router.post("/login", async (req, res) => {
             loggedIn: true,
             user: {
                 username: verifyToken.username,
-                email: verifyToken.email
+                email: verifyToken.email,
+                isEmailVerified: verifyToken.isEmailVerified
             }
         })
     })

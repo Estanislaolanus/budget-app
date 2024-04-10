@@ -5,7 +5,7 @@ const UsersSchema = new mongoose.Schema({
     email: { type: String, required: true },
     password: { type: String, required: true },
     verified: { type: Boolean },
-    token: { type: String || undefined }
+    token: { type: String }
 });
 
 export default UsersSchema;

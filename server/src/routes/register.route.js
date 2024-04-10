@@ -32,7 +32,7 @@ router.post("/register", async (req, res) => {
         const newUser = await user.save(userData);
         await amount.save({ amountArray: [], userId: newUser._id });
         sendEmail(email, userToken);
-        const tokenData = { id: newUser._id, email, username };
+        const tokenData = { id: newUser._id, email, username, isEmailVerified: false };
         const accessToken = generateAccessToken(tokenData);
         res.status(200).json({ success: true, message: 'User registered. Please verify your Email', username, accessToken });
     } catch (err) {

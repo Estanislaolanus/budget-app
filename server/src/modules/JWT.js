@@ -2,9 +2,9 @@ import Config from '../config/config.js';
 const { SECRET_JWT_TOKEN } = new Config();
 import jwt from 'jsonwebtoken';
 
-const generateAccessToken  = ({id, email, username}) => {
+const generateAccessToken = ({ id, email, username, isEmailVerified }) => {
     try {
-        return jwt.sign({id, email, username}, SECRET_JWT_TOKEN , {expiresIn: '24h'});
+        return jwt.sign({ id, email, username, isEmailVerified }, SECRET_JWT_TOKEN, { expiresIn: '24h' });
     } catch (err) {
         console.error(err);
     }
@@ -13,12 +13,12 @@ const validateToken = (accessToken) => {
     try {
         return jwt.verify(accessToken, SECRET_JWT_TOKEN);
     } catch (err) {
-        console.error(err);        
+        console.error(err);
         return undefined;
     }
 }
 
-export { 
-    generateAccessToken, 
+export {
+    generateAccessToken,
     validateToken
 }

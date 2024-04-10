@@ -6,6 +6,7 @@ export default class Config {
         this.URI = process.env.URI;
         this.MONGO_ATLAS_URI = process.env.MONGO_ATLAS_URI;
         this.SESSION_SECRET = process.env.SESSION_SECRET;
+        this.SERVER_URL = process.env.SERVER_URL;
         this.CLIENT_URL = process.env.CLIENT_URL;
         this.SECRET_JWT_TOKEN = process.env.SECRET_JWT_TOKEN;
         this.AUTH_EMAIL = process.env.AUTH_EMAIL;
