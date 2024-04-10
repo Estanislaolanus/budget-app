@@ -43,10 +43,11 @@ export default function Register() {
             userContext?.setUser(() => {
                 return {
                     username: usernameRef.current?.value ?? "",
-                    email: emailRef.current?.value ?? ""
+                    email: emailRef.current?.value ?? "",
+                    isEmailVerified: false
                 };
             });
-            navigate("/");
+            navigate("/verifyEmail");
         } catch (err: any) {
             if (!err && !err.response) return;
             const status = parseInt(err.response.status);

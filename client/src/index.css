@@ -13,14 +13,14 @@
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* background-color: #E8E1EF; */
+  background-color: #F9FBF2;
 }
 
 button {
   background: none;
   outline: none;
   border: none;
-  text-align: left;
+  text-align: center;
 }
 
 

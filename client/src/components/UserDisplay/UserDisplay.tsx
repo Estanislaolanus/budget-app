@@ -25,7 +25,7 @@ export default function UserDisplay() {
     function onLogout() {
         localStorage.clear();
         authContext?.setAuth(false);
-        userContext?.setUser({ username: "", email: "" });
+        userContext?.setUser({ username: "", email: "", isEmailVerified: false });
         navigate("/login");
     }
     return (

@@ -33,9 +33,11 @@ export default function Login() {
             localStorage.setItem("accessToken", res.data.accessToken);
             authContext?.setAuth(() => data.success);
             const dataUsername = data ? data.user.username : "";
+            const isEmailVerified = data ? data.user.isEmailVerified : false;
             userContext?.setUser(() => {
-                return { username: dataUsername ?? "", email: emailRef.current?.value ?? "" };
+                return { username: dataUsername ?? "", email: emailRef.current?.value ?? "", isEmailVerified };
             });
+            if (!isEmailVerified) return navigate("/verifyEmail");
             navigate("/");
         } catch (err) {
             setPasswordError("Email or password incorrect");

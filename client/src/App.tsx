@@ -8,6 +8,7 @@ import useAuth from './hooks/useAuth';
 import Axios from './api/Axios';
 import './App.css';
 import useUser from "./hooks/useUser";
+import VerifyEmail from "./components/VerifyEmail/VerifyEmail";
 
 
 function App() {
@@ -28,10 +29,10 @@ function App() {
         });
         const data = res.data;
         authContext?.setAuth(() => data.loggedIn);
-
-        if(data.user) {
+        console.log(data.user)
+        if (data.user) {
           userContext?.setUser(() => {
-            return {username: data.user.username || "", email: data.user.email || ""};
+            return { username: data.user.username ?? "", email: data.user.email ?? "", isEmailVerified: data.user.isEmailVerified ?? false };
           });
         }
         setLoading(false);
@@ -39,11 +40,11 @@ function App() {
         console.error(err)
         authContext?.setAuth(() => false);
         setLoading(false);
-        
+
       }
     }
     isLoggedIn();
-  });
+  }, []);
 
 
   const routes: RouteObject[] = [
@@ -59,10 +60,11 @@ function App() {
       ],
     },
     { path: "/register", element: <Register /> },
-    { path: "/login", element: <Login /> }
+    { path: "/login", element: <Login /> },
+    { path: "/verifyEmail", element: <VerifyEmail /> }
   ];
   const router = createBrowserRouter(routes);
-  if(loading) return (
+  if (loading) return (
     <div className="app">
       <div className="loader"></div>
     </div>

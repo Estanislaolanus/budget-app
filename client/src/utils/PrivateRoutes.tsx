@@ -6,9 +6,9 @@ export default function PrivateRoutes() {
     const authContext = useAuth();
     const location = useLocation();
     return (
-        authContext?.auth ? 
-        <Outlet/> 
-        : 
-        <Navigate to="/login" state={{ from: location }} replace />
+        authContext?.auth ?
+            <Outlet />
+            :
+            <Navigate to="/login" state={{ from: location }} replace />
     )
 }

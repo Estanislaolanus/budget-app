@@ -10,6 +10,7 @@ interface Amount {
 interface User {
     username: string;
     email: string;
+    isEmailVerified: boolean;
 }
 
 interface BudgetFormProps {

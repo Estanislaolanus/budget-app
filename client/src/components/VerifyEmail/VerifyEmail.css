@@ -1,0 +1,34 @@
+.verify-email-container {
+    height: 300px;
+    min-width: 350px;
+    max-width: 500px;
+    border-radius: 6px;
+    box-shadow: #ccc 0 0 5px 0;
+    background: #fff;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.verify-email-container h3 {
+    font-size: 1.8rem;
+    color: #44a8f4;
+    font-weight: 500;
+}
+
+.verify-email-container p {
+    max-width: 80%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.verify-email-container button {
+    color: #44a8f4;
+    cursor: pointer;
+    font-size: 16px;
+    transition: color .3s;
+    text-decoration: underline;
+}
