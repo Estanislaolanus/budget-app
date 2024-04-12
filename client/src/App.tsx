@@ -45,7 +45,7 @@ function App() {
       }
     }
     isLoggedIn();
-  }, []);
+  }, [authContext, userContext]);
 
 
   const routes: RouteObject[] = [

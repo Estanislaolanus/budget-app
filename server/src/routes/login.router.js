@@ -34,11 +34,15 @@ router.post("/login", async (req, res) => {
         console.error(err);
     }
 })
-    .get("/login", (req, res) => {
+    .get("/login", async (req, res) => {
         const header = req.headers.authorization || req.headers['Authorization'];
         const accessToken = header.split(" ")[1];
         const verifyToken = validateToken(accessToken);
-        if (!verifyToken) return res.status(200).json({
+        if (!verifyToken) return res.status(401).json({
+            loggedIn: false
+        });
+        const findUser = await user.getById(verifyToken.id);
+        if (!findUser) return res.status(401).json({
             loggedIn: false
         });
         res.status(200).json({
@@ -46,7 +50,7 @@ router.post("/login", async (req, res) => {
             user: {
                 username: verifyToken.username,
                 email: verifyToken.email,
-                isEmailVerified: verifyToken.isEmailVerified
+                isEmailVerified: findUser.verified
             }
         })
     })

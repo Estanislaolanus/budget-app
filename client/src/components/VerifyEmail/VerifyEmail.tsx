@@ -1,6 +1,6 @@
 import "./VerifyEmail.css";
 import useUser from "../../hooks/useUser";
-import { ToastContainer, Zoom, toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Axios from "../../api/Axios";
@@ -10,7 +10,7 @@ export default function VerifyEmail() {
     const navigate = useNavigate()
     useEffect(() => {
         if (user?.user.isEmailVerified) navigate("/");
-    }, []);
+    }, [navigate, user?.user.isEmailVerified]);
     async function resendEmailVerification() {
         const res = await Axios.post("/verify/sendNewToken", {
             email: user?.user.email
