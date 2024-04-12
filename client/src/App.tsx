@@ -6,9 +6,11 @@ import Register from "./components/Register/Register";
 import Login from "./components/Login/Login";
 import useAuth from './hooks/useAuth';
 import Axios from './api/Axios';
-import './App.css';
 import useUser from "./hooks/useUser";
 import VerifyEmail from "./components/VerifyEmail/VerifyEmail";
+import './App.css';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 
 function App() {
@@ -29,7 +31,6 @@ function App() {
         });
         const data = res.data;
         authContext?.setAuth(() => data.loggedIn);
-        console.log(data.user)
         if (data.user) {
           userContext?.setUser(() => {
             return { username: data.user.username ?? "", email: data.user.email ?? "", isEmailVerified: data.user.isEmailVerified ?? false };
