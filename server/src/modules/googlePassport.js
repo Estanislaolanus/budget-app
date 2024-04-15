@@ -6,7 +6,7 @@ const { GOOGLE_CLIENT_SECRET, GOOGLE_CLIENT_ID } = new Config();
 passport.use(new Strategy({
     clientID: GOOGLE_CLIENT_ID,
     clientSecret: GOOGLE_CLIENT_SECRET,
-    callbackURL: "http://localhost:8080/api/auth/google/callback"
+    callbackURL: "/api/auth/google/callback"
 }, (accessToken, regreshToken, profile, done) => {
     done(null, profile)
 }
