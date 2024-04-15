@@ -1,9 +1,9 @@
 import "./GoogleBtn.css";
-
 export default function GoogleBtn() {
+    const BASE_URL = process.env.REACT_APP_BASE_URL;
     const handleGoogleLogin = async () => {
         try {
-            window.open("http://localhost:8080/api/auth/google")
+            window.open(`${BASE_URL}/auth/google`)
         } catch (error) {
             console.error('Error logging in with Google:', error);
         }
