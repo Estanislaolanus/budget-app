@@ -1,5 +1,5 @@
 import nodemailer from 'nodemailer';
-import Config from './config.js';
+import Config from '../config/config.js';
 const { AUTH_EMAIL, AUTH_PASSWORD, SERVER_URL } = new Config();
 const sendEmail = (email, token) => {
     const transporter = nodemailer.createTransport({

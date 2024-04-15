@@ -11,5 +11,7 @@ export default class Config {
         this.SECRET_JWT_TOKEN = process.env.SECRET_JWT_TOKEN;
         this.AUTH_EMAIL = process.env.AUTH_EMAIL;
         this.AUTH_PASSWORD = process.env.AUTH_PASSWORD;
+        this.GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
+        this.GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
     }
 }

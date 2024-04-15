@@ -54,7 +54,7 @@ export default function DisplayLists({ amountArray, deleteAmount, setAmountArray
     }
     return (
         <>
-            {addTransaction && <GetAmount setAddTransaction={setAddTransaction} type={typeOfTransaction} {...rest} />}
+            {addTransaction && <GetAmount setAddTransaction={setAddTransaction} type={typeOfTransaction} setAmountArray={setAmountArray} setBudget={setBudget} setExpense={setExpense} {...rest} />}
             <div className="lists">
                 <div className="budget-list list">
                     <div className="list-header">

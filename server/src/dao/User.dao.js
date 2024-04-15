@@ -19,4 +19,11 @@ export default class User extends MongoDB {
             console.error(`Dao error: ${err}`);
         }
     }
+    async getUserByGoogleId(id) {
+        try {
+            return await this.collection.findOne({ googleId: id })
+        } catch (err) {
+            console.error(`Dao error: ${err}`);
+        }
+    }
 }

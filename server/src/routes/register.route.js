@@ -2,7 +2,7 @@ import { Router } from "express";
 import { hashPassword } from '../modules/bcrypt.js';
 import { generateAccessToken } from "../modules/JWT.js";
 import { v4 } from "uuid";
-import sendEmail from "../config/sendEmail.js";
+import sendEmail from "../modules/sendEmail.js";
 import Amount from '../dao/Amount.dao.js';
 import User from '../dao/User.dao.js';
 const amount = new Amount();

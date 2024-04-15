@@ -17,11 +17,15 @@ function App() {
   const [loading, setLoading] = useState<Boolean>(true);
   const authContext = useAuth();
   const userContext = useUser();
-
-
   useEffect(() => {
+    const getQueryParam = (name: string) => {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(name);
+    };
     const isLoggedIn = async () => {
       try {
+        const param = getQueryParam('access_token');
+        if (param) localStorage.setItem('accessToken', param);
         const accessToken = localStorage.getItem("accessToken");
         const res = await Axios.get("/login", {
           headers: {

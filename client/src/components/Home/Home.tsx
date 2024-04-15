@@ -25,6 +25,12 @@ function Home() {
     const date = useDate()?.date;
 
     useEffect(() => {
+        const setEveryStateToDefault = () => {
+            setBudget(0);
+            setExpense(0);
+            setAmountArray([]);
+            setLoading(false);
+        }
         const getAmount = async () => {
             try {
                 const accessToken = localStorage.getItem("accessToken");
@@ -37,10 +43,9 @@ function Home() {
                         "Authorization": `Bearer ${accessToken}`
                     }
                 });
-
-                if (!res) return setLoading(false);
+                if (!res) return setEveryStateToDefault();
                 const data = res.data;
-                if (!data) return setLoading(false);
+                if (!data) return setEveryStateToDefault();
                 const getAmountArray = data.amountArray ?? [];
                 setBudget(getSum("budget", getAmountArray));
                 setExpense(getSum("expense", getAmountArray));
@@ -80,22 +85,7 @@ function Home() {
             console.log(err);
         }
     }
-    function compareDate(date: Date): boolean {
-        const comparisonDate: Date = new Date();
-        return date.getMonth() === comparisonDate.getMonth() && date.getFullYear() === comparisonDate.getFullYear();
-    }
-    function handleSetBudget(newBudget: number, date: Date) {
-        if (date) return compareDate(date);
-        setBudget(prev => prev + newBudget);
-    }
-    function handleSetExpense(newExpense: number, date: Date) {
-        if (date) return compareDate(date);
-        setExpense(prev => prev + newExpense);
-    }
-    function handleSetBudgetArray(newAmount: Amount) {
-        if (compareDate(newAmount.timestamp)) setAmountArray(prev => [...prev, newAmount]);
-        postAmount(newAmount);
-    }
+
     function deleteAmount(id: string, type: string, amount: number) {
         setAmountArray(prev => {
             const newArray = prev.filter(a => a.id !== id);
@@ -118,9 +108,7 @@ function Home() {
                 setAmountArray={setAmountArray}
                 setBudget={setBudget}
                 setExpense={setExpense}
-                handleSetBudget={handleSetBudget}
-                handleSetExpense={handleSetExpense}
-                handleSetAmountsArray={handleSetBudgetArray}
+                postAmount={postAmount}
             />
         </>
     );

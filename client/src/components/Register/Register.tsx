@@ -5,6 +5,7 @@ import "./Register.css";
 import useAuth from "../../hooks/useAuth";
 import useUser from "../../hooks/useUser";
 import validateForm from "../../validations/validateRegister";
+import GoogleBtn from "../GoogleBtn/GoogleBtn";
 export default function Register() {
     const authContext = useAuth();
     const userContext = useUser();
@@ -187,6 +188,10 @@ export default function Register() {
 
             </form>
             <div className="ask-to-login">Already have an account?<button onClick={() => navigate('/login')}>Login</button></div>
+            <div className="divider-wrapper">
+                <span className="divider">or</span>
+            </div>
+            <GoogleBtn />
         </div>
     )
 }

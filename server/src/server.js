@@ -7,7 +7,9 @@ import registerRoute from './routes/register.route.js';
 import loginRoute from './routes/login.router.js';
 import amountRoute from './routes/amount.route.js';
 import verifyEmailRoute from './routes/verifyEmail.route.js';
-import isAuth from './middlewares/isAuth.js'
+import authGoogleRoute from './routes/authGoogle.route.js'
+import isAuth from './middlewares/isAuth.js';
+import googlePassport from './modules/googlePassport.js';
 import Config from './config/config.js';
 const { PORT, CLIENT_URL } = new Config();
 const app = express();
@@ -21,9 +23,11 @@ app.use(cors({
 
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(googlePassport.initialize());
 
 app.use("/api", registerRoute);
 app.use("/api", loginRoute);
-app.use("/api/amount", isAuth, amountRoute)
+app.use("/api/amount", isAuth, amountRoute);
 app.use("/api/verify", verifyEmailRoute);
-app.listen(PORT, () => console.log(`Running on http://localhost:${PORT}`));
+app.use('/api/auth/google', authGoogleRoute);
+app.listen(PORT, () => console.log(`Running on port ${PORT}`));

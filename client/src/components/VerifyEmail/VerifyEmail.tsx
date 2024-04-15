@@ -9,7 +9,7 @@ export default function VerifyEmail() {
     const user = useUser();
     const navigate = useNavigate()
     useEffect(() => {
-        if (user?.user.isEmailVerified) navigate("/");
+        // if (user?.user.isEmailVerified) navigate("/");
     }, [navigate, user?.user.isEmailVerified]);
     async function resendEmailVerification() {
         const res = await Axios.post("/verify/sendNewToken", {

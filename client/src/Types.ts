@@ -13,13 +13,6 @@ interface User {
     isEmailVerified: boolean;
 }
 
-interface BudgetFormProps {
-    handleSetBudget: (newBudget: number, date: Date) => void;
-    handleSetExpense: (newExpense: number, date: Date) => void;
-    handleSetAmountsArray: (newAmount: Amount) => void;
-    setAddTransaction: Dispatch<SetStateAction<boolean>>;
-    type: string;
-}
 interface SliderProps {
     budget: number;
     expense: number;
@@ -31,9 +24,15 @@ interface DisplayListsProps {
     setAmountArray: Dispatch<SetStateAction<Amount[]>>;
     setBudget: Dispatch<SetStateAction<number>>;
     setExpense: Dispatch<SetStateAction<number>>;
-    handleSetBudget: (newBudget: number, date: Date) => void;
-    handleSetExpense: (newExpense: number, date: Date) => void;
-    handleSetAmountsArray: (newAmount: Amount) => void;
+    postAmount: (newAmount: Amount) => void;
+}
+interface GetAmountProps {
+    setBudget: Dispatch<SetStateAction<number>>;
+    setExpense: Dispatch<SetStateAction<number>>;
+    setAmountArray: Dispatch<SetStateAction<Amount[]>>;
+    setAddTransaction: Dispatch<SetStateAction<boolean>>;
+    postAmount: (newAmount: Amount) => void;
+    type: string;
 }
 interface DisplayListSectionProps {
     amountArray: Amount[];
@@ -79,7 +78,7 @@ interface ExpensesChart {
 export {
     type Amount,
     type User,
-    type BudgetFormProps,
+    type GetAmountProps,
     type SliderProps,
     type DisplayListsProps,
     type DisplayListSectionProps,

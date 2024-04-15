@@ -5,12 +5,12 @@
     flex-wrap: wrap;
     min-height: 38vh;
     margin-bottom: 20px;
+    margin-top: 3.5rem;
     gap: 1.5rem;
 
 }
 
 .list {
-    margin-top: 3.5rem;
     border-radius: 1rem;
     padding: .5rem;
     min-width: 350px;

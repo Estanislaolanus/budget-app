@@ -1,14 +1,19 @@
 import "./GetAmount.css";
 import { RefObject, useRef, useState } from 'react';
-import { BudgetFormProps } from '../../Types';
+import { GetAmountProps } from '../../Types';
 import Dropdown from '../Dropdown/Dropdown';
-export default function GetAmount({ type, setAddTransaction, handleSetBudget, handleSetExpense, handleSetAmountsArray }: Readonly<BudgetFormProps>) {
+export default function GetAmount({ type, setAddTransaction, setBudget, setExpense, setAmountArray, postAmount }: Readonly<GetAmountProps>) {
   const amountRef: RefObject<HTMLInputElement> = useRef(null);
   const descriptionRef: RefObject<HTMLInputElement> = useRef(null);
   const alertRef: RefObject<HTMLDivElement> = useRef(null);
   const dateRef: RefObject<HTMLInputElement> = useRef(null);
   const [category, setCategory] = useState("");
 
+  function compareDate(date: Date): boolean {
+    const comparisonDate: Date = new Date();
+    const comparison = date.getMonth() === comparisonDate.getMonth() && date.getFullYear() === comparisonDate.getFullYear();
+    return comparison;
+  }
   function addAmount(type: string) {
     const amountInput = amountRef.current;
     const descriptionSelect = descriptionRef.current;
@@ -31,12 +36,24 @@ export default function GetAmount({ type, setAddTransaction, handleSetBudget, ha
       timestamp: date
     }
 
-    if (type === "budget") {
-      handleSetBudget(amount, date);
-    } else {
-      handleSetExpense(amount, date);
+    const isSameMonth = compareDate(date);
+    if (!isSameMonth) {
+      postAmount(newAmount);
+      setAddTransaction(false);
+      setCategory("");
+      amountInput.value = "";
+      descriptionSelect.value = "";
+      return
     }
-    handleSetAmountsArray(newAmount);
+    if (type === "budget") {
+      setBudget(prev => prev + amount);
+    } else {
+      setExpense(prev => prev + amount);
+    }
+    setAmountArray(prev => {
+      return [...prev, newAmount];
+    });
+    postAmount(newAmount);
     setAddTransaction(false);
 
     setCategory("");

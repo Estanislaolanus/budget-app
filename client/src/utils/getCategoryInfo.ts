@@ -5,7 +5,7 @@ export default function getCategoryInfo(category: string) {
         case "groceries":
             return { color: "#3fed1c", category, name: "Groceries", img: "./assets/categories/grocery.png" };
         case "personalCare":
-            return { color: "#0ee8e4", category: "personal care", name: "Personal Care", img: "./assets/categories/personal-care.png" };
+            return { color: "#ffe8cf", category: "personal care", name: "Personal Care", img: "./assets/categories/personal-care.png" };
         case "debtPayents":
             return { color: "#ad4b11", category: "debt payents", name: "Debt Payents", img: "./assets/categories/debt.png" };
         case "taxes":

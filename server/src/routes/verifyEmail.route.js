@@ -1,7 +1,7 @@
 import { Router } from "express";
 import User from "../dao/User.dao.js";
 import Config from "../config/config.js";
-import sendEmail from "../config/sendEmail.js";
+import sendEmail from "../modules/sendEmail.js";
 import { v4 } from "uuid";
 const { CLIENT_URL } = new Config();
 const router = Router();
