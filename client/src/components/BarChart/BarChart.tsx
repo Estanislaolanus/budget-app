@@ -3,38 +3,36 @@ import { useEffect, useState } from 'react';
 import { ExpensesChart, SliderProps } from '../../Types';
 import getCategoryInfo from '../../utils/getCategoryInfo';
 
-export default function BarChart({ expense, amountArray }: SliderProps) {
+export default function BarChart({ totalExpense, expenseArray }: SliderProps) {
     const [expensesChart, setExpensesChart] = useState<ExpensesChart[]>([]);
     const [barData, setBarData] = useState<ExpensesChart>()
     const [show, setShow] = useState<boolean>(false);
     useEffect(() => {
         const expenses = new Map<string, ExpensesChart>();
-        for (let i = 0; i < amountArray.length; i++) {
-            const a = amountArray[i];
-            if (a.type === "expense") {
-                const category = a.category;
-                const color = getCategoryInfo(category).color;
-                const amount = a.amount;
-                const section: ExpensesChart = {
-                    id: a.id,
-                    amount,
-                    category,
-                    color,
-                    percent: Math.floor((amount / expense) * 100)
-                }
-                if (!expenses.has(category)) {
-                    expenses.set(category, section);
-                } else {
-                    const prevSection = expenses.get(category);
-                    if (!prevSection) continue;
-                    prevSection.amount += amount;
-                    prevSection.percent = Math.floor((prevSection.amount / expense) * 100);
-                    expenses.set(category, prevSection);
-                }
+        for (let i = 0; i < expenseArray.length; i++) {
+            const e = expenseArray[i];
+            const category = e.category;
+            const color = getCategoryInfo(category).color;
+            const amount = e.amount;
+            const section: ExpensesChart = {
+                id: e.id,
+                amount,
+                category,
+                color,
+                percent: Math.floor((amount / totalExpense) * 100)
+            }
+            if (!expenses.has(category)) {
+                expenses.set(category, section);
+            } else {
+                const prevSection = expenses.get(category);
+                if (!prevSection) continue;
+                prevSection.amount += amount;
+                prevSection.percent = Math.floor((prevSection.amount / totalExpense) * 100);
+                expenses.set(category, prevSection);
             }
         }
         setExpensesChart(Array.from(expenses.values()).sort((a, b) => b.amount - a.amount));
-    }, [amountArray, expense]);
+    }, [expenseArray, totalExpense]);
     const displayChartData = (expense: ExpensesChart, touch = false) => {
         setShow(true);
         setBarData(expense);

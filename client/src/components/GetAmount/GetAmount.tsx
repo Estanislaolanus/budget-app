@@ -1,62 +1,85 @@
 import "./GetAmount.css";
 import { RefObject, useRef, useState } from 'react';
-import { GetAmountProps } from '../../Types';
+import { GetAmountProps, Expense, Income } from '../../Types';
 import Dropdown from '../Dropdown/Dropdown';
-export default function GetAmount({ type, setAddTransaction, setBudget, setExpense, setAmountArray, postAmount }: Readonly<GetAmountProps>) {
+export default function GetAmount({ typeOfTransaction, setAddTransaction, setTotalExpense, setTotalIncome, setExpenseArray, setIncomeArray, postExpense, postIncome }: Readonly<GetAmountProps>) {
   const amountRef: RefObject<HTMLInputElement> = useRef(null);
   const descriptionRef: RefObject<HTMLInputElement> = useRef(null);
   const alertRef: RefObject<HTMLDivElement> = useRef(null);
   const dateRef: RefObject<HTMLInputElement> = useRef(null);
-  const [category, setCategory] = useState("");
+  const sourceRef: RefObject<HTMLInputElement> = useRef(null);
+  const [category, setCategory] = useState<'transportation' | 'groceries' | 'personalCare' | 'debtPayents' | 'taxes' | 'entertainment' | 'education' | 'insurance' | 'housing' | 'other'>("other");
+  const [isFixed, setIsfixed] = useState<boolean>(false)
 
   function compareDate(date: Date): boolean {
     const comparisonDate: Date = new Date();
     const comparison = date.getMonth() === comparisonDate.getMonth() && date.getFullYear() === comparisonDate.getFullYear();
     return comparison;
   }
-  function addAmount(type: string) {
+  async function addAmount(typeOfTransaction: "income" | "expense") {
     const amountInput = amountRef.current;
     const descriptionSelect = descriptionRef.current;
-    if (type === "expense" && !category) return;
+    const sourceInput = sourceRef.current;
     if (!amountInput || !descriptionSelect) return;
     const amount: number = parseInt(amountInput.value);
     const description: string = descriptionSelect.value;
+    const type: "fixed" | "regular" = isFixed ? "fixed" : "regular";
     const currentDate = new Date();
     const date = dateRef.current?.valueAsDate ?? currentDate;
     if (date.getFullYear() > currentDate.getFullYear() ||
       (date.getFullYear() === currentDate.getFullYear() && date.getMonth() > currentDate.getMonth()) ||
       (date.getFullYear() === currentDate.getFullYear() && date.getMonth() === currentDate.getMonth() && date.getDay() > currentDate.getDay())) return;
     if (!amount || amount <= 0) return;
-    const newAmount = {
-      id: crypto.randomUUID(),
-      type,
-      amount,
-      description,
-      category: category || "income",
-      timestamp: date
+    let expense: Expense;
+    let income: Income;
+    if (typeOfTransaction === "expense") {
+      if (!category) return;
+      const newExpense: Expense = {
+        id: '',
+        amount,
+        category,
+        description,
+        type,
+        timestamp: date,
+        updated_at: date,
+      }
+      const data = await postExpense(newExpense);
+      if (!data) return;
+      const expenseRes: Expense = data.expense;
+      expense = expenseRes;
+    } else {
+      if (!sourceInput) return;
+      const source = sourceInput.value;
+      const newIncome: Income = {
+        id: '',
+        amount,
+        source,
+        description,
+        type,
+        timestamp: date,
+        updated_at: date,
+      }
+      const data = await postIncome(newIncome);
+      if (!data) return;
+      const incomeRes: Income = data.income;
+      income = incomeRes;
     }
-
     const isSameMonth = compareDate(date);
     if (!isSameMonth) {
-      postAmount(newAmount);
       setAddTransaction(false);
-      setCategory("");
       amountInput.value = "";
       descriptionSelect.value = "";
-      return
+      return;
     }
-    if (type === "budget") {
-      setBudget(prev => prev + amount);
-    } else {
-      setExpense(prev => prev + amount);
-    }
-    setAmountArray(prev => {
-      return [...prev, newAmount];
-    });
-    postAmount(newAmount);
-    setAddTransaction(false);
+    if (typeOfTransaction === "expense") {
+      setTotalExpense(prev => prev + amount);
+      setExpenseArray(prev => [...prev, expense]);
 
-    setCategory("");
+    } else {
+      setTotalExpense(prev => prev + amount);
+      setIncomeArray(prev => [...prev, income]);
+    }
+    setAddTransaction(false);
     amountInput.value = "";
     descriptionSelect.value = "";
 
@@ -65,13 +88,16 @@ export default function GetAmount({ type, setAddTransaction, setBudget, setExpen
     <>
       <div className="background-screen"></div>
       <div ref={alertRef} className='get-amount-container'>
+        <div className="get-amount-title">{typeOfTransaction === "expense" ? <h3>Expense</h3> : <h3>Income</h3>}</div>
         <button onClick={() => setAddTransaction(false)} className='close-btn'>
           <svg fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M20 20L4 4.00003M20 4L4.00002 20" stroke="#000000" stroke-width="2" stroke-linecap="round" />
           </svg>
         </button>
         <div className="get-amount-fields">
-          {type === "budget" ? <></> : <Dropdown setCategory={setCategory} category={category} />}
+          {typeOfTransaction === "income" ? <div className="input-field">
+            <input ref={sourceRef} type="text" placeholder="Enter source" />
+          </div> : <Dropdown setCategory={setCategory} category={category} />}
           <div className='input-field'>
             <input ref={amountRef} type="number" placeholder='Enter amount' pattern="[0-9]*" />
           </div>
@@ -88,9 +114,10 @@ export default function GetAmount({ type, setAddTransaction, setBudget, setExpen
               </svg>
             </span>
           </div>
+          <div className="input-checkbox"><input onClick={() => setIsfixed(!isFixed)} type="checkbox" /><span>Fixed</span></div>
         </div>
         <div className="get-amount-buttons">
-          <button onClick={() => addAmount(type)} className='add-amount'>Add Transacion</button>
+          <button onClick={() => addAmount(typeOfTransaction)} className='add-amount'>Add Transacion</button>
         </div>
       </div>
     </>

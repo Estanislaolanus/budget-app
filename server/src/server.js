@@ -5,7 +5,8 @@ import bodyParser from 'body-parser';
 
 import registerRoute from './routes/register.route.js';
 import loginRoute from './routes/login.router.js';
-import amountRoute from './routes/amount.route.js';
+import expenseRoute from './routes/expense.route.js'
+import incomeRoute from './routes/income.route.js'
 import verifyEmailRoute from './routes/verifyEmail.route.js';
 import authGoogleRoute from './routes/authGoogle.route.js'
 import isAuth from './middlewares/isAuth.js';
@@ -27,7 +28,8 @@ app.use(googlePassport.initialize());
 
 app.use("/api", registerRoute);
 app.use("/api", loginRoute);
-app.use("/api/amount", isAuth, amountRoute);
+app.use("/api/expense", isAuth, expenseRoute);
+app.use("/api/income", isAuth, incomeRoute);
 app.use("/api/verify", verifyEmailRoute);
 app.use('/api/auth/google', authGoogleRoute);
 app.listen(PORT, () => console.log(`Running on port ${PORT}`));

@@ -1,56 +1,79 @@
 import { ReactNode, Dispatch, SetStateAction } from 'react'
-interface Amount {
+
+interface Expense {
     id: string;
     amount: number;
-    type: string;
-    description: string;
-    category: string;
+    category: 'transportation' | 'groceries' | 'personalCare' | 'debtPayents' | 'taxes' | 'entertainment' | 'education' | 'insurance' | 'housing' | 'other';
+    description: string,
+    type: 'fixed' | 'regular';
     timestamp: Date;
+    updated_at: Date;
+}
+interface Income {
+    id: string;
+    amount: number;
+    source: string,
+    description: string,
+    type: 'fixed' | 'regular';
+    timestamp: Date;
+    updated_at: Date;
 }
 interface User {
     username: string;
     email: string;
     isEmailVerified: boolean;
 }
-
+type TypeOfTransaction = "expense" | "income";
 interface SliderProps {
-    budget: number;
-    expense: number;
-    amountArray: Amount[];
+    totalIncome: number;
+    totalExpense: number;
+    expenseArray: Expense[];
+    incomeArray: Income[];
 }
 interface DisplayListsProps {
-    amountArray: Amount[];
-    deleteAmount: (id: string, type: string, amount: number) => void;
-    setAmountArray: Dispatch<SetStateAction<Amount[]>>;
-    setBudget: Dispatch<SetStateAction<number>>;
-    setExpense: Dispatch<SetStateAction<number>>;
-    postAmount: (newAmount: Amount) => void;
-}
-interface GetAmountProps {
-    setBudget: Dispatch<SetStateAction<number>>;
-    setExpense: Dispatch<SetStateAction<number>>;
-    setAmountArray: Dispatch<SetStateAction<Amount[]>>;
-    setAddTransaction: Dispatch<SetStateAction<boolean>>;
-    postAmount: (newAmount: Amount) => void;
-    type: string;
-}
-interface DisplayListSectionProps {
-    amountArray: Amount[];
-    deleteAmount: (id: string, type: string, amount: number) => void;
-    updateAmountArray: (id: string, object: Amount | Object, money?: number, type?: string) => void;
-}
-interface ListItemProps {
-    amount: Amount;
-    deleteAmount: (id: string, type: string, amount: number) => void;
-    updateAmountArray: (id: string, object: Amount | Object, money?: number, type?: string) => void;
+    expenseArray: Expense[];
+    incomeArray: Income[];
+    deleteTransaction: (id: string, type: TypeOfTransaction, amount: number) => void;
+    setTotalIncome: Dispatch<SetStateAction<number>>;
+    setTotalExpense: Dispatch<SetStateAction<number>>;
+    setExpenseArray: Dispatch<SetStateAction<Expense[]>>;
+    setIncomeArray: Dispatch<SetStateAction<Income[]>>;
+    postIncome: (income: Income) => Promise<any>;
+    postExpense: (expense: Expense) => Promise<any>;
+    updateTransactionArray: (id: string, object: Object, money?: number) => void;
+    setTypeOfTransaction: Dispatch<SetStateAction<TypeOfTransaction>>;
+    typeOfTransaction: TypeOfTransaction;
 }
 
+interface DisplayListSectionProps {
+    expenseArray: Expense[];
+    incomeArray: Income[];
+    typeOfTransaction: TypeOfTransaction;
+    deleteTransaction: (id: string, type: TypeOfTransaction, amount: number) => void;
+    updateTransactionArray: (id: string, object: Object, money?: number) => void;
+}
+interface ListItemProps {
+    transaction: Expense | Income;
+    typeOfTransaction: TypeOfTransaction;
+    deleteTransaction: (id: string, type: TypeOfTransaction, amount: number) => void;
+    updateTransactionArray: (id: string, object: Object, money?: number) => void;
+}
+interface GetAmountProps {
+    setTotalIncome: Dispatch<SetStateAction<number>>;
+    setTotalExpense: Dispatch<SetStateAction<number>>;
+    setExpenseArray: Dispatch<SetStateAction<Expense[]>>;
+    setIncomeArray: Dispatch<SetStateAction<Income[]>>;
+    setAddTransaction: Dispatch<SetStateAction<boolean>>;
+    postIncome: (income: Income) => Promise<any>;
+    postExpense: (expense: Expense) => Promise<any>;
+    typeOfTransaction: TypeOfTransaction;
+}
 interface ContextProviderProps {
     children: ReactNode;
 }
 
 interface DropdownProps {
-    setCategory: Dispatch<SetStateAction<string>>;
+    setCategory: Dispatch<SetStateAction<'transportation' | 'groceries' | 'personalCare' | 'debtPayents' | 'taxes' | 'entertainment' | 'education' | 'insurance' | 'housing' | 'other'>>;
     category: string;
 }
 
@@ -76,8 +99,10 @@ interface ExpensesChart {
 
 
 export {
-    type Amount,
+    type Expense,
+    type Income,
     type User,
+    type TypeOfTransaction,
     type GetAmountProps,
     type SliderProps,
     type DisplayListsProps,
@@ -89,4 +114,4 @@ export {
     type UserContext,
     type DateContext,
     type ExpensesChart
-}
+};

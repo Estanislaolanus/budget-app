@@ -1,15 +1,16 @@
 import { ChangeEvent, useEffect, useState, useRef, RefObject } from 'react'
-import { ListItemProps } from '../../Types';
+import { Expense, ListItemProps } from '../../Types';
 import "./ListItem.css";
-export default function ListItem({ amount, deleteAmount, updateAmountArray }: Readonly<ListItemProps>) {
+export default function ListItem({ transaction, typeOfTransaction, deleteTransaction, updateTransactionArray }: Readonly<ListItemProps>) {
+    const category = "category" in transaction ? (transaction as Expense).category : "";
     const [edit, setEdit] = useState<boolean>(false);
-    const [editCategory, setEditCategory] = useState<string>(amount.category);
-    const [editAmount, setEditAmount] = useState<number>(amount.amount);
-    const [editDescription, setEditDescription] = useState<string>(amount.description);
+    const [editCategory, setEditCategory] = useState<string>(category);
+    const [editAmount, setEditAmount] = useState<number>(transaction.amount);
+    const [editDescription, setEditDescription] = useState<string>(transaction.description);
     const [showFullDescription, setShowFullDescription] = useState<boolean>(false);
-    const [numberValue, setNumberValue] = useState<number>(amount.amount);
-    const background = amount.type === "budget" ? "#374785" : "#f76c6c"
-    const amountColor = amount.type === "budget" ? "green" : "red";
+    const [numberValue, setNumberValue] = useState<number>(transaction.amount);
+    const background = typeOfTransaction === "income" ? "#374785" : "#f76c6c"
+    const amountColor = typeOfTransaction === "income" ? "green" : "red";
     const listRef: RefObject<HTMLDivElement> = useRef(null);
     const itemRef: RefObject<HTMLDivElement> = useRef(null);
     const textareaRef: RefObject<HTMLTextAreaElement> = useRef(null);
@@ -51,20 +52,20 @@ export default function ListItem({ amount, deleteAmount, updateAmountArray }: Re
     }
     function editList() {
         setShowFullDescription(false);
-        setNumberValue(amount.amount)
+        setNumberValue(transaction.amount)
         setEdit(() => !edit);
     }
     function confirmEdition() {
         let object: Object = {};
-        if (editAmount !== amount.amount && editAmount) object = { ...object, amount: editAmount };
-        if (editDescription !== amount.description && editDescription !== "") object = { ...object, description: editDescription };
-        if (editCategory !== amount.category) object = { ...object, category: editCategory };
+        if (editAmount !== transaction.amount && editAmount) object = { ...object, amount: editAmount };
+        if (editDescription !== transaction.description && editDescription !== "") object = { ...object, description: editDescription };
+        if (editCategory !== category) object = { ...object, category: editCategory };
         if (Object.keys(object).length === 0) return setEdit(() => !edit);
-        if (editAmount !== amount.amount && editAmount) {
-            const money = editAmount - amount.amount;
-            updateAmountArray(amount.id, object, money, amount.type)
+        if (editAmount !== transaction.amount && editAmount) {
+            const money = editAmount - transaction.amount;
+            updateTransactionArray(transaction.id, object, money);
         } else {
-            updateAmountArray(amount.id, object);
+            updateTransactionArray(transaction.id, object);
         }
         setEdit(() => !edit);
     }
@@ -75,7 +76,7 @@ export default function ListItem({ amount, deleteAmount, updateAmountArray }: Re
             <div ref={itemRef} className="list-item-info">
                 <div className='list-item-category'>
 
-                    {edit && amount.type === "expense" ?
+                    {edit && typeOfTransaction === "expense" ?
                         <div className="dropdown-item">
                             <select onChange={e => handleCategory(e)} value={editCategory.toString()}>
                                 <option value="income">Income</option>
@@ -105,27 +106,27 @@ export default function ListItem({ amount, deleteAmount, updateAmountArray }: Re
                         showFullDescription ?
                             <button onClick={() => setShowFullDescription(!showFullDescription)} className='list-item-full-description'>
                                 <div className='fullist-item-full-description-title'>Description</div>
-                                <div className='fullist-item-full-description-text'>{amount.description}</div>
+                                <div className='fullist-item-full-description-text'>{transaction.description}</div>
                             </button>
                             :
                             <></>
                     }
                     {edit ?
-                        <textarea ref={textareaRef} className=' list-item-textarea' onChange={e => handleDescriptionChange(e)}>{amount.description}</textarea>
+                        <textarea ref={textareaRef} className=' list-item-textarea' onChange={e => handleDescriptionChange(e)}>{transaction.description}</textarea>
                         :
                         <button onClick={() => {
-                            if (amount.description.length > 32) setShowFullDescription(!showFullDescription);
+                            if (transaction.description.length > 32) setShowFullDescription(!showFullDescription);
                         }}>{
-                                amount.description.length > 32 ?
-                                    amount.description.slice(0, 32) + "..." :
-                                    amount.description
+                                transaction.description.length > 32 ?
+                                    transaction.description.slice(0, 32) + "..." :
+                                    transaction.description
                             }</button>
                     }
 
                 </div>
             </div>
             <div className="list-item-data">
-                <div className='list-item-amount' style={{ color: amountColor }}>{amount.type === "budget" ? "+" : "-"}$
+                <div className='list-item-amount' style={{ color: amountColor }}>{typeOfTransaction === "income" ? "+" : "-"}$
                     {edit ?
                         <input
                             onChange={e => handleAmountChange(e)}
@@ -134,9 +135,9 @@ export default function ListItem({ amount, deleteAmount, updateAmountArray }: Re
                             value={numberValue}
                         />
                         :
-                        <div>{amount.amount}</div>}
+                        <div>{transaction.amount}</div>}
                 </div>
-                <div className="list-item-date">{format.format(new Date(amount.timestamp))}</div>
+                <div className="list-item-date">{format.format(new Date(transaction.timestamp))}</div>
 
             </div>
 
@@ -154,7 +155,7 @@ export default function ListItem({ amount, deleteAmount, updateAmountArray }: Re
                     }
 
                 </div>
-                <button onClick={() => deleteAmount(amount.id, amount.type, amount.amount)}><img src="./assets/icons/trash.png" alt="" /></button>
+                <button onClick={() => deleteTransaction(transaction.id, typeOfTransaction, transaction.amount)}><img src="./assets/icons/trash.png" alt="" /></button>
 
             </div>
         </div>

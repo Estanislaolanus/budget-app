@@ -27,6 +27,12 @@
     margin-top: 20px;
 }
 
+.get-amount-title h3 {
+    color: #6363d7;
+    font-size: 2rem;
+
+}
+
 .close-btn {
     height: 2rem;
     width: 2rem;
@@ -57,6 +63,15 @@
     border-bottom: 1.8px solid #656565;
     position: relative;
     width: 200px
+}
+
+.input-checkbox {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: .4rem;
+    color: #656565
 }
 
 ::-webkit-calendar-picker-indicator {
@@ -106,10 +121,10 @@
     font-size: 18px;
     cursor: pointer;
     padding: 8px 10px;
-    width: 180px;
+    width: 200px;
     transition: all .2s;
-    color: #27254f;
-    border: 2px solid #27254f;
+    color: #8f8fde;
+    border: 2px solid #8f8fde;
     border-radius: 1rem;
     text-align: center;
 }
@@ -117,7 +132,7 @@
 
 .add-amount:hover {
     transition: background color .3s;
-    background: #27254f;
+    background: #8f8fde;
     color: #fff;
 }
 

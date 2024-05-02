@@ -21,9 +21,9 @@ export default function Dropdown({ category: cat, setCategory }: Readonly<Dropdo
             document.removeEventListener("click", handleClick);
         };
     }, []);
-    const onSelect = (category: string) => {
+    const onSelect = (category: 'transportation' | 'groceries' | 'personalCare' | 'debtPayents' | 'taxes' | 'entertainment' | 'education' | 'insurance' | 'housing' | 'other') => {
         setCategory(category);
-        setTextField(category === "income" ? "Income" : getCategory(category).name);
+        setTextField(getCategory(category).name);
         setSelect(false);
     }
 

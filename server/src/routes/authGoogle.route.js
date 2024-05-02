@@ -3,11 +3,9 @@ import passportGoogle from '../modules/googlePassport.js'
 import Config from '../config/config.js';
 import { generateAccessToken } from '../modules/JWT.js'
 import User from '../dao/User.dao.js';
-import Amount from '../dao/Amount.dao.js';
 const { CLIENT_URL } = new Config()
 
 const user = new User();
-const amount = new Amount();
 const router = Router();
 
 router.get('/',
@@ -21,7 +19,8 @@ router.get('/callback',
         const email = emails[0].value;
         const username = name.givenName;
         const findUser = await user.getUserByGoogleId(id);
-        if (!findUser) {
+        const findUserByEmail = await user.getUserByEmail(email);
+        if (!findUser || !findUserByEmail) {
             const newUserData = {
                 email,
                 username,
@@ -30,7 +29,6 @@ router.get('/callback',
                 googleId: id
             }
             const newUser = await user.save(newUserData);
-            await amount.save({ amountArray: [], userId: newUser._id });
             const accessToken = generateAccessToken({ id: newUser._id, username, email, isEmailVerified: true });
             return res.redirect(CLIENT_URL + `?access_token=${accessToken}`);
         }

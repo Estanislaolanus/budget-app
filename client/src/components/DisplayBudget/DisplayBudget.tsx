@@ -2,17 +2,15 @@ import { useEffect, useState, useRef, RefObject } from 'react';
 import { SliderProps } from '../../Types';
 import "./DisplayBudget.css";
 
-export default function DisplayBudget({ budget, expense, amountArray }: Readonly<SliderProps>) {
+export default function DisplayBudget({ totalIncome, totalExpense }: Readonly<SliderProps>) {
   const [balance, setBalance] = useState<number>(0);
   const [counter, setCounter] = useState<number>(0);
   const [color, setColor] = useState<string>(counter >= 5 ? "red" : "#50f93a");
   const percentRef: RefObject<HTMLDivElement> = useRef(null);
   useEffect(() => {
-    const calculatePercentage = Math.floor(100 - ((expense / budget) * 100)) || 0;
-    const calculateBalance = budget - expense;
-    setColor(() => {
-      return calculatePercentage <= 5 ? "#ff3760" : "#50f93a";
-    });
+    const calculatePercentage = Math.floor(100 - ((totalExpense / totalIncome) * 100)) || 0;
+    const calculateBalance = totalIncome - totalExpense;
+    setColor(() => calculatePercentage <= 5 ? "#ff3760" : "#50f93a");
     setBalance(calculateBalance);
 
     const isCounterHigher = counter > calculatePercentage ? -1 : 0
@@ -28,7 +26,7 @@ export default function DisplayBudget({ budget, expense, amountArray }: Readonly
           )`;
       }, 10)
     }
-  }, [counter, amountArray, expense, budget, color]);
+  }, [counter, totalExpense, totalIncome, color]);
 
   return (
     <div className='budget-display'>
