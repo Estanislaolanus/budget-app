@@ -63,9 +63,9 @@ export default function ListItem({ transaction, typeOfTransaction, deleteTransac
         if (Object.keys(object).length === 0) return setEdit(() => !edit);
         if (editAmount !== transaction.amount && editAmount) {
             const money = editAmount - transaction.amount;
-            updateTransactionArray(transaction.id, object, money);
+            updateTransactionArray(transaction.id, object, typeOfTransaction, money);
         } else {
-            updateTransactionArray(transaction.id, object);
+            updateTransactionArray(transaction.id, object, typeOfTransaction);
         }
         setEdit(() => !edit);
     }

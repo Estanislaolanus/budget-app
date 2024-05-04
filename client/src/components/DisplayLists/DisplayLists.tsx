@@ -3,8 +3,9 @@ import { useState } from 'react';
 import { DisplayListsProps, TypeOfTransaction } from '../../Types';
 import DisplayListSection from "../DisplayListSection/DisplayListSection";
 import GetAmount from "../GetAmount/GetAmount";
-export default function DisplayLists({ incomeArray, setTypeOfTransaction, expenseArray, setIncomeArray, setExpenseArray, deleteTransaction, setTotalExpense, setTotalIncome, updateTransactionArray, ...rest }: DisplayListsProps) {
+export default function DisplayLists({ incomeArray, expenseArray, setIncomeArray, setExpenseArray, deleteTransaction, setTotalExpense, setTotalIncome, updateTransactionArray, ...rest }: DisplayListsProps) {
     const [addTransaction, setAddTransaction] = useState<boolean>(false);
+    const [typeOfTransaction, setTypeOfTransaction] = useState<TypeOfTransaction>("expense");
     const setTransaction = (type: TypeOfTransaction) => {
         setTypeOfTransaction(type);
         setAddTransaction(!addTransaction);
@@ -12,7 +13,7 @@ export default function DisplayLists({ incomeArray, setTypeOfTransaction, expens
 
     return (
         <>
-            {addTransaction && <GetAmount setExpenseArray={setExpenseArray} setIncomeArray={setIncomeArray} setAddTransaction={setAddTransaction} setTotalIncome={setTotalIncome} setTotalExpense={setTotalExpense} {...rest} />}
+            {addTransaction && <GetAmount setExpenseArray={setExpenseArray} setIncomeArray={setIncomeArray} setAddTransaction={setAddTransaction} setTotalIncome={setTotalIncome} setTotalExpense={setTotalExpense} typeOfTransaction={typeOfTransaction}{...rest} />}
             <div className="lists">
                 <div className="budget-list list">
                     <div className="list-header">

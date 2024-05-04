@@ -11,7 +11,6 @@ function Home() {
     const [totalIncome, setTotalIncome] = useState<number>(0);
     const [totalExpense, setTotalExpense] = useState<number>(0);
     const [loading, setLoading] = useState<boolean>(true);
-    const [typeOfTransaction, setTypeOfTransaction] = useState<TypeOfTransaction>("expense");
     const date = useDate()?.date;
 
     useEffect(() => {
@@ -111,7 +110,8 @@ function Home() {
             console.log(err);
         }
     }
-    async function updateTransactionArray(id: string, object: Object, money?: number, type?: string) {
+    async function updateTransactionArray(id: string, object: Object, typeOfTransaction: TypeOfTransaction, money?: number,) {
+        console.log(object, money, typeOfTransaction)
         if (typeOfTransaction === "expense") {
             const expenseIdx = expenseArray.findIndex(e => e.id === id);
             const expense = expenseArray[expenseIdx];
@@ -163,12 +163,16 @@ function Home() {
         }
     }
 
-    function deleteTransaction(id: string, type: TypeOfTransaction, amount: number) {
+    function deleteTransaction(id: string, typeOfTransaction: TypeOfTransaction, amount: number) {
 
-        if (type === "expense") {
+        if (typeOfTransaction === "expense") {
             setTotalExpense(prev => prev - amount);
+            const newExpenseArray = expenseArray.filter(e => e.id !== id);
+            setExpenseArray(() => [...newExpenseArray]);
         } else {
             setTotalIncome(prev => prev - amount);
+            const newIncomeArray = incomeArray.filter(i => i.id !== id);
+            setIncomeArray(() => [...newIncomeArray]);
         }
         deleteFromDB(id, typeOfTransaction);
     }
@@ -187,8 +191,6 @@ function Home() {
                 postExpense={postExpense}
                 postIncome={postIncome}
                 updateTransactionArray={updateTransactionArray}
-                typeOfTransaction={typeOfTransaction}
-                setTypeOfTransaction={setTypeOfTransaction}
             />
         </>
     );

@@ -13,7 +13,6 @@ export default function DisplayListSection({ typeOfTransaction, incomeArray, exp
                     })
                     :
                     incomeArray.length === 0 ? <></> : <CategoryDropdown typeOfTransaction={typeOfTransaction} incomeArray={incomeArray} expenseArray={expenseArray} {...rest} />
-
             }
         </>
     )

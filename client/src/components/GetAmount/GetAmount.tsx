@@ -76,7 +76,7 @@ export default function GetAmount({ typeOfTransaction, setAddTransaction, setTot
       setExpenseArray(prev => [...prev, expense]);
 
     } else {
-      setTotalExpense(prev => prev + amount);
+      setTotalIncome(prev => prev + amount);
       setIncomeArray(prev => [...prev, income]);
     }
     setAddTransaction(false);

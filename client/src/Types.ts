@@ -40,9 +40,9 @@ interface DisplayListsProps {
     setIncomeArray: Dispatch<SetStateAction<Income[]>>;
     postIncome: (income: Income) => Promise<any>;
     postExpense: (expense: Expense) => Promise<any>;
-    updateTransactionArray: (id: string, object: Object, money?: number) => void;
-    setTypeOfTransaction: Dispatch<SetStateAction<TypeOfTransaction>>;
-    typeOfTransaction: TypeOfTransaction;
+    updateTransactionArray: (id: string, object: Object, typeOfTransaction: TypeOfTransaction, money?: number) => void;
+    // setTypeOfTransaction: Dispatch<SetStateAction<TypeOfTransaction>>;
+    // typeOfTransaction: TypeOfTransaction;
 }
 
 interface DisplayListSectionProps {
@@ -50,13 +50,13 @@ interface DisplayListSectionProps {
     incomeArray: Income[];
     typeOfTransaction: TypeOfTransaction;
     deleteTransaction: (id: string, type: TypeOfTransaction, amount: number) => void;
-    updateTransactionArray: (id: string, object: Object, money?: number) => void;
+    updateTransactionArray: (id: string, object: Object, typeOfTransaction: TypeOfTransaction, money?: number) => void;
 }
 interface ListItemProps {
     transaction: Expense | Income;
     typeOfTransaction: TypeOfTransaction;
     deleteTransaction: (id: string, type: TypeOfTransaction, amount: number) => void;
-    updateTransactionArray: (id: string, object: Object, money?: number) => void;
+    updateTransactionArray: (id: string, object: Object, typeOfTransaction: TypeOfTransaction, money?: number) => void;
 }
 interface GetAmountProps {
     setTotalIncome: Dispatch<SetStateAction<number>>;
